@@ -90,10 +90,10 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Add A New Doctor</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">Dashboard</a>
+							<a href="index.html">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
@@ -103,50 +103,51 @@
 				</div>
 			</div>
 
-            <section class="container rows">
-                <form method="post" class="form" action="">
-                    <div id="header">
-                        <h2>Add a new doctor</h2>
-                    </div>
 
-                    <div class="input-box">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter admin's name" />
-                    </div>
+			<div class="table-data">
+				<div class="order">
+					<form method="post" class="form" action="">
+						<div class="input-box">
+							<label for="name">Name</label>
+							<input type="text" id="name" name="name" placeholder="Enter doctor's name" />
+						</div>
+	
+						<div class="input-box">
+							<label for="number">Phone Number</label>
+							<input type="number" id="number" name="number" placeholder="Enter doctor's number" />
+						</div>
+	
+						<div class="input-box">
+							<label for="email">Email</label>
+							<input type="email" id="email" name="email" placeholder="Enter doctor's email" />
+							<span class="error" id="email-error"></span>
+						</div>
+	
+						<div class="input-box">
+							<label for="password">Password</label>
+							<input type="password" id="password" name="password" placeholder="Enter doctor's password" />
+						</div>
+	
+						<div class="input-box">
+							<label for="gender">Gender</label>
+						</div>
+						<div class="row">
+							<div class="column">
+								<input type="radio" name="gender" id="male" value="Male">
+								<label for="male">Male</label>
+							</div>
+							<div class="column">
+								<input type="radio" name="gender" id="female" value="Female">
+								<label for="female">Female</label>
+							</div>
+						</div>
+	
+						<button input type="submit" name="submit" id="submit-button" value="submit">Add Doctor</button>
+					</form>
+				</div>
+			</div>
 
-                    <div class="input-box">
-                        <label for="number">Phone Number</label>
-                        <input type="number" id="number" name="number" placeholder="Enter admin's number" />
-                    </div>
-
-                    <div class="input-box">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Enter admin's email" />
-                        <span class="error" id="email-error"></span>
-                    </div>
-
-                    <div class="input-box">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" />
-                    </div>
-
-                    <div class="input-box">
-                        <label for="gender">Gender</label>
-                    </div>
-                    <div class="row">
-                        <div class="column">
-                            <input type="radio" name="gender" id="male" value="Male">
-                            <label for="male">Male</label>
-                        </div>
-                        <div class="column">
-                            <input type="radio" name="gender" id="female" value="Female">
-                            <label for="female">Female</label>
-                        </div>
-                    </div>
-
-                    <button input type="submit" name="submit" id="submit-button" value="submit">Add Doctor</button>
-                </form>
-            </section>
+           
 
 		</main>
 		<!-- MAIN -->

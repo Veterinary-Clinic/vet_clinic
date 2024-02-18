@@ -7,7 +7,7 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="../../static/css/admin/addDoctor.css">
+	<link rel="stylesheet" href="../../static/css/admin/tables.css">
     <link rel="icon" href="../../static/images/logo.png" type="image/icon type" />
 
 
@@ -90,63 +90,67 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Doctors</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="#">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Add Doctor</a>
+							<a class="active" href="#">Doctors</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 
-            <section class="container rows">
-                <form method="post" class="form" action="">
-                    <div id="header">
-                        <h2>Add a new doctor</h2>
-                    </div>
+            <div class="table-data">
+				<div class="order">
 
-                    <div class="input-box">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter admin's name" />
-                    </div>
-
-                    <div class="input-box">
-                        <label for="number">Phone Number</label>
-                        <input type="number" id="number" name="number" placeholder="Enter admin's number" />
-                    </div>
-
-                    <div class="input-box">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Enter admin's email" />
-                        <span class="error" id="email-error"></span>
-                    </div>
-
-                    <div class="input-box">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" />
-                    </div>
-
-                    <div class="input-box">
-                        <label for="gender">Gender</label>
-                    </div>
-                    <div class="row">
-                        <div class="column">
-                            <input type="radio" name="gender" id="male" value="Male">
-                            <label for="male">Male</label>
-                        </div>
-                        <div class="column">
-                            <input type="radio" name="gender" id="female" value="Female">
-                            <label for="female">Female</label>
-                        </div>
-                    </div>
-
-                    <button input type="submit" name="submit" id="submit-button" value="submit">Add Doctor</button>
-                </form>
-            </section>
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Phone Number</th>
+								<th>Email</th>
+								<th>Gender</th>
+								<th>Operation</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Sara Yasser</td>
+								<td>01097483745</td>
+								<td>sara@petLover.com</td>
+								<td>Female</td>
+                                <td>
+                                    <button class = "buttons" id ="edit"><a href="">Edit</a></button>
+                                    <button class = "buttons" id ="delete"><a href="#">Delete</a></button>
+                                </td>							
+                            </tr>
+                            <tr>
+								<td>Sara Yasser</td>
+								<td>01097483745</td>
+								<td>sara@petLover.com</td>
+								<td>Female</td>
+                                <td>
+                                    <button class = "buttons" id ="edit"><a href="">Edit</a></button>
+                                    <button class = "buttons" id ="delete"><a href="#">Delete</a></button>
+                                </td>							
+                            </tr>							
+                            <tr>
+								<td>Sara Yasser</td>
+								<td>01097483745</td>
+								<td>sara@petLover.com</td>
+								<td>Female</td>
+                                <td>
+                                    <button class = "buttons" id ="edit"><a href="">Edit</a></button>
+                                    <button class = "buttons" id ="delete"><a href="#">Delete</a></button>
+                                </td>							
+                            </tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 
 		</main>
 		<!-- MAIN -->
