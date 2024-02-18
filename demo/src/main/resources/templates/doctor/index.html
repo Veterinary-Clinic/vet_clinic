@@ -7,39 +7,38 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="../../static/css/admin/addDoctor.css">
+	<link rel="stylesheet" href="../../static/css/admin/index.css">
     <link rel="icon" href="../../static/images/logo.png" type="image/icon type" />
 
 
-	<title>AdminHub</title>
+	<title>DoctorHub</title>
 </head>
 <body>
 
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="index.html" class="brand">
+		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">AdminHub</span>
+			<span class="text">DoctorHub</span>
 		</a>
 		<ul class="side-menu top">
-			<li>
-                
+			<li class="active">
 				<a href="index.html">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li> 
-				<a href="doctors.html">
+				<a href="#">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Doctors</span>
 				</a>
 			</li>
-			<li class="active">
-				<a href="addDoctor.html">
+			<li>
+				<a href="profile.html">
 					<i class='bx bxs-file-plus'></i>
-					<span class="text">Add Doctor</span>
+					<span class="text">Profile</span>
 				</a>
 			</li>
 			<li>
@@ -90,69 +89,90 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Add A New Doctor</h1>
+					<h1>Dashboard</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="index.html">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Add Doctor</a>
+							<a class="active" href="#">Home</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-calendar-check' ></i>
+					<span class="text">
+						<h3>50</h3>
+						<p>New Appointments</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3>2834</h3>
+						<p>Patients</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-dollar-circle' ></i>
+					<span class="text">
+						<h3>$2543</h3>
+						<p>Total Sales</p>
+					</span>
+				</li>
+			</ul>
+
 
 			<div class="table-data">
 				<div class="order">
-					<form method="post" class="form" action="">
-						<div class="input-box">
-							<label for="name">Name</label>
-							<input type="text" id="name" name="name" placeholder="Enter doctor's name" />
-						</div>
-	
-						<div class="input-box">
-							<label for="number">Phone Number</label>
-							<input type="number" id="number" name="number" placeholder="Enter doctor's number" />
-						</div>
-	
-						<div class="input-box">
-							<label for="email">Email</label>
-							<input type="email" id="email" name="email" placeholder="Enter doctor's email" />
-							<span class="error" id="email-error"></span>
-						</div>
-	
-						<div class="input-box">
-							<label for="password">Password</label>
-							<input type="password" id="password" name="password" placeholder="Enter doctor's password" />
-						</div>
-	
-						<div class="input-box">
-							<label for="gender">Gender</label>
-						</div>
-						<div class="row">
-							<div class="column">
-								<input type="radio" name="gender" id="male" value="Male">
-								<label for="male">Male</label>
-							</div>
-							<div class="column">
-								<input type="radio" name="gender" id="female" value="Female">
-								<label for="female">Female</label>
-							</div>
-						</div>
-	
-						<button input type="submit" name="submit" id="submit-button" value="submit">Add Doctor</button>
-					</form>
+					<div class="head">
+						<h3>Recent Appointements</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>Patient</th>
+								<th>Appointment Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<img src="../../static/images/profile.jpg">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+							</tr>
+							<tr>
+								<td>
+									<img src="../../static/images/profile.jpg">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+							</tr>
+							<tr>
+								<td>
+									<img src="../../static/images/profile.jpg">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
-
-           
-
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
 	
+
+	<script src="script.js"></script>
 </body>
 </html>
