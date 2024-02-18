@@ -95,8 +95,8 @@ input {
 .container {
 	background-color: #fff;
 	border-radius: 10px;
-	box-shadow: 0 14px 28px #181818 ,
-		0 10px 10px #181818 ;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+		0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
 	width: 768px;
@@ -167,8 +167,8 @@ input {
 
 .overlay {
 	/* background: rgb(1, 19, 28); */
-	background: -webkit-linear-gradient(to right, #181818, #ED6436);
-	background: linear-gradient(to right, rgb(1, 5, 28), #ED6436);
+	background: -webkit-linear-gradient(to right, #fa5620, #f2774e);
+	background: linear-gradient(to right, #fa5620, #f2774e);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -183,7 +183,7 @@ input {
 
 .container.right-panel-active .overlay {
 	transform: translateX(50%);
-	background: linear-gradient(to right, #ED6436, rgb(1, 5, 28));
+	background: linear-gradient(to right, #f2774e, #fa5620);
 }
 
 .overlay-panel {
