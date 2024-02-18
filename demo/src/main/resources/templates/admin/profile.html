@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="../../static/css/admin/profile.css">
+    <link rel="icon" href="../../static/images/logo.png" type="image/icon type" />
+
+
+    <title>AdminHub</title>
+</head>
+
+<body>
+
+
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-smile'></i>
+            <span class="text">AdminHub</span>
+        </a>
+        <ul class="side-menu top">
+            <li>
+
+                <a href="index.html">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="doctors.html">
+                    <i class='bx bxs-group'></i>
+                    <span class="text">Doctors</span>
+                </a>
+            </li>
+            <li>
+                <a href="addDoctor.html">
+                    <i class='bx bxs-file-plus'></i>
+                    <span class="text">Add Doctor</span>
+                </a>
+            </li>
+            <li>
+                <a href="pets.html">
+                    <i class='bx bx-plus-medical'></i>
+                    <span class="text">Pets</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            <a href="#" class="nav-link">Categories</a>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <a href="profile.html" class="profile">
+                <img src="../../static/images/profile.jpg">
+            </a>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <div class="table-data">
+                <div class="order">
+
+                    <div class="text">
+                        <img src="../../static/images/profile.jpg" class="profile">
+                        <h4 class="my-3">Sara Yasser</h4>
+                        <p class="text-muted mb-1">Admin</p>
+                    </div>
+
+                    <div class="text info">
+                        <div>
+                            <p>Name: Sara Yasser</p>
+                        </div>
+                        <div>
+                            <p>Email: sara@petsLover.com</p>
+                        </div>
+                        <div>
+                            <p>Phone Number: 01097486748</p>
+                        </div>
+                        <div>
+                            <button class = "buttons" id ="edit"><a href="">Edit Profile </a></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+
+</body>
+
+</html>
