@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Registration Form</title>
+<link rel="stylesheet" href="../../static/css/form.css">
+</head>
+<body>
+<div class="container">
+  <h2>Pet Registration Form</h2>
+  <form action="#" method="post">
+    <label for="pet_name">Pet Name:</label>
+    <input type="text" id="pet_name" name="pet_name" required>
+
+    <label for="pet_type">Pet Type:</label>
+    <select id="pet_type" name="pet_type" required>
+      <option value="">Select</option>
+      <option value="dog">Dog</option>
+      <option value="cat">Cat</option>
+      <option value="bird">Bird</option>
+      <option value="rabbit">Rabbit</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="pet_breed">Breed:</label>
+    <input type="text" id="pet_breed" name="pet_breed" required>
+
+    <label for="pet_age">Age:</label>
+    <input type="text" id="pet_age" name="pet_age" required>
+
+    <label for="pet_weight">Weight:</label>
+    <input type="text" id="pet_weight" name="pet_weight" required>
+
+    <label for="pet_gender">Gender:</label>
+    <select id="pet_gender" name="pet_gender" required>
+      <option value="">Select</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+
+    <input type="submit" value="Register">
+  </form>
+</div>
+</body>
+</html>
