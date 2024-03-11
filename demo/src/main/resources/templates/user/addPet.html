@@ -7,7 +7,7 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="../../static/css/admin/addDoctor.css">
+	<link rel="stylesheet" href="../../static/css/addPet.css">
     <link rel="icon" href="../../static/images/logo.png" type="image/icon type" />
 
 
@@ -99,49 +99,42 @@
 			</div>
 
 
-			<div class="table-data">
-				<div class="order">
-					<form method="post" class="form" action="">
-						<div class="input-box">
-							<label for="name">Name</label>
-							<input type="text" id="name" name="name" placeholder="Enter doctor's name" />
-						</div>
-	
-						<div class="input-box">
-							<label for="number">Phone Number</label>
-							<input type="number" id="number" name="number" placeholder="Enter doctor's number" />
-						</div>
-	
-						<div class="input-box">
-							<label for="email">Email</label>
-							<input type="email" id="email" name="email" placeholder="Enter doctor's email" />
-							<span class="error" id="email-error"></span>
-						</div>
-	
-						<div class="input-box">
-							<label for="password">Password</label>
-							<input type="password" id="password" name="password" placeholder="Enter doctor's password" />
-						</div>
-	
-						<div class="input-box">
-							<label for="gender">Gender</label>
-						</div>
-						<div class="row">
-							<div class="column">
-								<input type="radio" name="gender" id="male" value="Male">
-								<label for="male">Male</label>
-							</div>
-							<div class="column">
-								<input type="radio" name="gender" id="female" value="Female">
-								<label for="female">Female</label>
-							</div>
-						</div>
-	
-						<button input type="submit" name="submit" id="submit-button" value="submit">Add Doctor</button>
-					</form>
-				</div>
-			</div>
-
+			<div class="container">
+				<h2>Pet Registration Form</h2>
+				<form action="#" method="post">
+				  <label for="pet_name">Pet Name:</label>
+				  <input type="text" id="pet_name" name="pet_name" required>
+			  
+				  <label for="pet_type">Pet Type:</label>
+				  <select id="pet_type" name="pet_type" required>
+					<option value="">Select</option>
+					<option value="dog">Dog</option>
+					<option value="cat">Cat</option>
+					<option value="bird">Bird</option>
+					<option value="rabbit">Rabbit</option>
+					<option value="other">Other</option>
+				  </select>
+			  
+				  <label for="pet_breed">Breed:</label>
+				  <input type="text" id="pet_breed" name="pet_breed" required>
+			  
+				  <label for="pet_age">Age:</label>
+				  <input type="text" id="pet_age" name="pet_age" required>
+			  
+				  <label for="pet_weight">Weight:</label>
+				  <input type="text" id="pet_weight" name="pet_weight" required>
+			  
+				  <label for="pet_gender">Gender:</label>
+				  <select id="pet_gender" name="pet_gender" required>
+					<option value="">Select</option>
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+				  </select>
+			  
+			  
+				  <input type="submit" value="Register">
+				</form>
+			  </div>
            
 
 		</main>
