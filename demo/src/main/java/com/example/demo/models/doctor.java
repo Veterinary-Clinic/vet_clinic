@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 public class doctor {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected int id;
     protected int number;
