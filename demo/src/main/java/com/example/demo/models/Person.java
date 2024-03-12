@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public abstract class Person {
      @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
     protected int number;
     protected String name;
