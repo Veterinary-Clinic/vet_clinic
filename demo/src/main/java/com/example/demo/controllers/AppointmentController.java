@@ -1,10 +1,14 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Appointment;
 import com.example.demo.repositories.AppointmentRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/appointments")    
@@ -12,10 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AppointmentController {
     @Autowired
     AppointmentRepository appointmentsRepository;
-    @GetMapping("/add-appointment")
-    public void get() {
-        System.out.println("sara");
+
+    @GetMapping("/add-appointment")   
+    public ModelAndView addAppointment() {
+        ModelAndView mav = new ModelAndView("addAppointments.html");
+        Appointment appointment = new Appointment();
+        mav.addObject("appointments", appointment);
+        return mav;
     }
     
+
     
 }
