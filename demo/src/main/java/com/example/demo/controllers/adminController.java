@@ -1,58 +1,63 @@
 package com.example.demo.controllers;
 
-import org.springframework.web.bind.annotation.RequestParam;
-// import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.example.demo.models.admin;
 import com.example.demo.models.doctor;
 import com.example.demo.repositories.adminRepository;
 import com.example.demo.repositories.doctorRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+
 @Controller
 @RequestMapping("/admin")
 public class adminController {
     @Autowired
-    private doctorRepository doctorRepository ;
-    //   @GetMapping("index")
-    //     public ModelAndView getDoctors() {
-    //         ModelAndView mav = new ModelAndView("/admin/index.html");
-    //         admin newAdmin =new admin();
-    //         mav.addObject("admin",newAdmin);
-    //         return mav;
-    //     }
-//         @GetMapping("addDoctor")
-//         public ModelAndView addDoctor() {
-//             ModelAndView mav = new ModelAndView("/admin/addDoctor.html");
-//             admin newAdmin =new admin();
-//             mav.addObject("admin", newAdmin);
-//             return mav;
-//         }
-//         @PostMapping("addDoctor")
-//         public String saveDoctor(@ModelAttribute doctor doctor){
+    private adminRepository adminRepository;
 
-//             String encoddedPassword=BCrypt.hashpw(doctor.getPassword(), BCrypt.gensalt(12));
-//             doctor.setPassword(encoddedPassword);
-//             this.doctorRepository.save(doctor);
-// return "added";
-//         }
+    @GetMapping("")
+    public String listDoctors(Model model) {
+        model.addAttribute("admin", adminRepository.findAll());
+        return "admin/list";
+    }
 
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("admin", new admin());
+        return "admin/addAdmin";
+    }
 
+    @PostMapping("/add")
+public String addDoctor(@ModelAttribute("admin") admin admin) {
+    adminRepository.save(admin);
+    return "redirect:/admin";
+}
 
-        // @PostMapping("/admin/addDoctor")
-        // public String saveAdmin(@ModelAttribute doctor newDoctor) {
-        //     String encodedPassword = newDoctor.getPassword();
-        //     newDoctor.setPassword(encodedPassword);
-        //     doctorRepository.save(newDoctor);
-        //     return "redirect:/admin";
-        // }
-    
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable("id") Long id, Model model) {
+        admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
+        model.addAttribute("admin", admin);
+        return "doctors/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateAdmin(@PathVariable("id") Long id, @ModelAttribute("admin") admin updatedAdmin) {
+        admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
+        admin.setUsername(updatedAdmin.getUsername());
+       
+        adminRepository.save(admin);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteAdmin(@PathVariable("id") Long id) {
+        admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+    adminRepository.delete(admin);
+        return "redirect:/admin";
+    }
 }

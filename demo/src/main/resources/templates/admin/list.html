@@ -18,12 +18,12 @@
         </thead>
         <tbody>
            
-            <tr th:each="doctor : ${doctors}">
+            <tr th:each="admin : ${admins}">
                 <!-- <td th:text="${doctor.id}"></td> -->
-                <td th:text="${doctor.name}"></td>
+                <td th:text="${admin.username}"></td>
                 <td>
-                    <a th:href="@{/admin/doctors/{id}/edit(id=${doctor.id})}">Edit</a>
-                    <form th:action="@{/admin/doctors/{id}/delete(id=${doctor.id})}" method="post">
+                    <a th:href="@{/admin/{id}/edit(id=${admin.id})}">Edit</a>
+                    <form th:action="@{/admin/{id}/delete(id=${admin.id})}" method="post">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
@@ -31,7 +31,7 @@
         </tbody>
     </table>
 
-    <a href="/admin/doctors/add">Add New Doctor</a>
+    <a href="/admin/add">Add New Doctor</a>
 
 </body>
 </html>

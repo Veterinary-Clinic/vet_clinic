@@ -97,7 +97,7 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Add A New Doctor</h1>
+					<h1>Add A New Admin</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="index.html">Dashboard</a>
@@ -113,22 +113,19 @@
 
 			<div class="table-data">
 				<div class="order">
-					<form th:action="@{/admin/addDoctor}" th:object="${admin}" method="post" class="form" action="">
+					<form th:action="@{/admin/addAdmin}" th:object="${admin}" method="post" class="form" action="">
 						<div class="input-box">
 							<label for="name">Name</label>
 							<input type="text" th:field="*{username}" id="name" name="name" placeholder="Enter doctor's name" />
 						</div>
 	
-						<div class="input-box">
-							<label for="number">Phone Number</label>
-							<input type="number"  th:field="*{number}" id="number" name="number" placeholder="Enter doctor's number" />
-						</div>
+						
 	
-						<div class="input-box">
+						<!-- <div class="input-box">
 							<label for="email">Email</label>
 							<input type="email"  th:field="*{email}" id="email" name="email" placeholder="Enter doctor's email" />
 							<span class="error" id="email-error"></span>
-						</div>
+						</div> -->
 	
 						<div class="input-box">
 							<label for="password">Password</label>
