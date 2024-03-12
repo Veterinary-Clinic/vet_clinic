@@ -1,12 +1,13 @@
 package com.example.demo.models;
-import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.Objects;
+
 @Entity
-public abstract class Person {
+public class doctor {
      @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected int id;
@@ -16,13 +17,10 @@ public abstract class Person {
     protected String password;
     protected String gender;
 
-
-
-    //constructors
-    public Person() {
+    public doctor() {
     }
 
-    public Person(int id, int number, String name, String email, String password, String gender) {
+    public doctor(int id, int number, String name, String email, String password, String gender) {
         this.id = id;
         this.number = number;
         this.name = name;
@@ -31,7 +29,6 @@ public abstract class Person {
         this.gender = gender;
     }
 
-    //Getters & Setters
     public int getId() {
         return this.id;
     }
@@ -80,70 +77,56 @@ public abstract class Person {
         this.gender = gender;
     }
 
-    public Person id(int id) {
+    public doctor id(int id) {
         setId(id);
         return this;
     }
 
-    public Person number(int number) {
+    public doctor number(int number) {
         setNumber(number);
         return this;
     }
 
-    public Person name(String name) {
+    public doctor name(String name) {
         setName(name);
         return this;
     }
 
-    public Person email(String email) {
+    public doctor email(String email) {
         setEmail(email);
         return this;
     }
 
-    public Person password(String password) {
+    public doctor password(String password) {
         setPassword(password);
         return this;
     }
 
-    public Person gender(String gender) {
+    public doctor gender(String gender) {
         setGender(gender);
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Person)) {
-            return false;
-        }
-        Person person = (Person) o;
-        return id == person.id && number == person.number && Objects.equals(name, person.name) && Objects.equals(email, person.email) && Objects.equals(password, person.password) && Objects.equals(gender, person.gender);
-    }
+    // @Override
+    // public boolean equals(Object o) {
+    //   return EqualsBuilder.reflectionEquals(this, o);
+    // }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, number, name, email, password, gender);
     }
 
-    // public abstract void authorize();
-
-    // public boolean isAuthenticated() {
-    //     boolean isAuthenticatedFlag = false;
-    //     return isAuthenticatedFlag;
-    // }
-
-    // public void login(){
-    //     if(isAuthenticated()){
-
-    //     }
-    // }
-    // public void logout(){
-
-
-    // }
-    // public void editProfileInfo(){
-
-    // }
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", number='" + getNumber() + "'" +
+            ", name='" + getName() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", gender='" + getGender() + "'" +
+            "}";
+    }
     
 }
