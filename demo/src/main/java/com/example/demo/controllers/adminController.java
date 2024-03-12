@@ -1,58 +1,61 @@
 package com.example.demo.controllers;
 
-import org.springframework.web.bind.annotation.RequestParam;
-// import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.example.demo.models.admin;
 import com.example.demo.models.doctor;
-import com.example.demo.repositories.adminRepository;
 import com.example.demo.repositories.doctorRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+
 @Controller
 @RequestMapping("/admin")
 public class adminController {
     @Autowired
-    private doctorRepository doctorRepository ;
-    //   @GetMapping("index")
-    //     public ModelAndView getDoctors() {
-    //         ModelAndView mav = new ModelAndView("/admin/index.html");
-    //         admin newAdmin =new admin();
-    //         mav.addObject("admin",newAdmin);
-    //         return mav;
-    //     }
-//         @GetMapping("addDoctor")
-//         public ModelAndView addDoctor() {
-//             ModelAndView mav = new ModelAndView("/admin/addDoctor.html");
-//             admin newAdmin =new admin();
-//             mav.addObject("admin", newAdmin);
-//             return mav;
-//         }
-//         @PostMapping("addDoctor")
-//         public String saveDoctor(@ModelAttribute doctor doctor){
+    private doctorRepository doctorRepository;
 
-//             String encoddedPassword=BCrypt.hashpw(doctor.getPassword(), BCrypt.gensalt(12));
-//             doctor.setPassword(encoddedPassword);
-//             this.doctorRepository.save(doctor);
-// return "added";
-//         }
+    @GetMapping("")
+    public String listDoctors(Model model) {
+        model.addAttribute("admin", doctorRepository.findAll());
+        return "admin/list";
+    }
 
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("doctor", new doctor());
+        return "doctors/add";
+    }
 
+    @PostMapping("/add")
+public String addDoctor(@ModelAttribute("doctor") doctor doctor) {
+    doctorRepository.save(doctor);
+    return "redirect:/admin/doctors";
+}
 
-        // @PostMapping("/admin/addDoctor")
-        // public String saveAdmin(@ModelAttribute doctor newDoctor) {
-        //     String encodedPassword = newDoctor.getPassword();
-        //     newDoctor.setPassword(encodedPassword);
-        //     doctorRepository.save(newDoctor);
-        //     return "redirect:/admin";
-        // }
-    
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable("id") Long id, Model model) {
+        doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+        model.addAttribute("doctor", doctor);
+        return "doctors/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("doctor") doctor updatedDoctor) {
+        doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+        doctor.setName(updatedDoctor.getName());
+       
+        doctorRepository.save(doctor);
+        return "redirect:/admin/doctors";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteDoctor(@PathVariable("id") Long id) {
+        doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+        doctorRepository.delete(doctor);
+        return "redirect:/admin/doctors";
+    }
 }

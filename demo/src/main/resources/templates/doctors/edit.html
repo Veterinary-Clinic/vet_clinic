@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Doctor</title>
-    <link rel="stylesheet" th:href="@{/static/styles.css}">
+  
 </head>
 <body>
     <h1>Edit Doctor</h1>
 
-    <form th:action="@{/doctors/{id}/edit(id=${doctor.id})}" method="post">
+    <form th:action="@{/admin/doctors/{id}/edit(id=${doctor.id})}" method="post">
         <input type="hidden" id="id" name="id" th:value="${doctor.id}">
 
         <label for="name">Name:</label>
@@ -20,7 +20,7 @@
         <button type="submit">Save</button>
     </form>
 
-    <a th:href="@{/doctors}">Back to List</a>
+    <a th:href="@{/admin/doctors}">Back to List</a>
 
 </body>
 </html>
