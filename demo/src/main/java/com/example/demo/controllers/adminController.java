@@ -29,21 +29,21 @@ public class adminController {
     //         mav.addObject("admin",newAdmin);
     //         return mav;
     //     }
-        @GetMapping("addDoctor")
-        public ModelAndView addDoctor() {
-            ModelAndView mav = new ModelAndView("/admin/addDoctor.html");
-            admin newAdmin =new admin();
-            mav.addObject("admin", newAdmin);
-            return mav;
-        }
-        @PostMapping("addDoctor")
-        public String saveDoctor(@ModelAttribute doctor doctor){
+//         @GetMapping("addDoctor")
+//         public ModelAndView addDoctor() {
+//             ModelAndView mav = new ModelAndView("/admin/addDoctor.html");
+//             admin newAdmin =new admin();
+//             mav.addObject("admin", newAdmin);
+//             return mav;
+//         }
+//         @PostMapping("addDoctor")
+//         public String saveDoctor(@ModelAttribute doctor doctor){
 
-            String encoddedPassword=BCrypt.hashpw(doctor.getPassword(), BCrypt.gensalt(12));
-            doctor.setPassword(encoddedPassword);
-            this.doctorRepository.save(doctor);
-return "added";
-        }
+//             String encoddedPassword=BCrypt.hashpw(doctor.getPassword(), BCrypt.gensalt(12));
+//             doctor.setPassword(encoddedPassword);
+//             this.doctorRepository.save(doctor);
+// return "added";
+//         }
 
 
 

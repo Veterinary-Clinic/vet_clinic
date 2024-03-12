@@ -12,4 +12,6 @@ import com.example.demo.models.doctor;
 public interface doctorRepository extends JpaRepository<doctor, Integer> {
 
     Optional<doctor> findById(Long id);
+
+    void deleteById(Long id);
 }
