@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-@RestController 
+@RestController
 @RequestMapping("/appointments")    
 
 public class AppointmentController {

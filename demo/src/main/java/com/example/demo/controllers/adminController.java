@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.*;
 public class adminController {
     @Autowired
     private adminRepository adminRepository;
+    private doctorRepository doctorRepository;
 
     @GetMapping("")
-    public String listDoctors(Model model) {
+    public String listAdmins(Model model) {
         model.addAttribute("admin", adminRepository.findAll());
         return "admin/list";
     }
@@ -36,7 +37,7 @@ public class adminController {
     }
 
     @GetMapping("/{id}/edit")
-    public String showEditForm(@PathVariable("id") Long id, Model model) {
+    public String showEditAdminForm(@PathVariable("id") Long id, Model model) {
         admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
         model.addAttribute("admin", admin);
@@ -60,4 +61,8 @@ public class adminController {
     adminRepository.delete(admin);
         return "redirect:/admin";
     }
+
+
+   
+
 }
