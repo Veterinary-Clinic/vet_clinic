@@ -30,10 +30,10 @@ public class adminController {
     }
 
     @PostMapping("/add")
-public String addDoctor(@ModelAttribute("admin") admin admin) {
-    adminRepository.save(admin);
-    return "redirect:/admin";
-}
+    public String addDoctor(@ModelAttribute("admin") admin admin) {
+        adminRepository.save(admin);
+        return "redirect:/admin";
+    }
 
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable("id") Long id, Model model) {
