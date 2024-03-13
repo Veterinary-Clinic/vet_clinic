@@ -27,11 +27,11 @@ public class doctorController {
         return "doctors/add";
     }
 
-    @PostMapping("/add")
-public String addDoctor(@ModelAttribute("doctor") doctor doctor) {
-    doctorRepository.save(doctor);
-    return "redirect:/admin/doctors";
-}
+        @PostMapping("/add")
+    public String addDoctor(@ModelAttribute("doctor") doctor doctor) {
+        doctorRepository.save(doctor);
+        return "redirect:/admin/doctors";
+    }
 
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable("id") Long id, Model model) {
