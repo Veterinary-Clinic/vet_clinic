@@ -1,8 +1,8 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.admin;
-import com.example.demo.repositories.adminRepository;
-import com.example.demo.repositories.doctorRepository;
+import com.example.demo.models.Admin;
+import com.example.demo.repositories.AdminRepository;
+import com.example.demo.repositories.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
-public class adminController {
+public class AdminController {
     @Autowired
-    private adminRepository adminRepository;
-    private doctorRepository doctorRepository;
+    private AdminRepository adminRepository;
+    private DoctorRepository doctorRepository;
 
     @GetMapping("")
     public String listAdmins(Model model) {
@@ -24,27 +24,27 @@ public class adminController {
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("admin", new admin());
+        model.addAttribute("admin", new Admin());
         return "admin/addAdmin";
     }
 
     @PostMapping("/add")
-    public String addDoctor(@ModelAttribute("admin") admin admin) {
+    public String addDoctor(@ModelAttribute("admin") Admin admin) {
         adminRepository.save(admin);
         return "redirect:/admin";
     }
 
     @GetMapping("/{id}/edit")
     public String showEditAdminForm(@PathVariable("id") Long id, Model model) {
-        admin admin = adminRepository.findById(id)
+        Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
         model.addAttribute("admin", admin);
         return "doctors/edit";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateAdmin(@PathVariable("id") Long id, @ModelAttribute("admin") admin updatedAdmin) {
-        admin admin = adminRepository.findById(id)
+    public String updateAdmin(@PathVariable("id") Long id, @ModelAttribute("admin") Admin updatedAdmin) {
+        Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
         admin.setUsername(updatedAdmin.getUsername());
        
@@ -54,7 +54,7 @@ public class adminController {
 
     @PostMapping("/{id}/delete")
     public String deleteAdmin(@PathVariable("id") Long id) {
-        admin admin = adminRepository.findById(id)
+        Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
     adminRepository.delete(admin);
         return "redirect:/admin";

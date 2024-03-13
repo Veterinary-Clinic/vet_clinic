@@ -7,6 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+
 import java.util.Objects;
 
 
@@ -14,11 +17,14 @@ import java.util.Objects;
 public class Appointment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    int id;
-    LocalDate date;
-    LocalTime startHr;
-    LocalTime endHr;
-    
+    private int id;
+    private LocalDate date;
+    private LocalTime startHr;
+    private LocalTime endHr;
+
+    @ManyToOne
+    private Doctor doctor;
+
 
     public Appointment() {
     }

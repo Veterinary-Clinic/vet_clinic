@@ -1,29 +1,22 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.User;
-import com.example.demo.models.admin;
-import com.example.demo.models.doctor;
-import com.example.demo.repositories.adminRepository;
-import com.example.demo.repositories.doctorRepository;
-import com.example.demo.repositories.userRepository;
+import com.example.demo.repositories.UserRepository;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/user")
-public class userController {
+public class UserController {
     @Autowired
 
-    private userRepository userRepository;
+    private UserRepository userRepository;
 
     @GetMapping("Registration")
-
     public ModelAndView addUser()
     {
         ModelAndView mav = new ModelAndView("Signup.html");
@@ -31,8 +24,8 @@ public class userController {
         mav.addObject("user",newUser);
         return mav;
     }    
-    @PostMapping("Registration")
 
+    @PostMapping("Registration")
     public String saveUser(@ModelAttribute User user)
     {
         String encodedPassword=BCrypt.hashpw(user.getPassword(),BCrypt.gensalt(12));
