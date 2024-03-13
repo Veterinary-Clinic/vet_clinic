@@ -16,22 +16,22 @@ public class Pet {
     private String name;
     private String type;
     private String breed;
-    private String age;
+    private int age;
     private int weight;
-    private int gender;
+    private String gender;
 
-    public Pet(){
 
+    public Pet() {
     }
 
-    public Pet(int id, String name, String type,String breed,String age,int weight, int gender){
-        this.id=id;
-        this.name=name;
-        this.type=type;
-        this.breed=breed;
-        this.age=age;
-        this.weight=weight;
-        this.gender=gender;
+    public Pet(int id, String name, String type, String breed, int age, int weight, String gender) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.breed = breed;
+        this.age = age;
+        this.weight = weight;
+        this.gender = gender;
     }
 
     public int getId() {
@@ -66,11 +66,11 @@ public class Pet {
         this.breed = breed;
     }
 
-    public String getAge() {
+    public int getAge() {
         return this.age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -82,11 +82,11 @@ public class Pet {
         this.weight = weight;
     }
 
-    public int getGender() {
+    public String getGender() {
         return this.gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -110,7 +110,7 @@ public class Pet {
         return this;
     }
 
-    public Pet age(String age) {
+    public Pet age(int age) {
         setAge(age);
         return this;
     }
@@ -120,7 +120,7 @@ public class Pet {
         return this;
     }
 
-    public Pet gender(int gender) {
+    public Pet gender(String gender) {
         setGender(gender);
         return this;
     }
@@ -133,7 +133,7 @@ public class Pet {
             return false;
         }
         Pet pet = (Pet) o;
-        return id == pet.id && Objects.equals(name, pet.name) && Objects.equals(type, pet.type) && Objects.equals(breed, pet.breed) && Objects.equals(age, pet.age) && weight == pet.weight && gender == pet.gender;
+        return id == pet.id && Objects.equals(name, pet.name) && Objects.equals(type, pet.type) && Objects.equals(breed, pet.breed) && age == pet.age && weight == pet.weight && Objects.equals(gender, pet.gender);
     }
 
     @Override
@@ -153,4 +153,6 @@ public class Pet {
             ", gender='" + getGender() + "'" +
             "}";
     }
+    
+  
 }

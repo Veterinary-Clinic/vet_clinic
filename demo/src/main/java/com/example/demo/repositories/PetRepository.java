@@ -8,5 +8,4 @@ import com.example.demo.models.Pet;
 
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Integer> {
-    Pet findByname(String name);
 } 
