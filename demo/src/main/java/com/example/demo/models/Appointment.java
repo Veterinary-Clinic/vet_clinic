@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import java.util.Objects;
 
 
+
 @Entity
 public class Appointment {
     @Id
