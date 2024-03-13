@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+
 @RestController
 @RequestMapping("/appointments")    
 
@@ -35,7 +36,5 @@ public class AppointmentController {
         this.appointmentsRepository.save(appointment);
         return new RedirectView("add-appointment");
     }
-    
-
     
 }
