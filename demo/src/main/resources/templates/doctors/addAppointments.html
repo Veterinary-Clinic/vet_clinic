@@ -108,10 +108,10 @@
 
             <div class="table-data">
                 <div class="order">
-                    <form class="form" th:action="@{/appointments/add-appointment}" th:object="${appointments}" method ="POST">
+                    <form class="form" th:action="@{/appointments/save-appointment}" th:object="${appointments}" method ="POST">
                         <div class="input-box">
-                            <label for="day">Preferred Day</label>
-                            <input type="date" id="day" th:field = "*{date}"/>
+                            <label for="date">Preferred Date</label>
+                            <input type="date" id="date" th:field = "*{date}"/>
                         </div>
 
                         <div class="input-box">
