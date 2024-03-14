@@ -177,12 +177,9 @@
                                         var formattedHour = (hour > 12) ? (hour - 12) : hour;
                                         var amPm = (hour >= 12) ? "PM" : "AM";
                                         var formattedMinute = (minute < 10) ? "0" + minute : minute;
-
                                         var option = document.createElement("option");
-
                                         option.value = formattedHour + ":" + formattedMinute + " " + amPm;
                                         option.textContent = formattedHour + ":" + formattedMinute + " " + amPm;
-
                                         hourSelect.appendChild(option);
                                     }
                                 }

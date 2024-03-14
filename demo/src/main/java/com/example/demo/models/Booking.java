@@ -1,12 +1,10 @@
 package com.example.demo.models;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import java.util.Objects;
@@ -19,20 +17,22 @@ public class Booking {
     private String date;
     private String time;
 
-    // @ManyToOne
-    // private Doctor doctor;
+    @ManyToOne
+    private Doctor doctor;
 
-    // @OneToOne
-    // private User user;
+    @OneToOne
+    private User user;
 
 
     public Booking() {
     }
 
-    public Booking(int id, String date, String time) {
+    public Booking(int id, String date, String time, Doctor doctor, User user) {
         this.id = id;
         this.date = date;
         this.time = time;
+        this.doctor = doctor;
+        this.user = user;
     }
 
     public int getId() {
@@ -59,6 +59,22 @@ public class Booking {
         this.time = time;
     }
 
+    public Doctor getDoctor() {
+        return this.doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Booking id(int id) {
         setId(id);
         return this;
@@ -74,6 +90,16 @@ public class Booking {
         return this;
     }
 
+    public Booking doctor(Doctor doctor) {
+        setDoctor(doctor);
+        return this;
+    }
+
+    public Booking user(User user) {
+        setUser(user);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -82,12 +108,12 @@ public class Booking {
             return false;
         }
         Booking booking = (Booking) o;
-        return id == booking.id && Objects.equals(date, booking.date) && Objects.equals(time, booking.time);
+        return id == booking.id && Objects.equals(date, booking.date) && Objects.equals(time, booking.time) && Objects.equals(doctor, booking.doctor) && Objects.equals(user, booking.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, time);
+        return Objects.hash(id, date, time, doctor, user);
     }
 
     @Override
@@ -96,6 +122,8 @@ public class Booking {
             " id='" + getId() + "'" +
             ", date='" + getDate() + "'" +
             ", time='" + getTime() + "'" +
+            ", doctor='" + getDoctor() + "'" +
+            ", user='" + getUser() + "'" +
             "}";
     }
 

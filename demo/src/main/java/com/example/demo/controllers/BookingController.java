@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.models.Appointment;
 import com.example.demo.models.Booking;
 import com.example.demo.repositories.BookingRepository;
 
@@ -27,6 +28,7 @@ public class BookingController {
         return mav;
     }
 
+    @SuppressWarnings("null")
     @PostMapping("booked")
     public String save(@ModelAttribute Booking booking) {
         this.bookingRepository.save(booking);
