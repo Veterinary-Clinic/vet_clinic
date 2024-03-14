@@ -1,7 +1,13 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Doctor;
+import com.example.demo.models.Pet;
 import com.example.demo.models.User;
+import com.example.demo.repositories.DoctorRepository;
+import com.example.demo.repositories.PetRepository;
 import com.example.demo.repositories.UserRepository;
+
+import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
 
+    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+     private  DoctorRepository doctorRepository;
+
+     @GetMapping("")
+    public ModelAndView getHomePage() {
+        ModelAndView mav = new ModelAndView("/user/HomePage.html");
+        return mav;
+    } 
 
     @GetMapping("Registration")
     public ModelAndView addUser()
@@ -33,4 +48,13 @@ public class UserController {
         this.userRepository.save(user);
         return "Added";
     }
+
+    @GetMapping("/doctors")
+  public ModelAndView getDoctors() {
+        ModelAndView mav = new ModelAndView("/user/doctors.html");
+        List<Doctor> doctors = doctorRepository.findAll();
+        mav.addObject("doctors", doctors);
+        return mav;
+    }
+
 }

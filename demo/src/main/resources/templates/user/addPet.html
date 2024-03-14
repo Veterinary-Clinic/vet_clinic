@@ -1,143 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- Boxicons -->
-	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-	<!-- My CSS -->
-	<link rel="stylesheet" href="../../static/css/addPet.css">
-    <link rel="icon" href="../../static/images/logo.png" type="image/icon type" />
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/css/addPet.css">
+    <link rel="icon" href="/images/logo.png" type="image/icon type" />
 
-
-	<title>UserHub</title>
+    <title>UserHub</title>
 </head>
 <body>
 
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="profile.html" class="brand">
+            <i class='bx bxs-smile'></i>
+            <span class="text">UserHub</span>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="profile.html">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Profile</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="addPet.html">
+                    <i class='bx bxs-group' ></i>
+                    <span class="text">Add Pet</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="pets.html">
+                    <i class='bx bx-plus-medical'></i>
+                    <span class="text">Pets</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cog' ></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="logout">
+                    <i class='bx bxs-log-out-circle' ></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
 
-	<!-- SIDEBAR -->
-	<section id="sidebar">
-		<a href="profile.html" class="brand">
-			<i class='bx bxs-smile'></i>
-			<span class="text">UserHub</span>
-		</a>
-		<ul class="side-menu top">
-			<li>
-                
-				<a href="profile.html">
-					<i class='bx bxs-dashboard'></i>
-					<span class="text">Profile</span>
-				</a>
-			</li>
-			<li class="active">
-				<a href="addPet.html">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Add Pet</span>
-				</a>
-			</li>
-			
-			<li>
-				<a href="pets.html">
-					<i class='bx bx-plus-medical'></i>
-					<span class="text">Pets</span>
-				</a>
-			</li>
-		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
-	</section>
-	<!-- SIDEBAR -->
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu' ></i>
+            <a href="#" class="nav-link">Categories</a>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                </div>
+            </form>
+            <a href="profile.html" class="profile">
+                <img src="/images/profile.jpg">
+            </a>
+        </nav>
+        <!-- NAVBAR -->
 
+        <!-- MAIN -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Add Pet</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="index.html">UserProfile</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" href="#">Add Pet</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-
-	<!-- CONTENT -->
-	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
-			<a href="profile.html" class="profile">
-				<img src="../../static/images/profile.jpg">
-			</a>
-		</nav>
-		<!-- NAVBAR -->
-
-		<!-- MAIN -->
-		<main>
-			<div class="head-title">
-				<div class="left">
-					<h1>Add Pet</h1>
-					<ul class="breadcrumb">
-						<li>
-							<a href="index.html">UserProfile</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="#">Add Pet</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-
-			<div class="container">
-				<h2>Pet Registration Form</h2>
-				<form action="#" method="post">
-				  <label for="pet_name">Pet Name:</label>
-				  <input type="text" id="pet_name" name="pet_name" required>
-			  
-				  <label for="pet_type">Pet Type:</label>
-				  <select id="pet_type" name="pet_type" required>
-					<option value="">Select</option>
-					<option value="dog">Dog</option>
-					<option value="cat">Cat</option>
-					<option value="bird">Bird</option>
-					<option value="rabbit">Rabbit</option>
-					<option value="other">Other</option>
-				  </select>
-			  
-		 		  <label for="pet_breed">Breed:</label>
-				  <input type="text" id="pet_breed" name="pet_breed" required>
-			  
-				  <label for="pet_age">Age:</label>
-				  <input type="text" id="pet_age" name="pet_age" required>
-			  
-				  <label for="pet_weight">Weight:</label>
-				  <input type="text" id="pet_weight" name="pet_weight" required>
-			  
-				  <label for="pet_gender">Gender:</label>
-				  <select id="pet_gender" name="pet_gender" required>
-					<option value="">Select</option>
-					<option value="male">Male</option>
-					<option value="female">Female</option>
-				  </select>
-			  
-			  
-				  <input type="submit" value="Register">
+            <div class="container">
+                <h2>Pet Registration Form</h2>
+                <form th:action="@{/Pet/addPet}" th:object="${pet}" method="post">
+					<label for="pet_name">Pet Name:</label>
+					<input type="text" id="pet_name" name="name" th:field="*{name}" required>
+					
+					<label for="pet_type">Pet Type:</label>
+					<select id="pet_type" name="type" th:field="*{type}" required>
+						<option value=" disabled selected">Select</option>
+						<option value="dog">Dog</option>
+						<option value="cat">Cat</option>
+						<option value="bird">Bird</option>
+						<option value="rabbit">Rabbit</option>
+						<option value="other">Other</option>
+					</select>
+					
+					
+					<label for="pet_breed">Breed:</label>
+					<input type="text" id="pet_breed" name="breed" th:field="*{breed}" required>
+					
+					<label for="pet_age">Age:</label>
+				    <input type="number" id="pet_age" name="pet_age" th:field="*{age}" required>
+					
+					
+					<label for="pet_weight">Weight:</label>
+					<input type="text" id="pet_weight" name="weight" th:field="*{weight}" required>
+					
+					<label for="pet_gender">Gender:</label>
+					<select id="pet_gender" name="gender" th:field="*{gender}" required>
+						<option value=" disabled selected">Select</option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+					</select>
+					
+					<input type="submit" value="Register">
 				</form>
-			  </div>
-           
-
-		</main>
+				
+				
+            </div>
+        </main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
