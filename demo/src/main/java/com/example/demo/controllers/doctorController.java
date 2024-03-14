@@ -1,18 +1,29 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Doctor;
+import com.example.demo.models.User;
 import com.example.demo.repositories.DoctorRepository;
+
+import jakarta.servlet.http.HttpSession;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
-@RequestMapping("/admin/doctors")
+@RequestMapping("/doctor")
 public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;
+    
 
     @GetMapping("")
     public String listDoctors(Model model) {
@@ -20,6 +31,50 @@ public class DoctorController {
         return "doctors/list";
     }
 
+    
+  @GetMapping("/signup")
+    public ModelAndView addDoctor()
+    {
+        ModelAndView mav = new ModelAndView("/doctors/HomePage");
+        Doctor newDoctor=new Doctor();
+        mav.addObject("doctor",newDoctor);
+        return mav;
+    }    
+
+    @PostMapping("/signup")
+    public RedirectView saveDoctor(@ModelAttribute Doctor doctor)
+    {
+        String encodedPassword=BCrypt.hashpw(doctor.getPassword(),BCrypt.gensalt(12));
+        doctor.setPassword(encodedPassword);
+        doctorRepository.save(doctor);
+        return new RedirectView("login");
+    }
+    @GetMapping("/login")
+    public ModelAndView login() {
+        ModelAndView mav = new ModelAndView("/doctors/loginDoctor");
+        mav.addObject("doctor", new Doctor());
+        return mav;
+    }
+
+    @PostMapping("/login")
+    public RedirectView loginProgress(@RequestParam("name") String name,
+            @RequestParam("password") String password, HttpSession session) {
+                Doctor dbDoctor = doctorRepository.findByname(name);
+        if (dbDoctor != null && BCrypt.checkpw(password, dbDoctor.getPassword())) {
+            session.setAttribute("name", dbDoctor.getName());
+            return new RedirectView("index");
+        } else {
+            // return "failed";
+            return new RedirectView("login");
+        }
+    }
+@GetMapping("/index")
+public ModelAndView gethome() {
+   ModelAndView mav = new ModelAndView("/doctors/index");
+   return mav;
+}
+
+    
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("doctor", new Doctor());

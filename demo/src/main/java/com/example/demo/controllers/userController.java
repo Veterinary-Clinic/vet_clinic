@@ -27,7 +27,7 @@ public class UserController {
 
      @GetMapping("")
     public ModelAndView getHomePage() {
-        ModelAndView mav = new ModelAndView("/user/HomePage.html");
+        ModelAndView mav = new ModelAndView("/user/index.html");
         return mav;
     } 
 
