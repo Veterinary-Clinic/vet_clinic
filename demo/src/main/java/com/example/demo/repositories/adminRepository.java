@@ -5,12 +5,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.models.admin;
+import com.example.demo.models.Admin;
 
 @Repository
-public interface adminRepository extends JpaRepository<admin,Integer>{
+public interface AdminRepository extends JpaRepository<Admin,Integer>{
 
-    Optional<admin> findById(Long id);
+    Optional<Admin> findById(Long id);
 
     
 }

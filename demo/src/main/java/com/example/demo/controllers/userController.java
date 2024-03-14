@@ -1,29 +1,37 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.Doctor;
+import com.example.demo.models.Pet;
 import com.example.demo.models.User;
-import com.example.demo.models.admin;
-import com.example.demo.models.doctor;
-import com.example.demo.repositories.adminRepository;
-import com.example.demo.repositories.doctorRepository;
-import com.example.demo.repositories.userRepository;
+import com.example.demo.repositories.DoctorRepository;
+import com.example.demo.repositories.PetRepository;
+import com.example.demo.repositories.UserRepository;
+
+import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/user")
-public class userController {
-    @Autowired
+public class UserController {
 
-    private userRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+     private  DoctorRepository doctorRepository;
+
+     @GetMapping("")
+    public ModelAndView getHomePage() {
+        ModelAndView mav = new ModelAndView("/user/HomePage.html");
+        return mav;
+    } 
 
     @GetMapping("Registration")
-
     public ModelAndView addUser()
     {
         ModelAndView mav = new ModelAndView("Signup.html");
@@ -31,8 +39,8 @@ public class userController {
         mav.addObject("user",newUser);
         return mav;
     }    
-    @PostMapping("Registration")
 
+    @PostMapping("Registration")
     public String saveUser(@ModelAttribute User user)
     {
         String encodedPassword=BCrypt.hashpw(user.getPassword(),BCrypt.gensalt(12));
@@ -40,4 +48,13 @@ public class userController {
         this.userRepository.save(user);
         return "Added";
     }
+
+    @GetMapping("/doctors")
+  public ModelAndView getDoctors() {
+        ModelAndView mav = new ModelAndView("/user/doctors.html");
+        List<Doctor> doctors = doctorRepository.findAll();
+        mav.addObject("doctors", doctors);
+        return mav;
+    }
+
 }

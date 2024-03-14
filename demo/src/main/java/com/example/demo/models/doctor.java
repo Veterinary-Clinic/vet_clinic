@@ -7,20 +7,20 @@ import jakarta.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class doctor {
+public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
-    protected int number;
-    protected String name;
-    protected String email;
-    protected String password;
-    protected String gender;
+    private int id;
+    private int number;
+    private String name;
+    private String email;
+    private String password;
+    private String gender;
 
-    public doctor() {
+    public Doctor() {
     }
 
-    public doctor(int id, int number, String name, String email, String password, String gender) {
+    public Doctor(int id, int number, String name, String email, String password, String gender) {
         this.id = id;
         this.number = number;
         this.name = name;
@@ -77,32 +77,32 @@ public class doctor {
         this.gender = gender;
     }
 
-    public doctor id(int id) {
+    public Doctor id(int id) {
         setId(id);
         return this;
     }
 
-    public doctor number(int number) {
+    public Doctor number(int number) {
         setNumber(number);
         return this;
     }
 
-    public doctor name(String name) {
+    public Doctor name(String name) {
         setName(name);
         return this;
     }
 
-    public doctor email(String email) {
+    public Doctor email(String email) {
         setEmail(email);
         return this;
     }
 
-    public doctor password(String password) {
+    public Doctor password(String password) {
         setPassword(password);
         return this;
     }
 
-    public doctor gender(String gender) {
+    public Doctor gender(String gender) {
         setGender(gender);
         return this;
     }

@@ -4,19 +4,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-@Entity
 
-public class admin{
+@Entity
+public class Admin{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
     private String password;
 
-    public admin() {
+    public Admin() {
     }
 
-    public admin(String username, String password) {
+    public Admin(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -37,12 +37,12 @@ public class admin{
         this.password = password;
     }
 
-    public admin username(String username) {
+    public Admin username(String username) {
         setUsername(username);
         return this;
     }
 
-    public admin password(String password) {
+    public Admin password(String password) {
         setPassword(password);
         return this;
     }
@@ -51,10 +51,10 @@ public class admin{
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof admin)) {
+        if (!(o instanceof Admin)) {
             return false;
         }
-        admin admin = (admin) o;
+        Admin admin = (Admin) o;
         return id == admin.id && Objects.equals(username, admin.username) && Objects.equals(password, admin.password) ;
     }
 

@@ -5,13 +5,13 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.models.doctor;
+import com.example.demo.models.Doctor;
 
 @Repository
 
-public interface doctorRepository extends JpaRepository<doctor, Integer> {
+public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
-    Optional<doctor> findById(Long id);
+    Optional<Doctor> findById(Long id);
 
     void deleteById(Long id);
 }
