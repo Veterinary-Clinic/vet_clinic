@@ -7,7 +7,7 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="/css/admin/addDoctor.css">
+	<link rel="stylesheet" href="/css/pets.css">
     <link rel="icon" href="/images/logo.png" type="image/icon type" />
 
 
@@ -107,80 +107,37 @@
 
             </head>
             <body>
-            
-            <div class="container">
-              <div class="pet-card">
-                <div class="pet-picture">
-                    <img src="../../static/images/team-1.jpg" alt="Bella">
-                 </div>
-                  <h2>Bella</h2>
-                  <div class="pet-details">
-                  <p>Type: Dog</p>
-                  <p>Breed: Labrador Retriever</p>
-                  <p>Age: 3 years</p>
-             </div>
-              </div>
-            
-              <div class="pet-card">
-                <div class="pet-picture">
-                    <img src="../../static/images/team-2.jpg" alt="Bella">
-                  </div>
-                <h2>Luna</h2>
-                <div class="pet-details">
-                  <p>Type: Cat</p>
-                  <p>Breed: Siamese</p>
-                  <p>Age: 3 years</p>
-                </div>
-              </div>
-            
-              <div class="pet-card">
-                <div class="pet-picture">
-                    <img src="../../static/images/team-3.jpg" alt="Bella">
-                  </div>
-                <h2>Max</h2>
-                <div class="pet-details">
-                  <p>Type: Dog</p>
-                  <p>Breed: German Shepherd</p>
-                  <p>Age: 4 years</p>
-                </div>
-              </div>
-            
-              <div class="pet-card">
-                <div class="pet-picture">
-                    <img src="../../static/images/team-4.jpg" alt="Bella">
-                  </div>
-                <h2>Simba</h2>
-                <div class="pet-details">
-                  <p>Type: Cat</p>
-                  <p>Breed: Persian</p>
-                  <p>Age: 6 years</p>
-                </div>
-              </div>
-            
-              <div class="pet-card">
-                <div class="pet-picture">
-                    <img src="../../static/images/team-1.jpg" alt="Bella">
-                  </div>                <h2>Charlie</h2>
-                <div class="pet-details">
-                  <p>Type: Dog</p>
-                  <p>Breed: Golden Retriever</p>
-                  <p>Age: 2 years</p>
-                </div>
-              </div>
-            
-              <div class="pet-card">
-                <div class="pet-picture">
-                    <img src="../../static/images/team-2.jpg" alt="Bellaa">
-               </div>                <h2>Smokey</h2>
-                <div class="pet-details">
-                  <p>Type: Cat</p>
-                  <p>Breed: Maine Coon</p>
-                  <p>Age: 3 years</p>
-                </div>
-              </div>
-            </div>
-            
+				<div class="container">
+					<h1>List Pets</h1>
+					<table id="pets">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Breed</th>
+								<th>Age</th>
+								<th>Weight</th>
+								<th>Gender</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="pet: ${pets}">
+								<td th:text="${pet.id}"></td>
+								<td th:text="${pet.name}"></td>
+								<td th:text="${pet.type}"></td>
+								<td th:text="${pet.breed}"></td>
+								<td th:text="${pet.age}"></td>
+								<td th:text="${pet.weight}"></td>
+								<td th:text="${pet.gender}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
             </body>
+
+			
             </html>
             
 
