@@ -29,7 +29,7 @@ public class doctorController {
 
         @PostMapping("/add")
     public String addDoctor(@ModelAttribute("doctor") doctor doctor) {
-        doctorRepository.save(doctor);
+       this.doctorRepository.save(doctor);
         return "redirect:/admin/doctors";
     }
 

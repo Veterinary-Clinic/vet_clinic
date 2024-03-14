@@ -25,7 +25,7 @@ public class adminController {
     }
 
     @GetMapping("/add")
-    public String showAddForm(Model model) {
+    public String showAddAdminForm(Model model) {
         model.addAttribute("admin", new admin());
         return "admin/addAdmin";
     }
@@ -63,6 +63,50 @@ public String addDoctor(@ModelAttribute("admin") admin admin) {
     }
 
 
+    //doctor 
+    @GetMapping("/admin/doctors/list")
+    public String listDoctors(Model model) {
+        model.addAttribute("doctors", doctorRepository.findAll());
+        return "doctors/list";
+    }
+
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("doctor", new doctor());
+        return "doctors/add";
+    }
+
+        @PostMapping("/add")
+    public String addDoctor(@ModelAttribute("doctor") doctor doctor) {
+       this.doctorRepository.save(doctor);
+        return "redirect:/admin/doctors";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable("id") Long id, Model model) {
+        doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+        model.addAttribute("doctor", doctor);
+        return "doctors/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("doctor") doctor updatedDoctor) {
+        doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+        doctor.setName(updatedDoctor.getName());
+       
+        doctorRepository.save(doctor);
+        return "redirect:/admin/doctors";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteDoctor(@PathVariable("id") Long id) {
+        doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+        doctorRepository.delete(doctor);
+        return "redirect:/admin/doctors";
+    }
    
 
 }
