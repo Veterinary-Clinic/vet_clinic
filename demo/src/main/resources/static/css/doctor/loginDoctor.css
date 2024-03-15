@@ -50,12 +50,20 @@ body {
   box-sizing: border-box;
 }
 
+.login-form input[type="text"], .login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 25px;
+  border: 3px solid var(--light);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 .login-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--blue);
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
