@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Transient;
 
-import java.util.Objects;
 
 @Entity
 public class Appointment {
@@ -100,6 +99,12 @@ public class Appointment {
         this.doctor = doctor;
     }
 
+    public String getDoctorName(){
+        return this.doctor.getName();
+    }
+
+
+    
 
     private String formatTime(LocalTime unFormattedTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");

@@ -129,6 +129,7 @@
                     <thead>
                         <tr>
                             <th>Doctor's Name</th>
+                            <th>Doctor's Gender</th>
                             <th>Date</th>
                             <th>Time</th>
                             <th>Book</th>
@@ -136,9 +137,10 @@
                     </thead>
                     <tbody>
                         <tr th:each="appointment: ${appointments}">
-                            <td th:text="${appointment.id}"></td> 
-                            <td th:field="date" th:text="${appointment.date}"></td>
-                            <td th:field="time" th:text="${appointment.startHr}"></td>
+                            <td th:text="${appointment.doctor.name}"></td> 
+                            <td th:text="${appointment.doctor.gender}"></td> 
+                            <td th:text="${appointment.date}"></td>
+                            <td th:text="${appointment.startHr}"></td>
                             <td>
                                 <button class="buttons" id="booking"><a
                                         th:href="@{/user/booking/booked(id=${appointment.id})}">Book</a></button>
