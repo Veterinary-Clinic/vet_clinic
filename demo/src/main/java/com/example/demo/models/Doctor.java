@@ -9,22 +9,12 @@ import java.util.Objects;
 @Entity
 public class Doctor {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String Phonenumber;
-    private String name;
-    private String email;
-    private String password;
-    private String gender;
-
-
     public Doctor() {
     }
 
-    public Doctor(int id, String Phonenumber, String name, String email, String password, String gender) {
+    public Doctor(int id, String phonenumber, String name, String email, String password, String gender) {
         this.id = id;
-        this.Phonenumber = Phonenumber;
+        this.phonenumber = phonenumber;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -40,11 +30,11 @@ public class Doctor {
     }
 
     public String getPhonenumber() {
-        return this.Phonenumber;
+        return this.phonenumber;
     }
 
-    public void setPhonenumber(String Phonenumber) {
-        this.Phonenumber = Phonenumber;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
     public String getName() {
@@ -84,8 +74,8 @@ public class Doctor {
         return this;
     }
 
-    public Doctor Phonenumber(String Phonenumber) {
-        setPhonenumber(Phonenumber);
+    public Doctor phonenumber(String phonenumber) {
+        setPhonenumber(phonenumber);
         return this;
     }
 
@@ -117,18 +107,35 @@ public class Doctor {
             return false;
         }
         Doctor doctor = (Doctor) o;
-        return id == doctor.id && Objects.equals(Phonenumber, doctor.Phonenumber) && Objects.equals(name, doctor.name) && Objects.equals(email, doctor.email) && Objects.equals(password, doctor.password) && Objects.equals(gender, doctor.gender);
+        return id == doctor.id && Objects.equals(phonenumber, doctor.phonenumber) && Objects.equals(name, doctor.name) && Objects.equals(email, doctor.email) && Objects.equals(password, doctor.password) && Objects.equals(gender, doctor.gender);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, Phonenumber, name, email, password, gender);
+        return Objects.hash(id, phonenumber, name, email, password, gender);
     }
 
     @Override
     public String toString() {
-        return name + gender;
+        return "{" +
+            " id='" + getId() + "'" +
+            ", phonenumber='" + getPhonenumber() + "'" +
+            ", name='" + getName() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", gender='" + getGender() + "'" +
+            "}";
     }
 
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String phonenumber;
+    private String name;
+    private String email;
+    private String password;
+    private String gender;
+
+
+
 }
