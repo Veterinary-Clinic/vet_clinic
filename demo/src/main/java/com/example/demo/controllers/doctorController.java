@@ -13,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/doctor")
@@ -69,6 +67,56 @@ public class DoctorController {
         ModelAndView mav = new ModelAndView("/doctors/index");
         return mav;
     }
+
+    // @GetMapping("/Profile")
+    // public ModelAndView getProfile() {
+    //     ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor");
+    //     return mav;
+    // }
+    @GetMapping("/Profile")
+public ModelAndView viewProfile(HttpSession session) {
+    ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor");
+    String name = (String) session.getAttribute("name");
+    String email = (String) session.getAttribute("email");
+    String phonenumber = (String) session.getAttribute("phonenumber");
+    mav.addObject("name",name);
+    mav.addObject("email",email);
+    mav.addObject("phonenumber",phonenumber); 
+    return mav;
+}
+
+
+    // @GetMapping("/editProfile")
+    // public ModelAndView editProfile(HttpSession session) {
+    //     ModelAndView mav = new ModelAndView("editprofile");
+    //     String username = (String) session.getAttribute("username");
+    //     user user = userRepository.findByUsername(username);
+    //     mav.addObject("user", user);
+    //     return mav;
+    // }
+
+    // @PostMapping("/editProfile")
+    // public RedirectView editProfile(@ModelAttribute user updatedUser,
+    //         @RequestParam(value = "newPassword", required = false) String newPassword,
+    //         HttpSession session) {
+    //     String username = (String) session.getAttribute("username");
+    //     user existingUser = userRepository.findByUsername(username);
+
+    //     if (existingUser != null) {
+    //         existingUser.setUsername(updatedUser.getUsername());
+    //         existingUser.setDob(updatedUser.getDob());
+    //         if (newPassword != null && !newPassword.isEmpty()) {
+    //             String encryptedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt(12));
+    //             existingUser.setPassword(encryptedPassword);
+    //         }
+
+    //         userRepository.save(existingUser);
+
+    //         session.setAttribute("username", existingUser.getUsername());
+    //     }
+
+    //     return new RedirectView("Profile");
+    // }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
