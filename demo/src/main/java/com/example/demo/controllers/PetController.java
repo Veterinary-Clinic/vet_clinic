@@ -14,13 +14,10 @@ import com.example.demo.repositories.PetRepository;
 @RestController
 @RequestMapping("/Pet")
 public class PetController {
-    
+    @Autowired
     private  PetRepository petRepository;
 
-   @Autowired
-    public PetController(PetRepository petRepository) {
-        this.petRepository = petRepository;
-    }
+
     @GetMapping("pets")
     public ModelAndView getpets() {
         ModelAndView mav = new ModelAndView("/user/pets.html");

@@ -9,6 +9,16 @@ import java.util.Objects;
 @Entity
 public class Doctor {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String phonenumber;
+    private String name;
+    private String email;
+    private String password;
+    private String gender;
+
+
     public Doctor() {
     }
 
@@ -117,24 +127,9 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", phonenumber='" + getPhonenumber() + "'" +
-            ", name='" + getName() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", gender='" + getGender() + "'" +
-            "}";
+        return name + email+ phonenumber +gender;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String phonenumber;
-    private String name;
-    private String email;
-    private String password;
-    private String gender;
 
 
 
