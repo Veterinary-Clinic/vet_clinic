@@ -72,18 +72,24 @@ public class DoctorController {
     //     ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor");
     //     return mav;
     // }
-    @GetMapping("Profile")
-public ModelAndView viewProfile(HttpSession session) {
-    ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor.html");
-    String name = (String) session.getAttribute("name");
-    String email = (String) session.getAttribute("email");
-    String phonenumber = (String) session.getAttribute("phonenumber");
-    mav.addObject("name",name);
-    mav.addObject("email",email);
-    mav.addObject("phonenumber",phonenumber); 
-    return mav;
-}
-
+    @GetMapping("/Profile")
+    public ModelAndView viewProfile(HttpSession session) {
+        Doctor doctor = new Doctor(); // Assuming you have a way to retrieve the logged-in doctor
+        ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor");
+    
+        // Retrieve attributes from session or doctor object
+        String name = (String) session.getAttribute("name");
+        String email = (String) session.getAttribute("email"); // Retrieve email from session or doctor object
+        String phonenumber = doctor.getPhonenumber(); // Retrieve phonenumber from doctor object
+    
+        // Add attributes to the ModelAndView
+        mav.addObject("name", name);
+        mav.addObject("email", email);
+        mav.addObject("phonenumber", phonenumber);
+    
+        return mav;
+    }
+    
 
     // @GetMapping("/editProfile")
     // public ModelAndView editProfile(HttpSession session) {
