@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
@@ -14,25 +17,24 @@ public class Booking {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-    private String date;
-    private String time;
+    private LocalDate date;
+    private LocalTime time;
 
-    @ManyToOne
-    private Doctor doctor;
+    // @ManyToOne
+    // private Doctor doctor;
 
-    @OneToOne
-    private User user;
+    // @OneToOne
+    // private User user;
+
 
 
     public Booking() {
     }
 
-    public Booking(int id, String date, String time, Doctor doctor, User user) {
+    public Booking(int id, LocalDate date, LocalTime time) {
         this.id = id;
         this.date = date;
         this.time = time;
-        this.doctor = doctor;
-        this.user = user;
     }
 
     public int getId() {
@@ -43,36 +45,20 @@ public class Booking {
         this.id = id;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return this.time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
-    }
-
-    public Doctor getDoctor() {
-        return this.doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public User getUser() {
-        return this.user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Booking id(int id) {
@@ -80,23 +66,13 @@ public class Booking {
         return this;
     }
 
-    public Booking date(String date) {
+    public Booking date(LocalDate date) {
         setDate(date);
         return this;
     }
 
-    public Booking time(String time) {
+    public Booking time(LocalTime time) {
         setTime(time);
-        return this;
-    }
-
-    public Booking doctor(Doctor doctor) {
-        setDoctor(doctor);
-        return this;
-    }
-
-    public Booking user(User user) {
-        setUser(user);
         return this;
     }
 
@@ -108,12 +84,12 @@ public class Booking {
             return false;
         }
         Booking booking = (Booking) o;
-        return id == booking.id && Objects.equals(date, booking.date) && Objects.equals(time, booking.time) && Objects.equals(doctor, booking.doctor) && Objects.equals(user, booking.user);
+        return id == booking.id && Objects.equals(date, booking.date) && Objects.equals(time, booking.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, time, doctor, user);
+        return Objects.hash(id, date, time);
     }
 
     @Override
@@ -122,10 +98,7 @@ public class Booking {
             " id='" + getId() + "'" +
             ", date='" + getDate() + "'" +
             ", time='" + getTime() + "'" +
-            ", doctor='" + getDoctor() + "'" +
-            ", user='" + getUser() + "'" +
             "}";
     }
-
    
 }

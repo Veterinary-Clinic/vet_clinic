@@ -1,9 +1,11 @@
 package com.example.demo.models;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.Objects;
+
 @Entity
 public class User {
     @Id
@@ -13,7 +15,6 @@ public class User {
     private String email;
     private String phone;
     private String password;
-
 
     public User() {
     }
@@ -117,6 +118,5 @@ public class User {
             ", password='" + getPassword() + "'" +
             "}";
     }
-
 
 }
