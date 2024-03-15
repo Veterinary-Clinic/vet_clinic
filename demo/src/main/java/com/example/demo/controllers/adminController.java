@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Admin;
+import com.example.demo.models.Doctor;
 import com.example.demo.repositories.AdminRepository;
 import com.example.demo.repositories.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,19 @@ public class AdminController {
         return "admin/list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/addAdmin")
     public String showAddAdminForm(Model model) {
-        model.addAttribute("admin", new admin());
+        model.addAttribute("admin", new Admin());
         return "admin/addAdmin";
     }
 
-    @PostMapping("/add")
-    public String addDoctor(@ModelAttribute("admin") Admin admin) {
+    @PostMapping("/addAdmin")
+    public String addAdmin(@ModelAttribute("Admin") Admin admin) {
         adminRepository.save(admin);
         return "redirect:/admin";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/{id}/editAdmin")
     public String showEditAdminForm(@PathVariable("id") Long id, Model model) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
@@ -42,8 +43,8 @@ public class AdminController {
         return "doctors/edit";
     }
 
-    @PostMapping("/{id}/edit")
-    public String updateAdmin(@PathVariable("id") Long id, @ModelAttribute("admin") Admin updatedAdmin) {
+    @PostMapping("/{id}/editAdmin")
+    public String updateAdmin(@PathVariable("id") Long id, @ModelAttribute("Admin") Admin updatedAdmin) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
         admin.setUsername(updatedAdmin.getUsername());
@@ -52,7 +53,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/{id}/delete")
+    @PostMapping("/{id}/deleteAdmin")
     public String deleteAdmin(@PathVariable("id") Long id) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
@@ -68,29 +69,29 @@ public class AdminController {
         return "doctors/list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/addDoctor")
     public String showAddForm(Model model) {
-        model.addAttribute("doctor", new doctor());
+        model.addAttribute("doctor", new Doctor());
         return "doctors/add";
     }
 
-        @PostMapping("/add")
-    public String addDoctor(@ModelAttribute("doctor") doctor doctor) {
+        @PostMapping("/addDoctor")
+    public String addDoctor(@ModelAttribute("Doctor") Doctor doctor) {
        this.doctorRepository.save(doctor);
         return "redirect:/admin/doctors";
     }
 
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable("id") Long id, Model model) {
-        doctor doctor = doctorRepository.findById(id)
+        Doctor doctor = doctorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
         model.addAttribute("doctor", doctor);
         return "doctors/edit";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("doctor") doctor updatedDoctor) {
-        doctor doctor = doctorRepository.findById(id)
+    public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("Doctor") Doctor updatedDoctor) {
+        Doctor doctor = doctorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
         doctor.setName(updatedDoctor.getName());
        
@@ -100,7 +101,8 @@ public class AdminController {
 
     @PostMapping("/{id}/delete")
     public String deleteDoctor(@PathVariable("id") Long id) {
-        doctor doctor = doctorRepository.findById(id)
+        
+        Doctor doctor = doctorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
         doctorRepository.delete(doctor);
         return "redirect:/admin/doctors";

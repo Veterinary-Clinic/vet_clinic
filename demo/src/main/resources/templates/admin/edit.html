@@ -9,7 +9,7 @@
 <body>
     <h1>Edit Doctor</h1>
 
-    <form th:action="@{/admin/doctors/{id}/edit(id=${admin.id})}" method="post">
+    <form th:action="@{/admin/{id}/edit(id=${admin.id})}" method="post">
         <input type="hidden" id="id" name="id" th:value="${admin.id}">
 
         <label for="name">Name:</label>
