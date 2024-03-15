@@ -9,8 +9,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Objects;
+
 
 @Entity
 public class Booking {
@@ -20,21 +19,21 @@ public class Booking {
     private LocalDate date;
     private String time;
 
-    // @ManyToOne
-    // private Doctor doctor;
+    @ManyToOne
+    private Doctor doctor;
 
-    // @OneToOne
-    // private User user;
-
-
+    @OneToOne
+    private User user;
 
     public Booking() {
     }
 
-    public Booking(int id, LocalDate date, String time) {
+    public Booking(int id, LocalDate date, String time, Doctor doctor, User user) {
         this.id = id;
         this.date = date;
         this.time = time;
+        this.doctor = doctor;
+        this.user = user;
     }
 
     public int getId() {
@@ -60,4 +59,21 @@ public class Booking {
     public void setTime(String time) {
         this.time = time;
     }
+
+    public Doctor getDoctor() {
+        return this.doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

@@ -33,6 +33,8 @@ public class BookingController {
             
             booking.setDate(appointment.getDate());
             booking.setTime(appointment.getStartHr());
+            booking.setDoctor(appointment.getDoctor());
+            //booking.setUser(appointment.getUser());
 
             this.bookingRepository.save(booking);
             this.appointmentRepository.delete(appointment);
