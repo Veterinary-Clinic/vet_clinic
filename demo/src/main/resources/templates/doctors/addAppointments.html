@@ -116,12 +116,12 @@
 
                         <div class="input-box">
                             <label for="startHr">Start working hour</label>
-                            <input type="time" id="startHr" th:field="*{startHr}"/>
+                            <input type="time" id="startHr" th:field="*{unFormattedStartHr}"/>
                         </div>
 
                         <div class="input-box">
                             <label for="endHr">End working hour</label>
-                            <input type="time" id="endHr" th:field="*{endHr}"/>
+                            <input type="time" id="endHr" th:field="*{unFormattedEndHr}"/>
                         </div> 
 
                         <button input type="submit" name="submit" id="submit-button" value="submit">Add Appointment</button>

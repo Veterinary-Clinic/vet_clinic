@@ -3,38 +3,49 @@ package com.example.demo.controllers;
 import com.example.demo.models.Appointment;
 import com.example.demo.repositories.AppointmentRepository;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
-
 @RestController
-@RequestMapping("/appointments")    
+@RequestMapping("/appointments")
 
 public class AppointmentController {
     @Autowired
     AppointmentRepository appointmentsRepository;
 
-    @GetMapping("add-appointment")   
+    @GetMapping("available-appointments")
+    public ModelAndView viewAppointment() {
+        ModelAndView mav = new ModelAndView("/user/booking.html");
+        List<Appointment> appointments = this.appointmentsRepository.findAll();
+        mav.addObject("appointments", appointments);
+        return mav;
+    }
+
+    @GetMapping("add-appointment")
     public ModelAndView addAppointment() {
         ModelAndView mav = new ModelAndView("/doctors/addAppointments.html");
         Appointment appointment = new Appointment();
         mav.addObject("appointments", appointment);
         return mav;
     }
-    
-    @SuppressWarnings("null")
+
     @PostMapping("save-appointment")
-    public  RedirectView saveAppointment(@ModelAttribute Appointment appointment) {
-        this.appointmentsRepository.save(appointment);
-        return new RedirectView("add-appointment");
+    public void saveAppointment(@ModelAttribute Appointment appointment, HttpServletResponse response) throws IOException {
+        appointment.setStartHr(appointment.getUnFormattedStartHr());
+        appointment.setEndHr(appointment.getUnFormattedEndHr());
+        response.sendRedirect("add-appointment");
     }
-    
+
 }

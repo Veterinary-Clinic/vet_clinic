@@ -7,14 +7,16 @@ import jakarta.persistence.Id;
 
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import java.util.Objects;
+
+import java.time.LocalDate;
+
 
 @Entity
 public class Booking {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-    private String date;
+    private LocalDate date;
     private String time;
 
     @ManyToOne
@@ -23,11 +25,10 @@ public class Booking {
     @OneToOne
     private User user;
 
-
     public Booking() {
     }
 
-    public Booking(int id, String date, String time, Doctor doctor, User user) {
+    public Booking(int id, LocalDate date, String time, Doctor doctor, User user) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -43,11 +44,11 @@ public class Booking {
         this.id = id;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -75,57 +76,4 @@ public class Booking {
         this.user = user;
     }
 
-    public Booking id(int id) {
-        setId(id);
-        return this;
-    }
-
-    public Booking date(String date) {
-        setDate(date);
-        return this;
-    }
-
-    public Booking time(String time) {
-        setTime(time);
-        return this;
-    }
-
-    public Booking doctor(Doctor doctor) {
-        setDoctor(doctor);
-        return this;
-    }
-
-    public Booking user(User user) {
-        setUser(user);
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Booking)) {
-            return false;
-        }
-        Booking booking = (Booking) o;
-        return id == booking.id && Objects.equals(date, booking.date) && Objects.equals(time, booking.time) && Objects.equals(doctor, booking.doctor) && Objects.equals(user, booking.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, date, time, doctor, user);
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", date='" + getDate() + "'" +
-            ", time='" + getTime() + "'" +
-            ", doctor='" + getDoctor() + "'" +
-            ", user='" + getUser() + "'" +
-            "}";
-    }
-
-   
 }
