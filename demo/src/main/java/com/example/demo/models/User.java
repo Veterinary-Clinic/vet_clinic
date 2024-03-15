@@ -1,10 +1,11 @@
 package com.example.demo.models;
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.util.Objects;
 
 @Entity
 public class User {
@@ -15,16 +16,19 @@ public class User {
     private String email;
     private String phone;
     private String password;
+    private String confirmPassword;
+
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String phone, String password) {
+    public User(Long id, String name, String email, String phone, String password, String confirmPassword) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.confirmPassword = confirmPassword;
     }
 
     public Long getId() {
@@ -67,6 +71,14 @@ public class User {
         this.password = password;
     }
 
+    public String getConfirmPassword() {
+        return this.confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
     public User id(Long id) {
         setId(id);
         return this;
@@ -92,6 +104,11 @@ public class User {
         return this;
     }
 
+    public User confirmPassword(String confirmPassword) {
+        setConfirmPassword(confirmPassword);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -100,12 +117,12 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(password, user.password);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(password, user.password) && Objects.equals(confirmPassword, user.confirmPassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, phone, password);
+        return Objects.hash(id, name, email, phone, password, confirmPassword);
     }
 
     @Override
@@ -116,7 +133,8 @@ public class User {
             ", email='" + getEmail() + "'" +
             ", phone='" + getPhone() + "'" +
             ", password='" + getPassword() + "'" +
+            ", confirmPassword='" + getConfirmPassword() + "'" +
             "}";
     }
-
+    
 }

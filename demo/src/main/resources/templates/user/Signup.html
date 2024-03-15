@@ -8,7 +8,7 @@
 
 	<link rel="icon" href="../../../Public/Images/logodowns.png" type="image/gif">
 
-	<link rel="stylesheet" href="../../static/css/signup.css">
+	<link rel="stylesheet" href="../../css/signup.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 </head>
@@ -19,7 +19,7 @@
 
 		<div class="form-container sign-up-container">
 
-			<form th:action="@{/User/Registration}" th:object="${user}" method="POST">
+			<form th:action="@{/user/Registration}" th:object="${user}" method="POST">
 
 				<h1>Create Account</h1>
 
@@ -34,7 +34,7 @@
 				<input type="text" th:field="*{phone}" placeholder="Phone" name="Phone" required />
 				<input type="password" th:field="*{password}" placeholder="Password" name="Password" id="password" required />
 				<span id="passwordValidation"></span>
-				<input type="password" placeholder="Confirm Password" name="confirm" id="confirmPassword" required />
+				<input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password" name="confirm" id="confirmPassword" required />
 				<span id="passwordValidationMessage"></span>
 				<button type="submit" id="sign"name="submit">Sign Up</button>
 			</form>
@@ -57,7 +57,7 @@
 				<input type="password" placeholder="Password" name="Password" />
 				<a href="#">Forgot your password?</a>
 
-				<button type="submit" name="login"name="submit" >Sign In</button>
+				<button type="submit" name="submit" >Sign In</button>
 			</form>
 
 		</div>
@@ -80,7 +80,7 @@
 
 	</div>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../static/Js/signup.js" ></script>
+    <script src="../../Js/signup.js" ></script>
 
 	</head>
 
