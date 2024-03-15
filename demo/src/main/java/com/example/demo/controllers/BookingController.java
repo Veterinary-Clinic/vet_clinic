@@ -1,39 +1,46 @@
 package com.example.demo.controllers;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.models.Appointment;
 import com.example.demo.models.Booking;
+import com.example.demo.repositories.AppointmentRepository;
 import com.example.demo.repositories.BookingRepository;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @RestController
-@RequestMapping("/booking")
+@RequestMapping("/user/booking")
 public class BookingController {
 
     @Autowired
     BookingRepository bookingRepository;
 
+    @Autowired
+    AppointmentRepository appointmentRepository;
 
-    @GetMapping("book-appointment")
-    public ModelAndView bookAppointment() {
-        ModelAndView mav = new ModelAndView("/user/booking.html");
-        Booking booking = new Booking();
-        mav.addObject("bookings", booking);
-        return mav;
-    }
+    @GetMapping("booked")
+    public void book(@RequestParam int id, HttpServletResponse response) throws IOException {
+        try {
+            Appointment appointment = appointmentRepository.findById(id).get();
+            Booking booking = new Booking();
+            booking.setDate(appointment.getDate());
+            booking.setTime(appointment.getStartHr());
 
-    @SuppressWarnings("null")
-    @PostMapping("booked")
-    public String save(@ModelAttribute Booking booking) {
-        this.bookingRepository.save(booking);
-        //return new RedirectView("booked");
-        return "booked";
+            this.bookingRepository.save(booking);
+            this.appointmentRepository.delete(appointment);
+
+        } catch (Exception e) {
+            System.out.println("Exception: "+e.getMessage());
+        }
+        response.sendRedirect("/appointments/available-appointments");
     }
     
 

@@ -1,10 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Doctor;
-import com.example.demo.models.Pet;
 import com.example.demo.models.User;
 import com.example.demo.repositories.DoctorRepository;
-import com.example.demo.repositories.PetRepository;
 import com.example.demo.repositories.UserRepository;
 
 import java.util.List;
