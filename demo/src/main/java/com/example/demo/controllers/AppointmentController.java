@@ -18,11 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
-
-
 @RestController
-@RequestMapping("/appointments")    
+@RequestMapping("/appointments")
 
 public class AppointmentController {
     @Autowired
@@ -36,18 +33,19 @@ public class AppointmentController {
         return mav;
     }
 
-    @GetMapping("add-appointment")   
+    @GetMapping("add-appointment")
     public ModelAndView addAppointment() {
         ModelAndView mav = new ModelAndView("/doctors/addAppointments.html");
         Appointment appointment = new Appointment();
         mav.addObject("appointments", appointment);
         return mav;
     }
-    
-    @SuppressWarnings("null")
+
     @PostMapping("save-appointment")
-    public  void saveAppointment(@ModelAttribute Appointment appointment, HttpServletResponse response) throws IOException {
-        this.appointmentsRepository.save(appointment);
+    public void saveAppointment(@ModelAttribute Appointment appointment, HttpServletResponse response) throws IOException {
+        appointment.setStartHr(appointment.getUnFormattedStartHr());
+        appointment.setEndHr(appointment.getUnFormattedEndHr());
         response.sendRedirect("add-appointment");
     }
+
 }

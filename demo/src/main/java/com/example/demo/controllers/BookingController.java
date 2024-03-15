@@ -30,6 +30,7 @@ public class BookingController {
         try {
             Appointment appointment = appointmentRepository.findById(id).get();
             Booking booking = new Booking();
+            
             booking.setDate(appointment.getDate());
             booking.setTime(appointment.getStartHr());
 

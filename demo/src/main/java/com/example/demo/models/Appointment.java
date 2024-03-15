@@ -2,39 +2,46 @@ package com.example.demo.models;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.Transient;
 
 import java.util.Objects;
-
-
 
 @Entity
 public class Appointment {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDate date;
-    private LocalTime startHr;
-    private LocalTime endHr;
+    private String startHr;
+    private String endHr;
+
+    @Transient
+    private LocalTime unFormattedStartHr;
+    @Transient
+    private LocalTime unFormattedEndHr;
 
     @ManyToOne
     private Doctor doctor;
 
-
     public Appointment() {
     }
 
-    public Appointment(int id, LocalDate date, LocalTime startHr, LocalTime endHr) {
+    public Appointment(int id, LocalDate date, String startHr, String endHr, LocalTime unFormattedStartHr,
+            LocalTime unFormattedEndHr, Doctor doctor) {
         this.id = id;
         this.date = date;
         this.startHr = startHr;
         this.endHr = endHr;
+        this.unFormattedStartHr = unFormattedStartHr;
+        this.unFormattedEndHr = unFormattedEndHr;
+        this.doctor = doctor;
     }
 
     public int getId() {
@@ -53,67 +60,85 @@ public class Appointment {
         this.date = date;
     }
 
-    public LocalTime getStartHr() {
+    public LocalTime getUnFormattedStartHr() {
+        return this.unFormattedStartHr;
+    }
+
+    public void setUnFormattedStartHr(LocalTime unFormattedStartHr) {
+        this.unFormattedStartHr = unFormattedStartHr;
+    }
+
+    public LocalTime getUnFormattedEndHr() {
+        return this.unFormattedEndHr;
+    }
+
+    public void setUnFormattedEndHr(LocalTime unFormattedEndHr) {
+        this.unFormattedEndHr = unFormattedEndHr;
+    }
+
+    public String getStartHr() {
         return this.startHr;
     }
 
-    public void setStartHr(LocalTime startHr) {
-        this.startHr = startHr;
+    public void setStartHr(LocalTime unFormattedStartHr) {
+        this.startHr = formatTime(unFormattedStartHr);
     }
 
-    public LocalTime getEndHr() {
+    public String getEndHr() {
         return this.endHr;
     }
 
     public void setEndHr(LocalTime endHr) {
-        this.endHr = endHr;
+        this.endHr = formatTime(unFormattedEndHr);
     }
 
-    public Appointment id(int id) {
-        setId(id);
-        return this;
+    public Doctor getDoctor() {
+        return this.doctor;
     }
 
-    public Appointment date(LocalDate date) {
-        setDate(date);
-        return this;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
-    public Appointment startHr(LocalTime startHr) {
-        setStartHr(startHr);
-        return this;
+
+    private String formatTime(LocalTime unFormattedTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
+        return unFormattedTime.format(formatter);
     }
 
-    public Appointment endHr(LocalTime endHr) {
-        setEndHr(endHr);
-        return this;
-    }
+    // private int timeSplit(String time){
+    //     String[] timeParts = time.split(":");
+    //     int hour = Integer.parseInt(timeParts[0]);
+    //     //int minute = Integer.parseInt(timeParts[1]);
+    //     return hour;
+    // }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Appointment)) {
-            return false;
-        }
-        Appointment appointment = (Appointment) o;
-        return id == appointment.id && Objects.equals(date, appointment.date) && Objects.equals(startHr, appointment.startHr) && Objects.equals(endHr, appointment.endHr);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, date, startHr, endHr);
-    }
+    // public String clockTimeConversion(int hour) {
+    //     if (hour == 12) {
+    //         return hour + ":00 PM";
+    //     } else if (hour > 12) {
+    //         return (hour - 12) + ":00 PM";
+    //     } else {
+    //         return hour + ":00 AM";
+    //     }
+    // }
 
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", date='" + getDate() + "'" +
-            ", startHr='" + getStartHr() + "'" +
-            ", endHr='" + getEndHr() + "'" +
-            "}";
-    }
+    // private void hourList(){
+    //     int startHour = timeSplit(this.startHr);
+    //     int endHour = timeSplit(this.endHr);
+        
+    //     for (int hour = startHour; hour <= endHour; hour++) {
+    //         System.out.println(clockTimeConversion(hour));
+    //         //clockTimeConversion(hour);
+    //     }
+    // }
 
-    
+    // private int numberOfWorkingHours(){
+    //     int startHour = timeSplit(this.startHr);
+    //     int endHour = timeSplit(this.endHr);
+    //     return endHour - startHour; 
+    // }
+
+
 }

@@ -18,7 +18,7 @@ public class Booking {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private LocalDate date;
-    private LocalTime time;
+    private String time;
 
     // @ManyToOne
     // private Doctor doctor;
@@ -31,7 +31,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(int id, LocalDate date, LocalTime time) {
+    public Booking(int id, LocalDate date, String time) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -53,52 +53,11 @@ public class Booking {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return this.time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
-
-    public Booking id(int id) {
-        setId(id);
-        return this;
-    }
-
-    public Booking date(LocalDate date) {
-        setDate(date);
-        return this;
-    }
-
-    public Booking time(LocalTime time) {
-        setTime(time);
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Booking)) {
-            return false;
-        }
-        Booking booking = (Booking) o;
-        return id == booking.id && Objects.equals(date, booking.date) && Objects.equals(time, booking.time);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, date, time);
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", date='" + getDate() + "'" +
-            ", time='" + getTime() + "'" +
-            "}";
-    }
-   
 }

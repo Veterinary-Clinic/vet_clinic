@@ -123,32 +123,32 @@
 
     <!-- Booking Start -->
     <main>
-    <div class="table-data">
-        <div class="order">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Doctor ID</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Book</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="appointment: ${appointments}">
-                        <td th:text="${appointment.id}"></td>
-                        <td th:field="date" th:text="${appointment.date}"></td>
-                        <td th:field="time" th:text="${appointment.startHr}"></td>
-                        <td>
-                            <button class="buttons" id="booking"><a
-                                    th:href="@{/user/booking/booked(id=${appointment.id})}">Book</a></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="table-data">
+            <div class="order">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Doctor's Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Book</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="appointment: ${appointments}">
+                            <td th:text="${appointment.id}"></td> 
+                            <td th:field="date" th:text="${appointment.date}"></td>
+                            <td th:field="time" th:text="${appointment.startHr}"></td>
+                            <td>
+                                <button class="buttons" id="booking"><a
+                                        th:href="@{/user/booking/booked(id=${appointment.id})}">Book</a></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
     <!-- Booking end -->
 
 
