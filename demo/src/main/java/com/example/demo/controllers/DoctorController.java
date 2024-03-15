@@ -51,12 +51,16 @@ public class DoctorController {
     @PostMapping("login")
     public RedirectView loginProgress(@RequestParam("name") String name,
             @RequestParam("password") String password, HttpSession session) {
+
         Doctor dbDoctor = this.doctorRepository.findByname(name);
-        if (dbDoctor != null && BCrypt.checkpw(password, dbDoctor.getPassword())) {
+        System.out.println(dbDoctor);
+
+        if (BCrypt.checkpw(password, dbDoctor.getPassword())) {
             session.setAttribute("name", dbDoctor.getName());
+            session.setAttribute("email", dbDoctor.getEmail());
+            session.setAttribute("phonenumber", dbDoctor.getPhonenumber());
             return new RedirectView("index");
         } else {
-            // return "failed";
             return new RedirectView("login");
         }
     }
@@ -75,12 +79,12 @@ public class DoctorController {
     @GetMapping("/Profile")
     public ModelAndView viewProfile(HttpSession session) {
         Doctor doctor = new Doctor(); // Assuming you have a way to retrieve the logged-in doctor
-        ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor");
+        ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor.html");
     
         // Retrieve attributes from session or doctor object
         String name = (String) session.getAttribute("name");
         String email = (String) session.getAttribute("email"); // Retrieve email from session or doctor object
-        String phonenumber = doctor.getPhonenumber(); // Retrieve phonenumber from doctor object
+        String phonenumber =(String) session.getAttribute("phonenumber"); // Retrieve phonenumber from doctor object
     
         // Add attributes to the ModelAndView
         mav.addObject("name", name);
