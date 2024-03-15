@@ -53,9 +53,7 @@ public class DoctorController {
             @RequestParam("password") String password, HttpSession session) {
 
         Doctor dbDoctor = this.doctorRepository.findByname(name);
-        System.out.println(dbDoctor);
-
-        if (BCrypt.checkpw(password, dbDoctor.getPassword())) {
+        if (dbDoctor != null &&BCrypt.checkpw(password, dbDoctor.getPassword())) {
             session.setAttribute("name", dbDoctor.getName());
             session.setAttribute("email", dbDoctor.getEmail());
             session.setAttribute("phonenumber", dbDoctor.getPhonenumber());
