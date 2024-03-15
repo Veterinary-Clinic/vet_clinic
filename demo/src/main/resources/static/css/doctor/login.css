@@ -45,7 +45,7 @@ body {
   width: 100%;
   padding: 10px;
   margin-bottom: 25px;
-  border: 1px solid var(--white);
+  border: 3px solid var(--light);
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -53,7 +53,7 @@ body {
 .login-form button {
     width: 100%;
     padding: 10px;
-    background-color: var(--primary);
+    background-color: var(--blue);
     color: var(--white);
     border: none;
     border-radius: 4px;
