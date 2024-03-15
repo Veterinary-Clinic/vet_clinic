@@ -107,11 +107,11 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="/index.html" class="nav-item nav-link">Home</a>
+                    <a href="/about.html" class="nav-item nav-link">About</a>
                     <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="price.html" class="nav-item nav-link">Price</a>
-                    <a href="booking.html" class="nav-item nav-link active">Booking</a>
+                    <a href="/price.html" class="nav-item nav-link">Price</a>
+                    <a href="@{/appointments/available-appointments}" class="nav-item nav-link active">Booking</a>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a>
@@ -121,7 +121,8 @@
     <!-- Navbar End -->
 
 
-
+    <!-- Booking Start -->
+    <main>
     <div class="table-data">
         <div class="order">
             <table>
@@ -135,102 +136,20 @@
                 </thead>
                 <tbody>
                     <tr th:each="appointment: ${appointments}">
-                        <td th:text ="${appointment.id}"></td>
-                        <td th:field = "date" th:text ="${appointment.date}"></td>
-                        <td th:field = "time" th:text ="${appointment.startHr}" ></td>
+                        <td th:text="${appointment.id}"></td>
+                        <td th:field="date" th:text="${appointment.date}"></td>
+                        <td th:field="time" th:text="${appointment.startHr}"></td>
                         <td>
-                            <button class = "buttons" id ="delete"><a th:href="@{/user/booking/booked(id=${appointment.id})}">Book</a></button>
-                        </td>							
-                    </tr>							
+                            <button class="buttons" id="booking"><a
+                                    th:href="@{/user/booking/booked(id=${appointment.id})}">Book</a></button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
-    <!-- Booking Start -->
-   <!-- <div class="container-fluid">
-        <div class="container">
-            <div class="col-lg-5">
-                <div class="bg-primary py-5 px-4 px-sm-5 mt-4 mb-5">
-                    <form class="py-5" th:action="@{/booking/booked}" th:object="${bookings}" method="POST">
-                        
-                        <div class="form-group">
-                            <label for="day" class="text-white">Select Your Preferred Day:</label>
-                            <select th:filed ="*{date}" id="date" id="date" name="date"
-                                class="custom-select border-0 px-4 custom-height" style="height: 47px;"
-                                 th:each = "appointment:${appointments}">
-                                <option selected disabled hidden>Select Date</option>
-                                <option th:text="${appointments.id}"></option>
-                            </select> 
-
-                        <div class="form-group">
-                            <label for="date" class="text-white">Select Your Preferred Date:</label>
-                            <select id="date" name="date" th:filed ="*{date}" 
-                            class="custom-select border-0 px-4 custom-height" style="height: 47px;">
-                                <option selected disabled hidden>Select Date</option>
-                            </select> -->
-                            <!-- <script>
-                                var currentDate = new Date();
-                                var year = currentDate.getFullYear();
-                                var month = currentDate.getMonth() + 1; 
-                                var daysInMonth = new Date(year, month, 0).getDate();
-                                var dateSelect = document.getElementById("date");
-                                for (var day = 1; day <= daysInMonth; day++) {
-                                    var date = year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
-                                    var option = new Option(date, date);
-                                    dateSelect.appendChild(option);
-                                }
-                            </script> -->
-
-                        <!-- </div>
-
-                        <div class="form-group">
-                            <label for="time" class="text-white">Select Your Preferred Time:</label>
-                            <select id="time" name="time" th:filed ="*{time}" 
-                            class="custom-select border-0 px-4 custom-height" style="height: 47px;">
-                                <option selected disabled hidden>Select Time</option>
-                            </select>
-
-                            <option> -->
-                            <!-- <script>
-                                var hourSelect = document.getElementById("time");
-                                var startHour = 8;
-                                var startMinute = 30;
-                                var endHour = 16;
-
-                                for (var hour = startHour; hour <= endHour; hour++) {
-                                    for (var minute = (hour == startHour ? startMinute : 0); minute < 60; minute += 30) {
-                                        var formattedHour = (hour > 12) ? (hour - 12) : hour;
-                                        var amPm = (hour >= 12) ? "PM" : "AM";
-                                        var formattedMinute = (minute < 10) ? "0" + minute : minute;
-                                        var option = document.createElement("option");
-                                        option.value = formattedHour + ":" + formattedMinute + " " + amPm;
-                                        option.textContent = formattedHour + ":" + formattedMinute + " " + amPm;
-                                        hourSelect.appendChild(option);
-                                    }
-                                }
-                            </script> -->
-                            <!-- </option>
-
-                        </div>
-
-                        <div>
-                            <button class="btn btn-dark btn-block border-0 py-3" type="submit">Book Now</button>
-                        </div>
-                    </form>
-
-
-
-
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    </div> -->
-    <!-- Booking Start -->
+</main>
+    <!-- Booking end -->
 
 
 
