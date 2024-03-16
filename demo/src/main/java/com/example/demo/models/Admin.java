@@ -4,13 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 @Entity
 public class Admin{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty(message = "Name is required")
+    @Size(max = 100, message = "Name must be less than 100 characters")
     private String username;
+    @NotEmpty(message = "password is required")
+    @Size(min = 8, message = "password must be more than 8 characters")
     private String password;
     private String phonenumber;
 

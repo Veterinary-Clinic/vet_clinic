@@ -94,48 +94,48 @@ public class DoctorController {
     
 
 
-    @GetMapping("/add")
-    public String showAddForm(Model model) {
-        model.addAttribute("doctor", new Doctor());
-        return "doctors/add";
-    }
+//     @GetMapping("/add")
+//     public String showAddForm(Model model) {
+//         model.addAttribute("doctor", new Doctor());
+//         return "doctors/add";
+//     }
 
-    @PostMapping("/add")
-    public String addDoctor(@ModelAttribute("doctor") Doctor doctor) {
-        doctorRepository.save(doctor);
-        return "redirect:/admin/doctors";
-    }
+//     @PostMapping("/add")
+//     public String addDoctor(@ModelAttribute("doctor") Doctor doctor) {
+//         doctorRepository.save(doctor);
+//         return "redirect:/admin/doctors";
+//     }
 
-    @GetMapping("/{id}/edit")
-    public String showEditForm(@PathVariable("id") Long id, Model model) {
-        Doctor doctor = doctorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-        model.addAttribute("doctor", doctor);
-        return "doctors/edit";
-    }
+//     @GetMapping("/{id}/edit")
+//     public String showEditForm(@PathVariable("id") Long id, Model model) {
+//         Doctor doctor = doctorRepository.findById(id)
+//                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+//         model.addAttribute("doctor", doctor);
+//         return "doctors/edit";
+//     }
 
-    @PostMapping("/{id}/edit")
-    public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("doctor") Doctor updatedDoctor) {
-        Doctor doctor = doctorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-        doctor.setName(updatedDoctor.getName());
+//     @PostMapping("/{id}/edit")
+//     public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("doctor") Doctor updatedDoctor) {
+//         Doctor doctor = doctorRepository.findById(id)
+//                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+//         doctor.setName(updatedDoctor.getName());
 
-        doctorRepository.save(doctor);
-        return "redirect:/admin/doctors";
-    }
+//         doctorRepository.save(doctor);
+//         return "redirect:/admin/doctors";
+//     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteDoctor(@PathVariable("id") Long id) {
-        Doctor doctor = doctorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-        doctorRepository.delete(doctor);
-        return "redirect:/admin/doctors";
-    }
+//     @PostMapping("/{id}/delete")
+//     public String deleteDoctor(@PathVariable("id") Long id) {
+//         Doctor doctor = doctorRepository.findById(id)
+//                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+//         doctorRepository.delete(doctor);
+//         return "redirect:/admin/doctors";
+//     }
 
-    @GetMapping("/logout")
-    public RedirectView logout(HttpSession session) {
-        // Invalidate the session
-        session.invalidate();
-        return new RedirectView("/doctor/login");
-}
+//     @GetMapping("/logout")
+//     public RedirectView logout(HttpSession session) {
+//         // Invalidate the session
+//         session.invalidate();
+//         return new RedirectView("/doctor/login");
+// }
 }

@@ -4,12 +4,19 @@ import com.example.demo.models.Admin;
 import com.example.demo.models.Doctor;
 import com.example.demo.repositories.AdminRepository;
 import com.example.demo.repositories.DoctorRepository;
+
+import jakarta.servlet.http.HttpSession;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.validation.annotation.Validated;
+import javax.validation.Valid;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -34,11 +41,55 @@ public class AdminController {
     }
 
     @PostMapping("/addAdmin")
-    public String addAdmin(@ModelAttribute("Admin") Admin admin) {
-        adminRepository.save(admin);
-        return "redirect:/admin/list";
-    }
+    public String addAdmin(@Validated @ModelAttribute("admin") Admin admin, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "admin/addAdmin";
+        }
 
+            else{
+        adminRepository.save(admin);
+        return "redirect:/admin/list" ; 
+            }
+        }
+
+@GetMapping("login")
+    public ModelAndView login() {
+        ModelAndView mav = new ModelAndView("/admin/loginAdmin.html");
+        mav.addObject("admin", new Admin());
+        return mav;
+    } 
+
+    @PostMapping("login")
+    public RedirectView loginProgress(@RequestParam("username") String name,
+            @RequestParam("password") String password, HttpSession session) {
+
+        Admin dbAdmin = this.adminRepository.findByname(name);
+        if (dbAdmin!= null &&BCrypt.checkpw(password, dbAdmin.getPassword())) {
+            // session.setAttribute("name", dbDoctor.getName());
+            // session.setAttribute("email", dbDoctor.getEmail());
+            // session.setAttribute("phonenumber", dbDoctor.getPhonenumber());
+            return new RedirectView("index");
+        } else {
+            return new RedirectView("login");
+        }
+    }
+    @GetMapping("/Profile")
+    public ModelAndView viewProfile(HttpSession session) {
+        Admin admin = new Admin(); // Assuming you have a way to retrieve the logged-in doctor
+        ModelAndView mav = new ModelAndView("/admin/profileAdminhtml");
+    
+        // Retrieve attributes from session or doctor object
+        String name = (String) session.getAttribute("username");
+        String password = (String) session.getAttribute("password"); // Retrieve email from session or doctor object
+        // String phonenumber =(String) session.getAttribute("phonenumber"); // Retrieve phonenumber from doctor object
+    
+        // // Add attributes to the ModelAndView
+        // mav.addObject("name", name);
+        // mav.addObject("email", email);
+        // mav.addObject("phonenumber", phonenumber);
+    
+        return mav;
+    }
     @GetMapping("/{id}/editAdmin")
     public String showEditAdminForm(@PathVariable("id") Long id, Model model) {
         Admin admin = adminRepository.findById(id)
@@ -48,13 +99,16 @@ public class AdminController {
     }
 
     @PostMapping("/{id}/editAdmin")
-    public String updateAdmin(@PathVariable("id") Long id, @ModelAttribute("Admin") Admin updatedAdmin) {
+    public String updateAdmin(@Valid @PathVariable("id") Long id, @ModelAttribute("Admin") Admin updatedAdmin , BindingResult bindingResult) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
         admin.setUsername(updatedAdmin.getUsername());
-       
+        if (bindingResult.hasErrors()) {
+            return "redirect:/admin/edit";
+        }else{
         adminRepository.save(admin);
         return "redirect:/admin/list";
+        }
     }
 
     @PostMapping("/{id}/deleteAdmin")
@@ -111,6 +165,13 @@ public class AdminController {
         doctorRepository.delete(doctor);
         return "redirect:/admin";
     }
-   
+    @ExceptionHandler
+    public String handleValidationException(Exception exception) {
+        return "admin/validation-error";
+    }
 
+    @ModelAttribute("admin")
+    public Admin getAdminModelAttribute() {
+        return new Admin();
+    }
 }
