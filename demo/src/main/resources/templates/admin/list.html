@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Admins</title>
@@ -20,8 +21,8 @@
 			<span class="text">AdminHub</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="/admin/index">
+            <li class="active">
+				<a href="/admin">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
@@ -108,12 +109,13 @@
         </thead>
         <tbody>
            
-            <tr th:each="admin : ${admins}">
-                <!-- <td th:text="${doctor.id}"></td> -->
-                <td th:text="${admin.username}"></td>
+            <tr th:each="Admin : ${admins}">
+                <td th:text="${Admin.id}"></td>
+                <td th:text="${Admin.username}"></td>
+                <!-- <td th:text="${doctor.specialization}"></td> -->
                 <td>
-                    <a th:href="@{/admin/{id}/edit(id=${admin.id})}">Edit</a>
-                    <form th:action="@{/admin/{id}/delete(id=${admin.id})}" method="post">
+                    <a th:href="@{/admin/{id}/editAdmin(id=${Admin.id})}">Edit</a>
+                    <form th:action="@{/admin/{id}/deleteAdmin(id=${Admin.id})}" method="post">
                         <button type="submit">Delete</button>
                     </form>
                 </td>

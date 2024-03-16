@@ -24,7 +24,7 @@ public class AdminController {
     }
     @GetMapping("/list")
     public String listAdmins(Model model) {
-        model.addAttribute("admin", adminRepository.findAll());
+        model.addAttribute("admins", adminRepository.findAll());
         return "admin/list";
     }
     @GetMapping("/addAdmin")
@@ -36,7 +36,7 @@ public class AdminController {
     @PostMapping("/addAdmin")
     public String addAdmin(@ModelAttribute("Admin") Admin admin) {
         adminRepository.save(admin);
-        return "redirect:/admin";
+        return "redirect:/admin/list";
     }
 
     @GetMapping("/{id}/editAdmin")
@@ -44,7 +44,7 @@ public class AdminController {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
         model.addAttribute("admin", admin);
-        return "doctors/edit";
+        return "admin/edit";
     }
 
     @PostMapping("/{id}/editAdmin")
@@ -54,7 +54,7 @@ public class AdminController {
         admin.setUsername(updatedAdmin.getUsername());
        
         adminRepository.save(admin);
-        return "redirect:/admin";
+        return "redirect:/admin/list";
     }
 
     @PostMapping("/{id}/deleteAdmin")
@@ -62,7 +62,7 @@ public class AdminController {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
     adminRepository.delete(admin);
-        return "redirect:/admin";
+        return "redirect:/admin/list";
     }
 
 
