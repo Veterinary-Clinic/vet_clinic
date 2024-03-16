@@ -43,7 +43,7 @@
 
 		<div class="form-container sign-in-container">
 
-			<form action="signup.php" method="post">
+			<form th:action="@{/user/Login}" th:object="${user}" method="POST">
 
 				<h1>Sign in</h1>
 
@@ -53,8 +53,8 @@
 				</div>
 
 				<span>or use your account</span>
-				<input type="email" placeholder="Email" name="Email" />
-				<input type="password" placeholder="Password" name="Password" />
+				<input type="email"  th:field="*{email}" placeholder="Email" name="Email" />
+				<input type="password"   th:field="*{password}" placeholder="Password" name="Password" />
 				<a href="#">Forgot your password?</a>
 
 				<button type="submit" name="submit" >Sign In</button>
