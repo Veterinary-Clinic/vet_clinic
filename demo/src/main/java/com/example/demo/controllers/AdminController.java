@@ -22,6 +22,7 @@ import javax.validation.Valid;
 public class AdminController {
     @Autowired
     private AdminRepository adminRepository;
+    @Autowired
     private DoctorRepository doctorRepository;
 
     @GetMapping("")
@@ -63,7 +64,7 @@ public class AdminController {
     public RedirectView loginProgress(@RequestParam("username") String name,
             @RequestParam("password") String password, HttpSession session) {
 
-        Admin dbAdmin = this.adminRepository.findByname(name);
+        Admin dbAdmin = this.adminRepository.findByUsername(name);
         if (dbAdmin!= null &&BCrypt.checkpw(password, dbAdmin.getPassword())) {
             // session.setAttribute("name", dbDoctor.getName());
             // session.setAttribute("email", dbDoctor.getEmail());

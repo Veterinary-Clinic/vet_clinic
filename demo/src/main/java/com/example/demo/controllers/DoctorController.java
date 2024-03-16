@@ -132,10 +132,10 @@ public class DoctorController {
 //         return "redirect:/admin/doctors";
 //     }
 
-//     @GetMapping("/logout")
-//     public RedirectView logout(HttpSession session) {
-//         // Invalidate the session
-//         session.invalidate();
-//         return new RedirectView("/doctor/login");
-// }
+    @GetMapping("/logout")
+    public RedirectView logout(HttpSession session) {
+        // Invalidate the session
+        session.invalidate();
+        return new RedirectView("/doctor/login");
+}
 }
