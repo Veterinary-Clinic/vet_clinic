@@ -12,7 +12,12 @@ public class Admin{
     private int id;
     private String username;
     private String password;
+    private String phonenumber;
 
+    private String email;
+   
+    private String gender;
+    
     public Admin() {
     }
     public int getId() {
