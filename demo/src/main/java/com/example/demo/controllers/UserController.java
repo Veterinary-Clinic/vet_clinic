@@ -84,7 +84,7 @@ public class UserController {
         userRepository.save(user);
     
         // Redirect to the home page after successful registration
-        return new RedirectView("index");
+        return new RedirectView("/user");
     }
  
       @GetMapping("Login")
@@ -102,9 +102,10 @@ public class UserController {
         Boolean isPasswordMatched= BCrypt.checkpw(password,dbUser.getPassword());
         if (isPasswordMatched){
             session.setAttribute("email", dbUser.getEmail());
-            session.setAttribute("user_id",dbUser.getId());
-            return new RedirectView("index");
-        } else return new RedirectView("Registration");
+            session.setAttribute("user_id", dbUser.getId());
+            return new RedirectView("/user");
+        } else
+            return new RedirectView("Registration");
     }
 
     @GetMapping("doctors")
