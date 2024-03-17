@@ -30,7 +30,7 @@ public class DoctorController {
         mav.addObject("doctor", newDoctor);
         return mav;
     }
-
+ 
     @PostMapping("signup")
     public RedirectView saveDoctor(@ModelAttribute Doctor doctor) {
         String encodedPassword = BCrypt.hashpw(doctor.getPassword(), BCrypt.gensalt(12));
