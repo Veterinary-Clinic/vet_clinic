@@ -69,11 +69,10 @@ public class AdminController {
             @RequestParam("password") String password, HttpSession session) {
 
         Admin dbAdmin = this.adminRepository.findByusername(name);
-        // Admin dbAdminPassword = this.adminRepository.findBypassword(password);
         if (dbAdmin != null && BCrypt.checkpw(password, dbAdmin.getPassword())) {
             session.setAttribute("username", dbAdmin.getUsername());
-            // session.setAttribute("email", dbDoctor.getEmail());
-            // session.setAttribute("phonenumber", dbDoctor.getPhonenumber());
+            //session.setAttribute("email", dbAdmin.getEmail());
+            //session.setAttribute("phonenumber", dbAdmin.getPhonenumber());
             return new RedirectView("index");
         } else {
             return new RedirectView("login");
@@ -82,19 +81,20 @@ public class AdminController {
 
     @GetMapping("/profile")
     public ModelAndView viewProfile(HttpSession session) {
-        Admin admin = new Admin(); // Assuming you have a way to retrieve the logged-in doctor
+        //Admin admin = new Admin(); 
         ModelAndView mav = new ModelAndView("/admin/profileAdmin.html");
 
         // Retrieve attributes from session or doctor object
         String name = (String) session.getAttribute("username");
-        String password = (String) session.getAttribute("password"); // Retrieve email from session or doctor object
+        String password = (String) session.getAttribute("password"); 
+        //String email = (String) session.getAttribute("email"); 
         // String phonenumber =(String) session.getAttribute("phonenumber"); // Retrieve
-        // phonenumber from doctor object
 
         // // Add attributes to the ModelAndView
         mav.addObject("username", name);
         mav.addObject("password", password);
         // mav.addObject("phonenumber", phonenumber);
+        // mav.addObject("email", email);
 
         return mav;
     }

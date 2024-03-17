@@ -45,6 +45,9 @@ public class BookingController {
             this.appointmentRepository.delete(appointment);
             response.sendRedirect("/appointments/available-appointments");
         }
+        else{
+            response.sendRedirect("/user/Login");
+        }
     }
 
 }
