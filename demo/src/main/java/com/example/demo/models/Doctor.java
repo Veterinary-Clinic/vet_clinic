@@ -11,7 +11,7 @@ public class Doctor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String phonenumber;
     private String name;
     private String email;
@@ -19,10 +19,12 @@ public class Doctor {
     private String gender;
 
 
+
+
     public Doctor() {
     }
 
-    public Doctor(int id, String phonenumber, String name, String email, String password, String gender) {
+    public Doctor(Long id, String phonenumber, String name, String email, String password, String gender) {
         this.id = id;
         this.phonenumber = phonenumber;
         this.name = name;
@@ -31,11 +33,11 @@ public class Doctor {
         this.gender = gender;
     }
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -79,7 +81,7 @@ public class Doctor {
         this.gender = gender;
     }
 
-    public Doctor id(int id) {
+    public Doctor id(Long id) {
         setId(id);
         return this;
     }
@@ -117,7 +119,7 @@ public class Doctor {
             return false;
         }
         Doctor doctor = (Doctor) o;
-        return id == doctor.id && Objects.equals(phonenumber, doctor.phonenumber) && Objects.equals(name, doctor.name) && Objects.equals(email, doctor.email) && Objects.equals(password, doctor.password) && Objects.equals(gender, doctor.gender);
+        return Objects.equals(id, doctor.id) && Objects.equals(phonenumber, doctor.phonenumber) && Objects.equals(name, doctor.name) && Objects.equals(email, doctor.email) && Objects.equals(password, doctor.password) && Objects.equals(gender, doctor.gender);
     }
 
     @Override
@@ -127,9 +129,15 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return name + email+ phonenumber +gender;
+        return "{" +
+            " id='" + getId() + "'" +
+            ", phonenumber='" + getPhonenumber() + "'" +
+            ", name='" + getName() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", gender='" + getGender() + "'" +
+            "}";
     }
-
 
 
 

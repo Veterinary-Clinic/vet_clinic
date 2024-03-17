@@ -9,11 +9,12 @@ import com.example.demo.models.Doctor;
 
 @Repository
 
-public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
-
-    Optional<Doctor> findById(Long id);
-
-    void deleteById(Long id);
+public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     Doctor findByname(String name);
+
+    Doctor findByName(String name);
+
+
+
 }
