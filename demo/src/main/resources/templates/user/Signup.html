@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="../../../Public/Images/logodowns.png" type="image/gif">
+	<meta charset="utf-8">
 
-	<link rel="stylesheet" href="/css/signup.css">
+	<title>Sign Up</title>
+
+	<link rel="icon" href="../../../Public/Images/logodowns.png" type="image/gif">
+
+	<link rel="stylesheet" href="../../css/signup.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="icon" href="/images/logo.png" type="image/icon type" />
-
 
 </head>
 
@@ -18,7 +18,7 @@
 	<div class="container" id="container">
 
 		<div class="form-container sign-up-container">
- 
+
 			<form th:action="@{/user/Registration}" th:object="${user}" method="POST">
 
 				<h1>Create Account</h1>
@@ -31,15 +31,16 @@
 				<span>or use your email for registration</span>
 				<input type="text" th:field="*{name}" placeholder="Name" name="Name" required />
 				<input type="email" th:field="*{email}" placeholder="Email" name="Email" required />
-				<div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 				<input type="text" th:field="*{phone}" placeholder="Phone" name="Phone" required />
 				<input type="password" th:field="*{password}" placeholder="Password" name="Password" id="password" required />
-				<span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 				<span id="passwordValidation"></span>
 				<input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password" name="confirm" id="confirmPassword" required />
-				<span class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+				<span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
 				<span id="passwordValidationMessage"></span>
 				<button type="submit" id="sign"name="submit">Sign Up</button>
+				<input type="hidden" id="registrationStatus" name="registrationStatus" th:value="${registrationStatus}" />
 			</form>
 
 		</div>
@@ -56,13 +57,14 @@
 				</div>
 
 				<span>or use your account</span>
-				<input type="email"  th:field="*{email}" placeholder="Email" name="Email" required />
-				<input type="password"   th:field="*{password}" placeholder="Password" name="Password" required />
+				<input type="email"  th:field="*{email}" placeholder="Email" name="Email" />
+				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+				<input type="password"   th:field="*{password}" placeholder="Password" name="Password" />
 				<a href="#">Forgot your password?</a>
 
 				<button type="submit" name="submit" >Sign In</button>
 			</form>
- 
+
 		</div>
 
 		<div class="overlay-container">
@@ -85,6 +87,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../Js/signup.js" ></script>
 
+	
 	</head>
 
 </body>

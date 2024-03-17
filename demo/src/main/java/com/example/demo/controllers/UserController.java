@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.models.Doctor;
@@ -53,48 +54,46 @@ public class UserController {
         mav.addObject("user", newUser);
         return mav;
     }
-     
     @PostMapping("Registration")
-    public RedirectView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
-        
+    public RedirectView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         // Check for validation errors
         if (bindingResult.hasErrors()) {
-            // If there are validation errors, return to the registration form
-            return new RedirectView("registration");
+            redirectAttributes.addFlashAttribute("error", bindingResult.getAllErrors());
+            return new RedirectView("/user/Registration?error=true");
         }
         
         // Check if the password meets the minimum length requirement
         String password = user.getPassword();
         if (password == null || password.length() < 8) {
             bindingResult.addError(new FieldError("user", "password", "Password must be at least 8 characters long."));
-            return new RedirectView("Registration");
+            return new RedirectView("/user/Registration");
         }
-        // check if email hasnt been used before
-        if (userRepository.findByEmail(user.getEmail()) != null) {
+        
+        // Check if the email has not been used before
+        if (userRepository.findByemail(user.getEmail()) != null) {
             bindingResult.addError(new FieldError("user", "email", "Email is already in use."));
-            return new RedirectView("Registration");
+            return new RedirectView("/user/Registration");
         }
         
         // Check if the password matches the confirm password
         String confirmPassword = user.getConfirmPassword();
         if (!password.equals(confirmPassword)) {
             bindingResult.addError(new FieldError("user", "confirmPassword", "Passwords do not match."));
-            return new RedirectView("Registration");
+            return new RedirectView("/user/Registration");
         }
     
         // Hash the password and save the user
         String encodedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
         user.setPassword(encodedPassword);
-        userRepository.save(user);
-
-        String encodedConfirm = BCrypt.hashpw(confirmPassword, BCrypt.gensalt(12));
-        user.setConfirmPassword(encodedConfirm);
-        userRepository.save(user);
     
-    
-        // Redirect to the home page after successful registration
-        return new RedirectView("/user/index");
+        // Saving user details
+        userRepository.save(user);
+        
+        // Redirect with success message
+        redirectAttributes.addFlashAttribute("success", "Signed up successfully!");
+        return new RedirectView("/user/Registration?success=true");
     }
+    
  
       @GetMapping("Login")
     public ModelAndView login() {
