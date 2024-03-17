@@ -55,7 +55,6 @@ public class UserController {
     
     @PostMapping("Registration")
     public RedirectView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
-        ModelAndView mav = new ModelAndView();
         
         // Check for validation errors
         if (bindingResult.hasErrors()) {
