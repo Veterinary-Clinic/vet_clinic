@@ -57,6 +57,14 @@ public class UserController {
         return mav;
     }
 
+    @GetMapping("profile")
+    public ModelAndView viewProfile() {
+        ModelAndView mav = new ModelAndView("/user/profile.html"); // Retrieve attributes from session or
+                                   
+       
+        return mav;
+    }
+
     @GetMapping("addPet")
     public ModelAndView addPet() {
         ModelAndView mav = new ModelAndView("/user/addPet.html");
