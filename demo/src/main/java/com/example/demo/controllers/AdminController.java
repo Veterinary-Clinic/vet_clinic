@@ -86,7 +86,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/Profile")
+    @GetMapping("/profile")
     public ModelAndView viewProfile(HttpSession session) {
         Admin admin = new Admin(); // Assuming you have a way to retrieve the logged-in doctor
         ModelAndView mav = new ModelAndView("/admin/profileAdmin.html");
@@ -161,6 +161,13 @@ public class AdminController {
     //     model.addAttribute("Doctor", Doctor);
     //     return "admin/doctorEdit";
     // }
+    @GetMapping("/{id}/editDoctor")
+    public String showEditDoctorForm(@PathVariable("id") Long id, Model model) {
+        Doctor Doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
+        model.addAttribute("Doctor", Doctor);
+        return "admin/doctorEdit";
+    }
 
     @PostMapping("/{id}/editDoctor")
     public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("Doctor") Doctor updatedDoctor) {

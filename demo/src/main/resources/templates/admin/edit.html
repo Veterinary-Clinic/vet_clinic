@@ -1,26 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/admin/addDoctor.css">
-    <link rel="icon" href="/images/logo.png" type="image/icon type" /> 
-	<link rel="stylesheet" href="/css/doctor/loginDoctor.css"> 
-	<title>Edit Doctor</title>
+	<meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description"
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="../../css/admin/addDoctor.css">
+	<link rel="stylesheet" href="../../css/admin/tables.css">
+    <link rel="icon" href="../../images/logo.png" type="image/icon type" />
 
+
+	<title>AdminHub</title>
 </head>
 
 <body>
+
+
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a th:href="@{/admin}" class="brand">
+		<a th:href="@{/admin/index}" class="brand">
 			<i class='bx bxs-smile'></i>
 			<span class="text">AdminHub</span>
 		</a>
 		<ul class="side-menu top">
-			<li>
-				<a th:href="@{/admin}">
+			<li class="active">
+				<a th:href="@{/admin/index}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
@@ -31,7 +39,7 @@
 					<span class="text">Profile</span>
 				</a>
 			</li>
-			<li class="active">
+			<li>
 				<a th:href="@{/admin/doctorList}">
 					<i class='bx bxs-group'></i>
 					<span class="text">Doctors</span>
@@ -97,7 +105,7 @@
 		<!-- NAVBAR -->
 		<!-- MAIN -->
 		<!-- SIDEBAR -->
-		<h1>Edit Doctor</h1>
+		<h1>Edit Admin</h1>
 
 		<form th:action="@{/admin/{id}/editAdmin(id=${admin.id})}" method="post">
 			<input type="hidden" id="id" name="id" th:value="${admin.id}">
@@ -111,7 +119,7 @@
 		</form>
 
 		<a th:href="@{/admin/list}">Back to List</a>
-
+	</section>
 </body>
 
 </html>
