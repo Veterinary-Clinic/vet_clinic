@@ -82,8 +82,9 @@
 		<!-- NAVBAR -->
 		<!-- MAIN -->
 		<!-- SIDEBAR -->
-		<h1>Edit pet</h1>
-
+		
+        <div class="container">
+            <h1>Edit Pet</h1>
 		<form th:action="@{/user/{id}/editPet(id=${pet.id})}" method="post">
 			<input type="hidden" id="id" name="id" th:value="${pet.id}">
 
@@ -95,9 +96,15 @@
 			<input type="text" id="age" name="age" th:value="${pet.age}" required><br>
             <label for="weight">weight:</label>
 			<input type="text" id="weight" name="weight" th:value="${pet.weight}" required><br>
-
-		<a th:href="@{/user/addPet}">Add Pet</a>
+            <button type="submit">Save</button>
+            <a th:href="@{/user/addPet}">Add Pet</a>
+        </form>
+        
+        </div>
+		
 	</section>
 </body>
-
+<style>
+    
+</style>
 </html>
