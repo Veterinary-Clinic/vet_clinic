@@ -4,6 +4,11 @@
     <title>Doctors</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="../../css/admin/addDoctor.css">
+    <link rel="icon" href="../../images/logo.png" type="image/icon type" />
 </head>
 <body>
     <h1>Doctors</h1>
@@ -73,30 +78,58 @@
     </ul>
 </section>
 <!-- SIDEBAR -->
+<main>
+    <div class="head-title">
+        <div class="left">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li><i class='bx bx-chevron-right' ></i></li>
+                <li>
+                    <a class="active" href="#">Doctors</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="table-data">
+        <div class="order">
+            
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Email</th>
+                <th>Phone number</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-           
-            <tr th:each="doctor : ${doctors}">
-                <!-- <td th:text="${doctor.id}"></td> -->
-                <td th:text="${doctor.name}"></td>
+            <div class="table-data">
+                <div class="order">
+            <tr th:each="Doctor : ${Doctor}">
+                <td th:text="${Doctor.id}"></td>
+                <td th:text="${Doctor.name}"></td>
+                <td th:text="${Doctor.email}"></td>
+                <td th:text="${Doctor.phonenumber}"></td>
+                <!-- <td th:text="${Doctor.gender}"></td> -->
                 <td>
-                    <a th:href="@{/admin/{id}/editDoctor(id=${doctor.id})}">Edit</a>
-                    <form th:action="@{/admin/{id}/deleteDoctor(id=${doctor.id})}" method="post">
-                        <button type="submit">Delete</button>
+                    <a class = "buttons" th:href="@{/admin/{id}/editDoctor(id=${Doctor.id})}">Edit</a>
+                    <form th:action="@{/admin/{id}/deleteDoctor(id=${Doctor.id})}" method="post">
+                        <button class = "buttons"type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
+                </div>
+            </div>
         </tbody>
     </table>
 
-    <a href=/admin/addDoctor">Add New Doctor</a>
+
+</main>
+    <a href="/admin/addDoctor">Add New Doctor</a>
 
 </body>
 </html>

@@ -19,11 +19,11 @@ public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    @GetMapping("")
-    public String listDoctors(Model model) {
-        model.addAttribute("doctors", doctorRepository.findAll());
-        return "doctors/list";
-    }
+    // @GetMapping("")
+    // public String listDoctors(Model model) {
+    //     model.addAttribute("doctors", doctorRepository.findAll());
+    //     return "doctors/list";
+    // }
 
     @GetMapping("signup")
     public ModelAndView addDoctor() {
