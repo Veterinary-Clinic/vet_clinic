@@ -23,7 +23,7 @@ public class PetController {
     private  PetRepository petRepository;
 
 
-    @GetMapping("pets")
+    /*@GetMapping("pets")
     public ModelAndView getpets() {
         ModelAndView mav = new ModelAndView("/user/pets.html");
         List<Pet>pets = this.petRepository.findAll();
@@ -42,7 +42,7 @@ public class PetController {
     public RedirectView savePet(@ModelAttribute Pet npet) {
         petRepository.save(npet);
         return new RedirectView("pets");
-    }
+    }*/
     @GetMapping("/deletePet/{id}")
     public RedirectView deletePet(@PathVariable("id") Long id) {
         petRepository.deleteById(id);

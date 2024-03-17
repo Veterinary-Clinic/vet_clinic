@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.models.Doctor;
+import com.example.demo.models.Pet;
 import com.example.demo.models.User;
 import com.example.demo.repositories.DoctorRepository;
+import com.example.demo.repositories.PetRepository;
 import com.example.demo.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -36,6 +38,29 @@ public class UserController {
 
     @Autowired
      private  DoctorRepository doctorRepository;
+     @Autowired
+    private  PetRepository petRepository;
+    @GetMapping("pets")
+    public ModelAndView getpets() {
+        ModelAndView mav = new ModelAndView("/user/pets.html");
+        List<Pet>pets = this.petRepository.findAll();
+        mav.addObject("pets", pets);
+        return mav;
+    }
+
+    @GetMapping("addPet")
+    public ModelAndView addPet() {
+        ModelAndView mav = new ModelAndView("/user/addPet.html");
+        mav.addObject("pet", new Pet());
+        return mav;
+    }
+    
+    @PostMapping("addPet")
+    public RedirectView savePet(@ModelAttribute Pet npet) {
+        petRepository.save(npet);
+        return new RedirectView("pets");
+    }
+
 
     @GetMapping("/index")
     public ModelAndView getHomePage() {
