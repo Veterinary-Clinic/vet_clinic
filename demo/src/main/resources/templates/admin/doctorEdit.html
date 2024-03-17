@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Doctor</title>
-  
+  	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="../../css/admin/addDoctor.css">
+    <link rel="icon" href="../../images/logo.png" type="image/icon type" />
 </head>
 <body>
     <h1>Edit Doctor</h1>
@@ -76,11 +80,13 @@
     </ul>
 </section>
 <!-- SIDEBAR -->
-    <form th:action="@{/admin/{id}/editDoctor(id=${doctor.id})}" method="post">
-        <input type="hidden" id="id" name="id" th:value="${doctor.id}">
+    <form th:action="@{/admin/{id}/editDoctor(id=${Doctor.id})}" method="post">
+        <input type="hidden" id="id" name="id" th:value="${Doctor.id}">
 
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" th:value="${doctor.name}" required><br>
+        <input type="text" id="name" name="name" th:value="${Doctor.name}" required><br>
+        <input type="text" id="email" name="email" th:value="${Doctor.email}"title="email" required><br>
+        <input type="text" id="phonenumber" name="phonenumber" th:value="${Doctor.phonenumber}" title="phonenumber" required><br>
 
 
 
