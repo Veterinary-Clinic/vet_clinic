@@ -5,6 +5,7 @@ import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.models.Admin;
 import com.example.demo.models.Doctor;
 import com.example.demo.models.Pet;
 import com.example.demo.models.User;
@@ -62,6 +64,28 @@ public class UserController {
     public RedirectView savePet(@ModelAttribute Pet npet) {
         petRepository.save(npet);
         return new RedirectView("pets");
+    }
+
+     @GetMapping("/{id}/editPet")
+    public String showEditPetForm(@PathVariable("id") Long id, Model model) {
+        Pet npet = petRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid pet ID: " + id));
+        model.addAttribute("pet", npet);
+        return "user/edit";
+    }
+
+    @PostMapping("/{id}/editPet")
+    public String updatePet(@Valid @PathVariable("id") Long id, @ModelAttribute("user") Pet updatedPet,
+            BindingResult bindingResult) {
+        Pet npet = petRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Pet ID: " + id));
+        npet.setName(updatedPet.getName());
+        if (bindingResult.hasErrors()) {
+            return "redirect:/user/edit";
+        } else {
+            petRepository.save(npet);
+            return "redirect:/user/pets";
+        }
     }
     
     @PostMapping("/{id}/deletePet")
