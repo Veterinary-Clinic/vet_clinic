@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -154,7 +157,14 @@ public class UserController {
         redirectAttributes.addFlashAttribute("success", "Signed up successfully!");
         return new RedirectView("/user/Registration?success=true");
     }
-    
+    @GetMapping("/check-email")
+@ResponseBody
+public Map<String, Boolean> checkEmailAvailability(@RequestParam("email") String email) {
+    boolean exists = (userRepository.findByEmail(email) != null);
+    Map<String, Boolean> response = new HashMap<>();
+    response.put("exists", exists);
+    return response;
+}
  
       @GetMapping("Login")
     public ModelAndView login() {

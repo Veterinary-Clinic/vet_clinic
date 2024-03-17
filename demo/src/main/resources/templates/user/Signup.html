@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../../Public/Images/logodowns.png" type="image/gif">
 
-	<title>Sign Up</title>
-
-	<link rel="icon" href="../../../Public/Images/logodowns.png" type="image/gif">
-
-	<link rel="stylesheet" href="../../css/signup.css">
+	<link rel="stylesheet" href="/css/signup.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="icon" href="/images/logo.png" type="image/icon type" />
+
 
 </head>
 
@@ -18,8 +18,8 @@
 	<div class="container" id="container">
 
 		<div class="form-container sign-up-container">
-
-			<form th:action="@{/user/Registration}" th:object="${user}" method="POST">
+ 
+			<form th:action="@{/user/Registration}" th:object="${user}" method="POST" id="signupForm">
 
 				<h1>Create Account</h1>
 
@@ -30,17 +30,16 @@
 
 				<span>or use your email for registration</span>
 				<input type="text" th:field="*{name}" placeholder="Name" name="Name" required />
-				<input type="email" th:field="*{email}" placeholder="Email" name="Email" required />
-				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+				<input type="email" th:field="*{email}" placeholder="Email" name="Email" id="email" required />
+				<div class="error" id="emailError"></div>
 				<input type="text" th:field="*{phone}" placeholder="Phone" name="Phone" required />
 				<input type="password" th:field="*{password}" placeholder="Password" name="Password" id="password" required />
-				<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+				<span class="error" id="passwordError"></span>
 				<span id="passwordValidation"></span>
 				<input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password" name="confirm" id="confirmPassword" required />
-				<span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+				<span class="error" id="confirmPasswordError"></span>
 				<span id="passwordValidationMessage"></span>
-				<button type="submit" id="sign"name="submit">Sign Up</button>
-				<input type="hidden" id="registrationStatus" name="registrationStatus" th:value="${registrationStatus}" />
+				<button type="submit" id="sign" name="submit" disabled>Sign Up</button>
 			</form>
 
 		</div>
@@ -57,14 +56,12 @@
 				</div>
 
 				<span>or use your account</span>
-				<input type="email"  th:field="*{email}" placeholder="Email" name="Email" />
-				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-				<input type="password"   th:field="*{password}" placeholder="Password" name="Password" />
+				<input type="email"  th:field="*{email}" placeholder="Email" name="Email" required />
+				<input type="password"   th:field="*{password}" placeholder="Password" name="Password" required />
 				<a href="#">Forgot your password?</a>
 
 				<button type="submit" name="submit" >Sign In</button>
 			</form>
-
 		</div>
 
 		<div class="overlay-container">
@@ -86,8 +83,55 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../Js/signup.js" ></script>
-
+	<script>
+		$(document).ready(function () {
+			$('#email').on('input', function () {
+				var email = $(this).val();
+				$.ajax({
+					type: 'GET',
+					url: '/user/check-email',
+					data: {email: email},
+					success: function (response) {
+						if (response.exists) {
+							$('#emailError').text('Email is already in use').show();
+							$('#sign').prop('disabled', true);
+						} else {
+							$('#emailError').text('').hide();
+							$('#sign').prop('disabled', false);
+						}
+					},
+					error: function () {
+						$('#emailError').text('Error occurred while checking email').show();
+						$('#sign').prop('disabled', true);
+					}
+				});
+			});
 	
+			$('#password').on('input', function () {
+				var password = $(this).val();
+				if (password.length < 8) {
+					$('#passwordError').text('Password must be at least 8 characters long').show();
+					$('#sign').prop('disabled', true);
+				} else {
+					$('#passwordError').text('').hide();
+					$('#sign').prop('disabled', false);
+				}
+			});
+	
+			$('#confirmPassword').on('input', function () {
+				var password = $('#password').val();
+				var confirmPassword = $(this).val();
+				if (password !== confirmPassword) {
+					$('#confirmPasswordError').text('Passwords do not match').show();
+					$('#sign').prop('disabled', true);
+				} else {
+					$('#confirmPasswordError').text('').hide();
+					$('#sign').prop('disabled', false);
+				}
+			});
+		});
+	</script>
+
 	</head>
 
 </body>
