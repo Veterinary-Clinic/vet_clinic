@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="/css/doctor/loginDoctor.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2 style="color: var(--success);">Login</h2>
+    <form class="login-form" th:action="@{/admin/login}" th:object="${admin}" method="POST">
+      <input type="text" th:field="*{username}" placeholder="name" required>
+      <input type="password" th:field="*{password}" placeholder="Password" required>
+      <button input type="submit">Login</button>
+    </form>
+  </div>
+</body>
+</html>

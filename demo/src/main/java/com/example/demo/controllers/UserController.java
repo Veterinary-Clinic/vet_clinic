@@ -21,6 +21,7 @@ import com.example.demo.repositories.DoctorRepository;
 import com.example.demo.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 
 
@@ -36,15 +37,15 @@ public class UserController {
     @Autowired
      private  DoctorRepository doctorRepository;
 
-    @GetMapping("")
+    @GetMapping("/index")
     public ModelAndView getHomePage() {
-        ModelAndView mav = new ModelAndView("index.html");
+        ModelAndView mav = new ModelAndView("/user/index.html");
         List<User>users = this.userRepository.findAll();
         mav.addObject("users", users);
         return mav;
     }
 
-
+ 
     @GetMapping("Registration") 
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/user/Signup.html");
@@ -52,7 +53,7 @@ public class UserController {
         mav.addObject("user", newUser);
         return mav;
     }
-    
+     
     @PostMapping("Registration")
     public RedirectView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         
@@ -92,9 +93,9 @@ public class UserController {
     
     
         // Redirect to the home page after successful registration
-        return new RedirectView("index");
+        return new RedirectView("/user/index");
     }
-
+ 
       @GetMapping("Login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView("Signup.html");
@@ -106,13 +107,14 @@ public class UserController {
     @PostMapping("Login")
     public RedirectView loginProcess(@RequestParam("email") String email,
     @RequestParam("password") String password, HttpSession session){
-        User dbUser = this.userRepository.findByEmail(email);
+        User dbUser = this.userRepository.findByemail(email);
         Boolean isPasswordMatched= BCrypt.checkpw(password,dbUser.getPassword());
         if (isPasswordMatched){
             session.setAttribute("email", dbUser.getEmail());
-            return new RedirectView("index");
-        } else return new RedirectView("Registration");
-
+            session.setAttribute("user_id", dbUser.getId());
+            return new RedirectView("/user/index");
+        } else
+            return new RedirectView("Registration");
     }
 
     @GetMapping("doctors")
@@ -122,5 +124,4 @@ public class UserController {
         mav.addObject("doctors", doctors);
         return mav;
     }
-
 }

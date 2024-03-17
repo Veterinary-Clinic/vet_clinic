@@ -100,12 +100,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link active">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="price.html" class="nav-item nav-link">Price</a>
-                    <a href="booking.html" class="nav-item nav-link">Booking</a>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a th:href="@{/user}" class="nav-item nav-link">Home</a>
+                    <a th:href="@{/appointments/available-appointments}" class="nav-item nav-link">Booking</a>
+                    <a href="" class="nav-item nav-link">Contact</a>
                 </div>
                 <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a>
             </div>

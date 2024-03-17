@@ -1,14 +1,12 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Doctor;
-import com.example.demo.models.User;
 import com.example.demo.repositories.DoctorRepository;
 
 import jakarta.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -19,20 +17,20 @@ public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    @GetMapping("")
-    public String listDoctors(Model model) {
-        model.addAttribute("doctors", doctorRepository.findAll());
-        return "doctors/list";
-    }
+    // @GetMapping("")
+    // public String listDoctors(Model model) {
+    //     model.addAttribute("doctors", doctorRepository.findAll());
+    //     return "doctors/list";
+    // }
 
-    @GetMapping("signup")
+    @GetMapping("signup") 
     public ModelAndView addDoctor() {
         ModelAndView mav = new ModelAndView("/doctors/HomePage.html");
         Doctor newDoctor = new Doctor();
         mav.addObject("doctor", newDoctor);
         return mav;
     }
-
+ 
     @PostMapping("signup")
     public RedirectView saveDoctor(@ModelAttribute Doctor doctor) {
         String encodedPassword = BCrypt.hashpw(doctor.getPassword(), BCrypt.gensalt(12));
@@ -46,20 +44,20 @@ public class DoctorController {
         ModelAndView mav = new ModelAndView("/doctors/loginDoctor.html");
         mav.addObject("doctor", new Doctor());
         return mav;
-    } 
+    }
 
     @PostMapping("login")
     public RedirectView loginProgress(@RequestParam("name") String name,
             @RequestParam("password") String password, HttpSession session) {
-
-        Doctor dbDoctor = this.doctorRepository.findByname(name);
-        if (dbDoctor != null &&BCrypt.checkpw(password, dbDoctor.getPassword())) {
+        Doctor dbDoctor = this.doctorRepository.findByName(name);
+        if (dbDoctor != null && BCrypt.checkpw(password, dbDoctor.getPassword())) {
             session.setAttribute("name", dbDoctor.getName());
             session.setAttribute("email", dbDoctor.getEmail());
             session.setAttribute("phonenumber", dbDoctor.getPhonenumber());
-            return new RedirectView("index");
+            session.setAttribute("doctor_id", dbDoctor.getId()); // Add id to session attributes
+            return new RedirectView("Profile"); // Redirect to the appropriate page
         } else {
-            return new RedirectView("login");
+            return new RedirectView("login"); // Redirect to login page with error flag
         }
     }
 
@@ -69,73 +67,80 @@ public class DoctorController {
         return mav;
     }
 
-    // @GetMapping("/Profile")
-    // public ModelAndView getProfile() {
-    //     ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor");
-    //     return mav;
-    // }
-    @GetMapping("/Profile")
+    @GetMapping("pets")
+    public ModelAndView getProfile() {
+        ModelAndView mav = new ModelAndView("/doctors/pets.html");
+        return mav;
+    }
+
+    @GetMapping("Profile")
     public ModelAndView viewProfile(HttpSession session) {
         Doctor doctor = new Doctor(); // Assuming you have a way to retrieve the logged-in doctor
-        ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor.html");
-    
-        // Retrieve attributes from session or doctor object
+        ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor.html"); // Retrieve attributes from session or
+                                   
+        // doctor object
+        Long id = (Long) session.getAttribute("doctor_id"); // Retrieve doctor's ID from session
         String name = (String) session.getAttribute("name");
         String email = (String) session.getAttribute("email"); // Retrieve email from session or doctor object
-        String phonenumber =(String) session.getAttribute("phonenumber"); // Retrieve phonenumber from doctor object
-    
+        String phonenumber = (String) session.getAttribute("phonenumber"); // Retrieve phonenumber from doctor object
+        String password = (String) session.getAttribute("password");
         // Add attributes to the ModelAndView
         mav.addObject("name", name);
         mav.addObject("email", email);
+        mav.addObject("password", password);
         mav.addObject("phonenumber", phonenumber);
-    
+        mav.addObject("id", id); // Add doctor's ID to the ModelAndView
         return mav;
     }
-    
 
+    @GetMapping("/editProfile")
+    public ModelAndView editDoctor(HttpSession session) {
+        ModelAndView mav = new ModelAndView("doctors/editProfile.html");
+        String name = (String) session.getAttribute("name");
+        String email = (String) session.getAttribute("email");
+        String phonenumber = (String) session.getAttribute("phonenumber");
+        String password = (String) session.getAttribute("password");
+        mav.addObject("name", name);
+        mav.addObject("email", email);
+        mav.addObject("phonenumber", phonenumber);
+        mav.addObject("password", password);
+        Doctor dr = doctorRepository.findByName(name);
+        mav.addObject("doctor", dr);
+        return mav;
+    }
 
-//     @GetMapping("/add")
-//     public String showAddForm(Model model) {
-//         model.addAttribute("doctor", new Doctor());
-//         return "doctors/add";
-//     }
+    @PostMapping("/editProfile")
+    public RedirectView editProfile(@ModelAttribute Doctor updatedDoctor,
+            @RequestParam(value = "newPassword", required = false) String newPassword,
+            HttpSession session) {
+        String name = (String) session.getAttribute("name");
+        Doctor existingUser = doctorRepository.findByName(name);
 
-//     @PostMapping("/add")
-//     public String addDoctor(@ModelAttribute("doctor") Doctor doctor) {
-//         doctorRepository.save(doctor);
-//         return "redirect:/admin/doctors";
-//     }
+        if (existingUser != null) {
+            existingUser.setName(updatedDoctor.getName());
+            existingUser.setEmail(updatedDoctor.getEmail());
 
-//     @GetMapping("/{id}/edit")
-//     public String showEditForm(@PathVariable("id") Long id, Model model) {
-//         Doctor doctor = doctorRepository.findById(id)
-//                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-//         model.addAttribute("doctor", doctor);
-//         return "doctors/edit";
-//     }
+            // Check if a new password is provided and update it
+            if (newPassword != null && !newPassword.isEmpty()) {
+                // Don't hash the password if you want to store it as plain text
+                existingUser.setPassword(newPassword);
+            }
 
-//     @PostMapping("/{id}/edit")
-//     public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("doctor") Doctor updatedDoctor) {
-//         Doctor doctor = doctorRepository.findById(id)
-//                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-//         doctor.setName(updatedDoctor.getName());
+            doctorRepository.save(existingUser);
 
-//         doctorRepository.save(doctor);
-//         return "redirect:/admin/doctors";
-//     }
+            // Update session attribute if necessary
+            session.setAttribute("name", existingUser.getName());
+            session.setAttribute("email", existingUser.getEmail());
+            session.setAttribute("password", existingUser.getPassword());
+        }
 
-//     @PostMapping("/{id}/delete")
-//     public String deleteDoctor(@PathVariable("id") Long id) {
-//         Doctor doctor = doctorRepository.findById(id)
-//                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-//         doctorRepository.delete(doctor);
-//         return "redirect:/admin/doctors";
-//     }
+        return new RedirectView("/doctor/Profile");
+    }
 
-//     @GetMapping("/logout")
-//     public RedirectView logout(HttpSession session) {
-//         // Invalidate the session
-//         session.invalidate();
-//         return new RedirectView("/doctor/login");
-// }
+    @GetMapping("/logout")
+    public RedirectView logout(HttpSession session) {
+        // Invalidate the session
+        session.invalidate();
+        return new RedirectView("/doctor/login");
+    }
 }

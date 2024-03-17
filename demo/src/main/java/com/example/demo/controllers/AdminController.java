@@ -17,23 +17,26 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private AdminRepository adminRepository;
+    @Autowired
     private DoctorRepository doctorRepository;
 
-    @GetMapping("")
+    @GetMapping("/index")
     public String indexAdmins(Model model) {
-        // model.addAttribute("admin", adminRepository.findAll());
         return "admin/index";
     }
+
     @GetMapping("/list")
     public String listAdmins(Model model) {
         model.addAttribute("admins", adminRepository.findAll());
         return "admin/list";
     }
+
     @GetMapping("/addAdmin")
     public String showAddAdminForm(Model model) {
         model.addAttribute("admin", new Admin());
@@ -46,50 +49,56 @@ public class AdminController {
             return "admin/addAdmin";
         }
 
-            else{
-        adminRepository.save(admin);
-        return "redirect:/admin/list" ; 
-            }
+        else {
+            String encodedPassword = BCrypt.hashpw(admin.getPassword(), BCrypt.gensalt(12));
+            admin.setPassword(encodedPassword);
+            adminRepository.save(admin);
+            return "redirect:/admin/list";
         }
+    }
 
-@GetMapping("login")
+    @GetMapping("login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView("/admin/loginAdmin.html");
         mav.addObject("admin", new Admin());
         return mav;
-    } 
+    }
 
     @PostMapping("login")
     public RedirectView loginProgress(@RequestParam("username") String name,
             @RequestParam("password") String password, HttpSession session) {
 
-        Admin dbAdmin = this.adminRepository.findByname(name);
-        if (dbAdmin!= null &&BCrypt.checkpw(password, dbAdmin.getPassword())) {
-            // session.setAttribute("name", dbDoctor.getName());
-            // session.setAttribute("email", dbDoctor.getEmail());
-            // session.setAttribute("phonenumber", dbDoctor.getPhonenumber());
+        Admin dbAdmin = this.adminRepository.findByusername(name);
+        if (dbAdmin != null && BCrypt.checkpw(password, dbAdmin.getPassword())) {
+            session.setAttribute("username", dbAdmin.getUsername());
+            //session.setAttribute("email", dbAdmin.getEmail());
+            //session.setAttribute("phonenumber", dbAdmin.getPhonenumber());
             return new RedirectView("index");
         } else {
             return new RedirectView("login");
         }
     }
-    @GetMapping("/Profile")
+
+    @GetMapping("/profile")
     public ModelAndView viewProfile(HttpSession session) {
-        Admin admin = new Admin(); // Assuming you have a way to retrieve the logged-in doctor
-        ModelAndView mav = new ModelAndView("/admin/profileAdminhtml");
-    
+        //Admin admin = new Admin(); 
+        ModelAndView mav = new ModelAndView("/admin/profileAdmin.html");
+
         // Retrieve attributes from session or doctor object
         String name = (String) session.getAttribute("username");
-        String password = (String) session.getAttribute("password"); // Retrieve email from session or doctor object
-        // String phonenumber =(String) session.getAttribute("phonenumber"); // Retrieve phonenumber from doctor object
-    
+        String password = (String) session.getAttribute("password"); 
+        //String email = (String) session.getAttribute("email"); 
+        // String phonenumber =(String) session.getAttribute("phonenumber"); // Retrieve
+
         // // Add attributes to the ModelAndView
-        // mav.addObject("name", name);
-        // mav.addObject("email", email);
+        mav.addObject("username", name);
+        mav.addObject("password", password);
         // mav.addObject("phonenumber", phonenumber);
-    
+        // mav.addObject("email", email);
+
         return mav;
     }
+
     @GetMapping("/{id}/editAdmin")
     public String showEditAdminForm(@PathVariable("id") Long id, Model model) {
         Admin admin = adminRepository.findById(id)
@@ -99,15 +108,16 @@ public class AdminController {
     }
 
     @PostMapping("/{id}/editAdmin")
-    public String updateAdmin(@Valid @PathVariable("id") Long id, @ModelAttribute("Admin") Admin updatedAdmin , BindingResult bindingResult) {
+    public String updateAdmin(@Valid @PathVariable("id") Long id, @ModelAttribute("Admin") Admin updatedAdmin,
+            BindingResult bindingResult) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
         admin.setUsername(updatedAdmin.getUsername());
         if (bindingResult.hasErrors()) {
             return "redirect:/admin/edit";
-        }else{
-        adminRepository.save(admin);
-        return "redirect:/admin/list";
+        } else {
+            adminRepository.save(admin);
+            return "redirect:/admin/list";
         }
     }
 
@@ -115,63 +125,72 @@ public class AdminController {
     public String deleteAdmin(@PathVariable("id") Long id) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-    adminRepository.delete(admin);
+        adminRepository.delete(admin);
         return "redirect:/admin/list";
     }
 
-
-    //doctor 
+    // doctor
     @GetMapping("/doctorList")
     public String listDoctors(Model model) {
-        model.addAttribute("doctors", doctorRepository.findAll());
-        return "Admin/doctorList";
+        model.addAttribute("Doctor", doctorRepository.findAll());
+        return "admin/doctorList";
     }
+
 
     @GetMapping("/addDoctor")
     public String showAddForm(Model model) {
-        model.addAttribute("doctor", new Doctor());
+        model.addAttribute("Doctor", new Doctor());
         return "Admin/addDoctor";
     }
 
-        @PostMapping("/addDoctor")
+    @PostMapping("/addDoctor")
     public String addDoctor(@ModelAttribute("Doctor") Doctor doctor) {
-       this.doctorRepository.save(doctor);
-        return "redirect:/admin";
+        String encodedPassword = BCrypt.hashpw(doctor.getPassword(), BCrypt.gensalt(12));
+        doctor.setPassword(encodedPassword);
+        this.doctorRepository.save(doctor);
+        return "redirect:/admin/doctorList";
     }
 
+    // @PostMapping("/addDoctor")
+    // public String addDoctor(@ModelAttribute("Doctor") Doctor doctor) {
+    // .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+    // model.addAttribute("Doctor", Doctor);
+    // return "admin/doctorEdit";
+    // }
     @GetMapping("/{id}/editDoctor")
-    public String showEditForm(@PathVariable("id") Long id, Model model) {
-        Doctor doctor = doctorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-        model.addAttribute("doctor", doctor);
+    public String showEditDoctorForm(@PathVariable("id") Long id, Model model) {
+        Doctor Doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
+        model.addAttribute("Doctor", Doctor);
         return "admin/doctorEdit";
     }
 
     @PostMapping("/{id}/editDoctor")
     public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("Doctor") Doctor updatedDoctor) {
-        Doctor doctor = doctorRepository.findById(id)
+        Doctor Doctor = doctorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-        doctor.setName(updatedDoctor.getName());
-       
-        doctorRepository.save(doctor);
-        return "redirect:/admin";
+        Doctor.setName(updatedDoctor.getName());
+
+        doctorRepository.save(Doctor);
+        return "redirect:/admin/doctorList";
     }
 
     @PostMapping("/{id}/deleteDoctor")
     public String deleteDoctor(@PathVariable("id") Long id) {
-        
-        Doctor doctor = doctorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-        doctorRepository.delete(doctor);
-        return "redirect:/admin";
-    }
-    @ExceptionHandler
-    public String handleValidationException(Exception exception) {
-        return "admin/validation-error";
-    }
 
-    @ModelAttribute("admin")
-    public Admin getAdminModelAttribute() {
-        return new Admin();
+        Doctor Doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+        doctorRepository.delete(Doctor);
+        return "redirect:/admin/doctorList";
+    }
+    // @ExceptionHandler
+    // public String handleValidationException(Exception exception) {
+    // return "admin/validation-error";
+    // }
+
+    @GetMapping("/pets")
+    public ModelAndView getProfile() {
+        ModelAndView mav = new ModelAndView("/admin/pets.html");
+        return mav;
     }
 }

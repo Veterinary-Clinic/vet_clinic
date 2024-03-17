@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Appointment;
 import com.example.demo.models.Booking;
+import com.example.demo.models.Doctor;
+import com.example.demo.models.User;
 import com.example.demo.repositories.AppointmentRepository;
 import com.example.demo.repositories.BookingRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user/booking")
@@ -26,24 +29,25 @@ public class BookingController {
     AppointmentRepository appointmentRepository;
 
     @GetMapping("booked")
-    public void book(@RequestParam int id, HttpServletResponse response) throws IOException {
-        try {
-            Appointment appointment = appointmentRepository.findById(id).get();
-            Booking booking = new Booking();
-            
+    public void book(@RequestParam int id, HttpServletResponse response, HttpSession session) throws IOException {
+        Appointment appointment = appointmentRepository.findById(id).get();
+        Booking booking = new Booking();
+        Long userId = (Long) session.getAttribute("user_id");
+
+        if (userId != null) {
+            User user = new User();
+            user.setId(userId);
+            booking.setUser(user);
             booking.setDate(appointment.getDate());
             booking.setTime(appointment.getStartHr());
             booking.setDoctor(appointment.getDoctor());
-            //booking.setUser(appointment.getUser());
-
             this.bookingRepository.save(booking);
             this.appointmentRepository.delete(appointment);
-
-        } catch (Exception e) {
-            System.out.println("Exception: "+e.getMessage());
+            response.sendRedirect("/appointments/available-appointments");
         }
-        response.sendRedirect("/appointments/available-appointments");
+        else{
+            response.sendRedirect("/user/Login");
+        }
     }
-    
 
 }

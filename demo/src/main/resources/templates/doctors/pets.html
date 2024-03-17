@@ -24,26 +24,26 @@
 		</a>
 		<ul class="side-menu top">
 			<li>
-                
-				<a href="index.html">
+				<a th:href="@{/doctor/index}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
+			
 			<li> 
-				<a href="addAppointments.html">
-					<i class='bx bx-time'></i>					
+				<a th:href="@{/appointments/add-appointment}">
+					<i class='bx bx-time'></i>                
 					<span class="text">Add Appointment</span>
 				</a>
 			</li>
 			<li>
-				<a href="profile.html">
+				<a th:href="@{/doctor/Profile}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Profile</span>
 				</a>
 			</li>
 			<li class="active">
-				<a href="pets.html">
+				<a th:href="@{/doctor/pets}">
 					<i class='bx bx-plus-medical'></i>
 					<span class="text">Pets</span>
 				</a>
@@ -57,7 +57,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#" class="logout">
+				<a href="@{doctor/logout}" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
@@ -81,7 +81,7 @@
 				</div>
 			</form>
 			<a href="#" class="profile">
-				<img src="../../static/images/profile.jpg" alt="profile">
+				<img src="/images/profile.jpg" alt="profile">
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -115,7 +115,7 @@
             <div class="container">
               <div class="pet-card">
                 <div class="pet-picture">
-                    <img src="../../static/images/team-1.jpg" alt="Bella">
+                    <img src="/images/team-1.jpg" alt="Bella">
                  </div>
                   <h2>Bella</h2>
                   <div class="pet-details">
@@ -127,7 +127,7 @@
             
               <div class="pet-card">
                 <div class="pet-picture">
-                    <img src="../../static/images/team-2.jpg" alt="Bella">
+                    <img src="/images/team-2.jpg" alt="Bella">
                   </div>
                 <h2>Luna</h2>
                 <div class="pet-details">
@@ -139,7 +139,7 @@
             
               <div class="pet-card">
                 <div class="pet-picture">
-                    <img src="../../static/images/team-3.jpg" alt="Bella">
+                    <img src="/images/team-3.jpg" alt="Bella">
                   </div>
                 <h2>Max</h2>
                 <div class="pet-details">
@@ -151,7 +151,7 @@
             
               <div class="pet-card">
                 <div class="pet-picture">
-                    <img src="../../static/images/team-4.jpg" alt="Bella">
+                    <img src="/images/team-4.jpg" alt="Bella">
                   </div>
                 <h2>Simba</h2>
                 <div class="pet-details">
@@ -163,7 +163,7 @@
             
               <div class="pet-card">
                 <div class="pet-picture">
-                    <img src="../../static/images/team-1.jpg" alt="Bella">
+                    <img src="/images/team-1.jpg" alt="Bella">
                   </div>                <h2>Charlie</h2>
                 <div class="pet-details">
                   <p>Type: Dog</p>
@@ -174,7 +174,7 @@
             
               <div class="pet-card">
                 <div class="pet-picture">
-                    <img src="../../static/images/team-2.jpg" alt="Bellaa">
+                    <img src="/images/team-2.jpg" alt="Bellaa">
                </div>                <h2>Smokey</h2>
                 <div class="pet-details">
                   <p>Type: Cat</p>

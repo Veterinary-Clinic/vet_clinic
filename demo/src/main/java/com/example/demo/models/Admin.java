@@ -4,18 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+
 @Entity
 public class Admin{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotEmpty(message = "Name is required")
-    @Size(max = 100, message = "Name must be less than 100 characters")
     private String username;
-    @NotEmpty(message = "password is required")
-    @Size(min = 8, message = "password must be more than 8 characters")
     private String password;
     private String phonenumber;
 
@@ -25,16 +20,13 @@ public class Admin{
     
     public Admin() {
     }
+
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-    public Admin(String username, String password) {
-        this.username = username;
-        this.password = password;
     }
 
     public String getUsername() {
@@ -53,15 +45,30 @@ public class Admin{
         this.password = password;
     }
 
-    public Admin username(String username) {
-        setUsername(username);
-        return this;
+    public String getPhonenumber() {
+        return this.phonenumber;
     }
 
-    public Admin password(String password) {
-        setPassword(password);
-        return this;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGender() {
+        return this.gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    
 
     @Override
     public boolean equals(Object o) {

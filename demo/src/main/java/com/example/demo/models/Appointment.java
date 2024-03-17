@@ -25,7 +25,7 @@ public class Appointment {
     private LocalTime unFormattedStartHr;
     @Transient
     private LocalTime unFormattedEndHr;
-
+ 
     @ManyToOne
     private Doctor doctor;
 
@@ -101,6 +101,9 @@ public class Appointment {
 
     public String getDoctorName(){
         return this.doctor.getName();
+    }
+    public long getDoctorId(){
+        return this.doctor.getId();
     }
 
 

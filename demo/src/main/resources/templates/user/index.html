@@ -89,6 +89,7 @@
     <!-- Topbar End -->
 
 
+
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
@@ -100,11 +101,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                    <a href="price.html" class="nav-item nav-link">Price</a>
-                    <a href="booking.html" class="nav-item nav-link">Booking</a>
+                    <a th:href="@{/user}" class="nav-item nav-link">Home</a>
+                    <a th:href="@{/appointments/available-appointments}" class="nav-item nav-link">Booking</a>
+                    <a th:href="@{/Pet/addPet}" class="nav-item nav-link">Add Pet</a>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
                 <a href="" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Get Quote</a>
@@ -125,7 +124,7 @@
                             <h3 class="text-white mb-3 d-none d-sm-block">Best Pet Services</h3>
                             <h1 class="display-3 text-white mb-3">Keep Your Pet Happy</h1>
                             <h5 class="text-white mb-3 d-none d-sm-block">Duo nonumy et dolor tempor no et. Diam sit diam sit diam erat</h5>
-                            <a href="@{/appointments/available-appointments}" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Book Now</a>
+                            <a th:href="@{/appointments/available-appointments}" class="btn btn-lg btn-primary mt-3 mt-md-4 px-4">Book Now</a>
                             <a href="" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Learn More</a>
                         </div>
                     </div>
@@ -326,7 +325,7 @@
                             </ul>
                         </div>
                         <div class="card-footer border-0 p-0">
-                            <a href="" class="btn btn-primary btn-block p-3" style="border-radius: 0;">Signup Now</a>
+                            <a th:href="@{/user/Registration}" class="btn btn-primary btn-block p-3" style="border-radius: 0;">Signup Now</a>
                         </div>
                     </div>
                 </div>
@@ -350,7 +349,7 @@
                             </ul>
                         </div>
                         <div class="card-footer border-0 p-0">
-                            <a href="" class="btn btn-secondary btn-block p-3" style="border-radius: 0;">Signup Now</a>
+                            <a th:href="@{/user/Registration}" class="btn btn-secondary btn-block p-3" style="border-radius: 0;">Signup Now</a>
                         </div>
                     </div>
                 </div>
@@ -374,7 +373,7 @@
                             </ul>
                         </div>
                         <div class="card-footer border-0 p-0">
-                            <a href="" class="btn btn-primary btn-block p-3" style="border-radius: 0;">Signup Now</a>
+                            <a th:href="@{/user/Registration}" class="btn btn-primary btn-block p-3" style="border-radius: 0;">Signup Now</a>
                         </div>
                     </div>
                 </div>
