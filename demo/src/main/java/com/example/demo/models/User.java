@@ -2,6 +2,9 @@ package com.example.demo.models;
 
 import java.util.Objects;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +18,8 @@ public class User {
     private String name;
     private String email;
     private String phone;
+    @NotEmpty(message = "password is required")
+    @Size(min = 8, message = "password must be more than 8 characters")
     private String password;
     private String confirmPassword;
 

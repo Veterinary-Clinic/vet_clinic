@@ -68,6 +68,11 @@ public class UserController {
             bindingResult.addError(new FieldError("user", "password", "Password must be at least 8 characters long."));
             return new RedirectView("Registration");
         }
+        // check if email hasnt been used before
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            bindingResult.addError(new FieldError("user", "email", "Email is already in use."));
+            return new RedirectView("Registration");
+        }
         
         // Check if the password matches the confirm password
         String confirmPassword = user.getConfirmPassword();
@@ -80,6 +85,11 @@ public class UserController {
         String encodedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
         user.setPassword(encodedPassword);
         userRepository.save(user);
+
+        String encodedConfirm = BCrypt.hashpw(confirmPassword, BCrypt.gensalt(12));
+        user.setConfirmPassword(encodedConfirm);
+        userRepository.save(user);
+    
     
         // Redirect to the home page after successful registration
         return new RedirectView("index");
