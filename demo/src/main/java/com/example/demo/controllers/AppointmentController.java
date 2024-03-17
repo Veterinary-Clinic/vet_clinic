@@ -45,13 +45,13 @@ public class AppointmentController {
     }
 
     @PostMapping("save-appointment")
-    public void saveAppointment(@ModelAttribute Appointment appointment, HttpServletResponse response, HttpSession session) throws IOException {
+    public void saveAppointment(@ModelAttribute Appointment appointment, HttpServletResponse response,
+            HttpSession session) throws IOException {
         Long doctorId = (Long) session.getAttribute("doctor_id");
+        Doctor doctor = new Doctor();
         if (doctorId != null) {
-            Doctor doctor = new Doctor();
             doctor.setId(doctorId);
             appointment.setDoctor(doctor);
-
             appointment.setStartHr(appointment.getUnFormattedStartHr());
             appointment.setEndHr(appointment.getUnFormattedEndHr());
             this.appointmentsRepository.save(appointment);
