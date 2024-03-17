@@ -30,14 +30,14 @@
                 </a>
             </li>
             <li>
-                <a th:href="@{/Pet/addPet}">
+                <a th:href="@{/user/addPet}">
                     <i class='bx bxs-group' ></i>
                     <span class="text">Add Pet</span>
                 </a>
             </li>
             
             <li class="active">
-                <a th:href="@{/Pet/pets}">
+                <a th:href="@{/user/pets}">
                     <i class='bx bx-plus-medical'></i>
                     <span class="text">Pets</span>
                 </a>
@@ -130,15 +130,16 @@
 								<td th:text="${pet.weight}"></td>
 								<td th:text="${pet.gender}"></td>
 								<td>
-                                    <a th:href="@{/pet/edit/{id}(id=${pet.id})}">Edit</a>
-                    <form th:action="@{/pet/{id}/delete(id=${pet.id})}" method="post">
-                        <button type="submit">Delete</button>
-                    </form>
+									<a class = "buttons" id ="edit" th:href="@{/user/{id}/editPet(id=${pet.id})}">Edit</a>
+									<form th:action="@{/user/{id}/deletePet(id=${pet.id})}" method="post">
+										<button class = "buttons" id ="delete"  type="submit">Delete</button>
+									</form>
                                 </td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
+				<a class="buttons" id="edit" th:href="@{/user/addPet}">Add New Pet</a>
 				
             </body>
 
@@ -154,4 +155,5 @@
 	
 </body>
 </html>
+
 

@@ -17,13 +17,13 @@ import com.example.demo.models.Pet;
 import com.example.demo.repositories.PetRepository;
 
 @RestController
-@RequestMapping("/Pet")
+
 public class PetController {
     @Autowired
     private  PetRepository petRepository;
 
 
-    @GetMapping("pets")
+    /*@GetMapping("pets")
     public ModelAndView getpets() {
         ModelAndView mav = new ModelAndView("/user/pets.html");
         List<Pet>pets = this.petRepository.findAll();
@@ -47,5 +47,5 @@ public class PetController {
     public RedirectView deletePet(@PathVariable("id") Long id) {
         petRepository.deleteById(id);
         return new RedirectView("pets");
-    }
+    }*/
 }
