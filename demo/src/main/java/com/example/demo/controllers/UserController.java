@@ -98,7 +98,7 @@ public class UserController {
     @PostMapping("Login")
     public RedirectView loginProcess(@RequestParam("email") String email,
     @RequestParam("password") String password, HttpSession session){
-        User dbUser = this.userRepository.findByEmail(email);
+        User dbUser = this.userRepository.findByemail(email);
         Boolean isPasswordMatched= BCrypt.checkpw(password,dbUser.getPassword());
         if (isPasswordMatched){
             session.setAttribute("email", dbUser.getEmail());
