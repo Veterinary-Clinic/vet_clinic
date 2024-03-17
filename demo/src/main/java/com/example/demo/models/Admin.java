@@ -4,8 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+
 @Entity
 public class Admin{
     @Id
@@ -21,16 +20,13 @@ public class Admin{
     
     public Admin() {
     }
+
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-    public Admin(String username, String password) {
-        this.username = username;
-        this.password = password;
     }
 
     public String getUsername() {
@@ -49,15 +45,30 @@ public class Admin{
         this.password = password;
     }
 
-    public Admin username(String username) {
-        setUsername(username);
-        return this;
+    public String getPhonenumber() {
+        return this.phonenumber;
     }
 
-    public Admin password(String password) {
-        setPassword(password);
-        return this;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGender() {
+        return this.gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    
 
     @Override
     public boolean equals(Object o) {

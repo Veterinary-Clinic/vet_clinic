@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -24,7 +23,7 @@ public class DoctorController {
     //     return "doctors/list";
     // }
 
-    @GetMapping("signup")
+    @GetMapping("signup") 
     public ModelAndView addDoctor() {
         ModelAndView mav = new ModelAndView("/doctors/HomePage.html");
         Doctor newDoctor = new Doctor();

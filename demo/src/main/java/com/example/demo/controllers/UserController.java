@@ -21,6 +21,7 @@ import com.example.demo.repositories.DoctorRepository;
 import com.example.demo.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 
 
@@ -44,7 +45,7 @@ public class UserController {
         return mav;
     }
 
-
+ 
     @GetMapping("Registration") 
     public ModelAndView addUser() {
         ModelAndView mav = new ModelAndView("/user/Signup.html");
@@ -52,7 +53,7 @@ public class UserController {
         mav.addObject("user", newUser);
         return mav;
     }
-    
+     
     @PostMapping("Registration")
     public RedirectView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         ModelAndView mav = new ModelAndView();
@@ -101,9 +102,9 @@ public class UserController {
         Boolean isPasswordMatched= BCrypt.checkpw(password,dbUser.getPassword());
         if (isPasswordMatched){
             session.setAttribute("email", dbUser.getEmail());
+            session.setAttribute("user_id",dbUser.getId());
             return new RedirectView("index");
         } else return new RedirectView("Registration");
-
     }
 
     @GetMapping("doctors")
@@ -113,5 +114,4 @@ public class UserController {
         mav.addObject("doctors", doctors);
         return mav;
     }
-
 }
