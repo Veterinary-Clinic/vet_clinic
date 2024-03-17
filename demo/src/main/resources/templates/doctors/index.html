@@ -24,27 +24,26 @@
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="/doctor/index">
+				<a th:href="@{/doctor/index}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			
 			<li> 
-				<a href="addAppointments.html">
-					<i class='bx bx-time'></i>
+				<a th:href="@{/appointments/add-appointment}">
+					<i class='bx bx-time'></i>                
 					<span class="text">Add Appointment</span>
 				</a>
 			</li>
-			
 			<li>
-				<a href="/doctor/Profile">
+				<a th:href="@{/doctor/Profile}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Profile</span>
 				</a>
 			</li>
 			<li>
-				<a href="pets.html">
+				<a th:href="@{/doctor/pets}">
 					<i class='bx bx-plus-medical'></i>
 					<span class="text">Pets</span>
 				</a>
@@ -58,7 +57,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="/doctor/logout" class="logout">
+				<a href="@{doctor/logout}" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>

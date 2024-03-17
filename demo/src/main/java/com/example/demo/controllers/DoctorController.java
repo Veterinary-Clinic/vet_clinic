@@ -49,7 +49,7 @@ public class DoctorController {
     } 
 
     @PostMapping("/login")
-public RedirectView loginProgress(@RequestParam("name") String name,
+    public RedirectView loginProgress(@RequestParam("name") String name,
         @RequestParam("password") String password, HttpSession session) {
 
     Doctor dbDoctor = this.doctorRepository.findByname(name);
@@ -71,11 +71,11 @@ public RedirectView loginProgress(@RequestParam("name") String name,
         return mav;
     }
 
-    // @GetMapping("/Profile")
-    // public ModelAndView getProfile() {
-    //     ModelAndView mav = new ModelAndView("/doctors/ProfileDoctor");
-    //     return mav;
-    // }
+    @GetMapping("/pets")
+    public ModelAndView getProfile() {
+        ModelAndView mav = new ModelAndView("/doctors/pets.html");
+        return mav;
+    }
     @GetMapping("/Profile")
 public ModelAndView viewProfile(HttpSession session) {
     Doctor doctor = new Doctor(); // Assuming you have a way to retrieve the logged-in doctor

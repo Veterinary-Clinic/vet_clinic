@@ -8,8 +8,8 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="../../static/css/admin/addDoctor.css">
-    <link rel="icon" href="../../static/images/logo.png" type="image/icon type" />
+	<link rel="stylesheet" href="/css/admin/addDoctor.css">
+    <link rel="icon" href="/images/logo.png" type="image/icon type" />
 
 
 	<title>AdminHub</title>
@@ -19,49 +19,49 @@
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="index.html" class="brand">
+		<a th:href="@{/admin}" class="brand">
 			<i class='bx bxs-smile'></i>
 			<span class="text">AdminHub</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="/admin">
+			<li>
+				<a th:href="@{/admin}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="profile.html">
+				<a th:href="@{/admin/profile}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Profile</span>
 				</a>
 			</li>
 			<li>
-				<a href="/admin/doctorList">
+				<a th:href="@{/admin/doctorList}">
 					<i class='bx bxs-group'></i>
 					<span class="text">Doctors</span>
 				</a>
 			</li>
 			<li>
-				<a href="/admin/list">
+				<a th:href="@{/admin/list}">
 					<i class='bx bxs-group'></i>
 					<span class="text">Admins</span>
 				</a>
 			</li>
-			<li>
-				<a href="/admin/addDoctor">
+			<li class="active">
+				<a th:href="@{/admin/addDoctor}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Add Doctor</span>
 				</a>
 			</li>
 			<li>
-				<a href="/admin/addAdmin">
+				<a th:href="@{/admin/addAdmin}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Add Admin</span>
 				</a>
 			</li>
 			<li>
-				<a href="pets.html">
+				<a th:href="@{/admin/pets}">
 					<i class='bx bx-plus-medical'></i>
 					<span class="text">Pets</span>
 				</a>
@@ -98,8 +98,8 @@
 					<button type="submit" class="search-btn"><i class='bx bx-search'title="Toggle Navigation" ></i></button>
 				</div>
 			</form>
-			<a href="profile.html" class="profile">
-				<img src="../../static/images/profile.jpg" alt="Image">
+			<a th:href="@{/admin/Profile}" class="profile">
+				<img src="/images/profile.jpg" alt="Image">
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -124,15 +124,15 @@
 
 			<div class="table-data">
 				<div class="order">
-					<form th:action="@{/admin/addDoctor}" th:object="${admin}" method="post" class="form" action="">
+					<form th:action="@{/admin/addDoctor}" th:object="${doctor}" method="post" class="form">
 						<div class="input-box">
 							<label for="name">Name</label>
-							<input type="text" th:field="*{username}" id="name" name="name" placeholder="Enter doctor's name" />
+							<input type="text" th:field="*{name}" id="name" name="name" placeholder="Enter doctor's name" />
 						</div>
 	
 						<div class="input-box">
 							<label for="number">Phone Number</label>
-							<input type="number"  th:field="*{number}" id="number" name="number" placeholder="Enter doctor's number" />
+							<input type="number" th:field="*{phonenumber}" id="number" name="number" placeholder="Enter doctor's number" />
 						</div>
 	
 						<div class="input-box">
@@ -155,11 +155,11 @@
 								<label for="male">Male</label>
 							</div>
 							<div class="column">
-								<input type="radio" th:field="*{gender}name="gender" id="female" value="Female">
+								<input type="radio" th:field="*{gender} "name="gender" id="female" value="Female">
 								<label for="female">Female</label>
 							</div>
-						</div>
-	 -->
+						</div> -->
+	 
 						<button input type="submit" name="submit" id="submit-button" value="submit">Add Doctor</button>
 					</form>
 				</div>

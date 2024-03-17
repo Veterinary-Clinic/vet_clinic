@@ -1,60 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../../css/admin/tables.css">
-    <link rel="icon" href="../../images/logo.png" type="image/icon type" /> -->
-    <!-- <link rel="stylesheet" href="/../css/doctor/loginDoctor.css"> -->
-    <title>Edit Doctor</title>
-  
+	<link rel="stylesheet" href="/admin/addDoctor.css">
+    <link rel="icon" href="/images/logo.png" type="image/icon type" /> 
+	<link rel="stylesheet" href="/css/doctor/loginDoctor.css"> 
+	<title>Edit Doctor</title>
+
 </head>
+
 <body>
-    <!-- SIDEBAR -->
+	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="index.html" class="brand">
+		<a th:href="@{/admin}" class="brand">
 			<i class='bx bxs-smile'></i>
 			<span class="text">AdminHub</span>
 		</a>
 		<ul class="side-menu top">
-            <li class="active">
-				<a href="/admin">
+			<li>
+				<a th:href="@{/admin}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="profile.html">
+				<a th:href="@{/admin/profile}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Profile</span>
 				</a>
 			</li>
-			<li>
-				<a href="/admin/doctorList">
+			<li class="active">
+				<a th:href="@{/admin/doctorList}">
 					<i class='bx bxs-group'></i>
 					<span class="text">Doctors</span>
 				</a>
 			</li>
 			<li>
-				<a href="/admin/list">
+				<a th:href="@{/admin/list}">
 					<i class='bx bxs-group'></i>
 					<span class="text">Admins</span>
 				</a>
 			</li>
 			<li>
-				<a href="/admin/addDoctor">
+				<a th:href="@{/admin/addDoctor}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Add Doctor</span>
 				</a>
 			</li>
 			<li>
-				<a href="/admin/addAdmin">
+				<a th:href="@{/admin/addAdmin}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Add Admin</span>
 				</a>
 			</li>
 			<li>
-				<a href="pets.html">
+				<a th:href="@{/admin/pets}">
 					<i class='bx bx-plus-medical'></i>
 					<span class="text">Pets</span>
 				</a>
@@ -76,20 +78,40 @@
 		</ul>
 	</section>
 	<!-- SIDEBAR -->
-    <h1>Edit Doctor</h1>
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu'></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn" title="submit"><i class='bx bx-search'></i></button>
+				</div>
+			</form>
+			<a th:href="@{admin/Profile}" class="profile">
+				<img src="/images/profile.jpg" alt="profile">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+		<!-- MAIN -->
+		<!-- SIDEBAR -->
+		<h1>Edit Doctor</h1>
 
-    <form  th:action="@{/admin/{id}/editAdmin(id=${admin.id})}" method="post">
-        <input type="hidden" id="id" name="id" th:value="${admin.id}">
+		<form th:action="@{/admin/{id}/editAdmin(id=${admin.id})}" method="post">
+			<input type="hidden" id="id" name="id" th:value="${admin.id}">
 
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="username" th:value="${admin.username}" required><br>
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="username" th:value="${admin.username}" required><br>
 
 
 
-        <button type="submit">Save</button>
-    </form>
+			<button type="submit">Save</button>
+		</form>
 
-    <a th:href="@{/admin/list}">Back to List</a>
+		<a th:href="@{/admin/list}">Back to List</a>
 
 </body>
+
 </html>
