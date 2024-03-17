@@ -9,7 +9,8 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="/css/addPet.css">
     <link rel="icon" href="/images/logo.png" type="image/icon type" />
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/Js/DrLogin.js"></script>
     <title>UserHub</title>
 </head>
 <body>
@@ -95,7 +96,7 @@
 
             <div class="container">
                 <h2>Pet Registration Form</h2>
-                <form th:action="@{/user/addPet}" th:object="${pet}" method="post">
+                <form th:action="@{/user/addPet}" th:object="${pet}" method="post" id="addPetForm">
 					<label for="pet_name">Pet Name:</label>
 					<input type="text" id="pet_name" name="name" th:field="*{name}" required>
 					
@@ -127,8 +128,9 @@
 						<option value="female">Female</option>
 					</select>
 					
-					<input type="submit" value="Add">
+					<input type="submit"  onclick="validateForm()" value="Add">
 				</form>
+                <div id="alert" class="alert" style="display: none;"></div>
             </div>
         </main>
 		<!-- MAIN -->
