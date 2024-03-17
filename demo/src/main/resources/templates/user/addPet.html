@@ -95,7 +95,7 @@
 
             <div class="container">
                 <h2>Pet Registration Form</h2>
-                <form th:action="@{/Pet/addPet}" th:object="${pet}" method="post">
+                <form th:action="@{/user/addPet}" th:object="${pet}" method="post">
 					<label for="pet_name">Pet Name:</label>
 					<input type="text" id="pet_name" name="name" th:field="*{name}" required>
 					

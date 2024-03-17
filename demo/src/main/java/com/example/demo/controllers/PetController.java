@@ -17,7 +17,7 @@ import com.example.demo.models.Pet;
 import com.example.demo.repositories.PetRepository;
 
 @RestController
-@RequestMapping("/Pet")
+
 public class PetController {
     @Autowired
     private  PetRepository petRepository;
@@ -42,10 +42,10 @@ public class PetController {
     public RedirectView savePet(@ModelAttribute Pet npet) {
         petRepository.save(npet);
         return new RedirectView("pets");
-    }*/
+    }
     @GetMapping("/deletePet/{id}")
     public RedirectView deletePet(@PathVariable("id") Long id) {
         petRepository.deleteById(id);
         return new RedirectView("pets");
-    }
+    }*/
 }

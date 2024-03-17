@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,6 +60,15 @@ public class UserController {
     public RedirectView savePet(@ModelAttribute Pet npet) {
         petRepository.save(npet);
         return new RedirectView("pets");
+    }
+    
+    @PostMapping("/{id}/deletePet")
+    public String deletePet(@PathVariable("id") Long id) {
+
+        Pet npet = petRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid pet ID: " + id));
+        petRepository.delete(npet);
+        return "redirect:user/pets";
     }
 
 
