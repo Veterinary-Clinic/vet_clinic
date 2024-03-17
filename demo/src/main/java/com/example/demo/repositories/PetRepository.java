@@ -8,4 +8,6 @@ import com.example.demo.models.Pet;
 
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Integer> {
+
+    void deleteById(Long id);
 } 
