@@ -5,15 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
   <link rel="stylesheet" href="/css/doctor/loginDoctor.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/Js/DrLogin.js"></script> 
 </head>
 <body>
   <div class="login-container">
     <h2 style="color: var(--success);">Login</h2>
-    <form class="login-form" th:action="@{/doctor/login}" th:object="${doctor}" method="POST">
-      <input type="text" th:field="*{name}" placeholder="name" required>
+    <form class="login-form" th:action="@{/doctor/login}" th:object="${doctor}" method="POST" id="loginForm">
+      <input type="text" th:field="*{name}" placeholder="Name" required>
       <input type="password" th:field="*{password}" placeholder="Password" required>
-      <button input type="submit">Login</button>
+      <button type="button" onclick="validateForm()">Login</button>
     </form>
+    <div id="alert" class="alert" style="display: none;"></div>
   </div>
 </body>
 </html>
