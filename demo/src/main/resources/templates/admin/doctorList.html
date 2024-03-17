@@ -121,6 +121,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Email</th>
+                        <th>phonenumber</th>
+                        <th>gender</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -129,6 +132,9 @@
                     <tr th:each="Doctor : ${Doctor}">
                         <td th:text="${Doctor.id}"></td>
                         <td th:text="${Doctor.name}"></td>
+                        <td th:text="${Doctor.email}"></td>
+                        <td th:text="${Doctor.phonenumber}"></td>
+                        <td th:text="${Doctor.gender}"></td>
                         <!-- <td th:text="${doctor.specialization}"></td> -->
                         <td>
                             <a class = "buttons" id ="edit" th:href="@{/admin/{id}/editDoctor(id=${Doctor.id})}">Edit</a>

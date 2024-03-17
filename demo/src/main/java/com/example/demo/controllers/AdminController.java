@@ -132,7 +132,7 @@ public class AdminController {
     // doctor
     @GetMapping("/doctorList")
     public String listDoctors(Model model) {
-        model.addAttribute("doctors", doctorRepository.findAll());
+        model.addAttribute("Doctor", doctorRepository.findAll());
         return "admin/doctorList";
     }
 
