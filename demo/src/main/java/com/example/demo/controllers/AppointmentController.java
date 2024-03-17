@@ -57,6 +57,9 @@ public class AppointmentController {
             this.appointmentsRepository.save(appointment);
             response.sendRedirect("add-appointment");
         }
+        else{
+            response.sendRedirect("/doctor/login");
+        }
     }
 
 }
