@@ -15,23 +15,6 @@
 
 
 	<title>DoctorHub</title>
-	<style>
-		/* CSS for the "Edit Profile" button */
-		.profile-form {
-			
-			background-color: #ED6436;
-			color: #fff; /* White text color */
-			border: none; /* Remove border */
-			padding: 10px 20px; /* Padding */
-			cursor: pointer; /* Cursor style */
-			border-radius: 5px; /* Rounded corners */
-		}
-	
-		
-		.profile-form:hover {
-			background-color: #ffb993; 
-		}
-	</style>
 </head>
 <body>
 
@@ -140,10 +123,10 @@
 							</div>
 							<div class="row mt-2">
 								<div class="col-md-6">
-									<label class="labels">Name: <span th:text="${name}"></span></label>
+									<label class="labels">ID: <span th:text="${id}"></span></label>
 								</div>
 								<div class="col-md-6">
-									<label class="labels">Name: <span th:text="${id}"></span></label>
+									<label class="labels">Name: <span th:text="${name}"></span></label>
 								</div>
 							</div>
 							<div class="row mt-3">

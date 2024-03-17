@@ -10,7 +10,6 @@ import com.example.demo.models.Doctor;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
-    Doctor findByname(String name);
 
     Doctor findByName(String name);
 
