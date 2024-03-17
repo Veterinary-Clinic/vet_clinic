@@ -38,7 +38,7 @@ public class UserController {
 
     @GetMapping("")
     public ModelAndView getHomePage() {
-        ModelAndView mav = new ModelAndView("index.html");
+        ModelAndView mav = new ModelAndView("/user/index.html");
         List<User>users = this.userRepository.findAll();
         mav.addObject("users", users);
         return mav;
@@ -85,7 +85,7 @@ public class UserController {
         // Redirect to the home page after successful registration
         return new RedirectView("index");
     }
-
+ 
       @GetMapping("Login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView("Signup.html");
