@@ -19,49 +19,49 @@
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="index.html" class="brand">
+		<a th:href="@{/admin}" class="brand">
 			<i class='bx bxs-smile'></i>
 			<span class="text">AdminHub</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="/admin">
+			<li>
+				<a th:href="@{/admin}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="profile.html">
+				<a th:href="@{/admin/profile}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Profile</span>
 				</a>
 			</li>
 			<li>
-				<a href="/admin/doctorList">
+				<a th:href="@{/admin/doctorList}">
 					<i class='bx bxs-group'></i>
 					<span class="text">Doctors</span>
 				</a>
 			</li>
 			<li>
-				<a href="/admin/list">
+				<a th:href="@{/admin/list}">
 					<i class='bx bxs-group'></i>
 					<span class="text">Admins</span>
 				</a>
 			</li>
 			<li>
-				<a href="/admin/addDoctor">
+				<a th:href="@{/admin/addDoctor}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Add Doctor</span>
 				</a>
 			</li>
-			<li>
-				<a href="/admin/addAdmin">
+			<li class="active">
+				<a th:href="@{/admin/addAdmin}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Add Admin</span>
 				</a>
 			</li>
 			<li>
-				<a href="pets.html">
+				<a th:href="@{/admin/pets}">
 					<i class='bx bx-plus-medical'></i>
 					<span class="text">Pets</span>
 				</a>
@@ -98,8 +98,8 @@
 					<button type="submit" class="search-btn"><i class='bx bx-search'title="Toggle Navigation" ></i></button>
 				</div>
 			</form>
-			<a href="profile.html" class="profile">
-				<img src="../../static/images/profile.jpg" alt="Image">
+			<a th:href="@{/admin/Profile}" class="profile">
+				<img src="/images/profile.jpg" alt="Image">
 			</a>
 		</nav>
 		<!-- NAVBAR -->

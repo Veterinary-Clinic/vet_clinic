@@ -17,6 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -30,11 +34,14 @@ public class AdminController {
         // model.addAttribute("admin", adminRepository.findAll());
         return "admin/index";
     }
+
+
     @GetMapping("/list")
     public String listAdmins(Model model) {
         model.addAttribute("admins", adminRepository.findAll());
         return "admin/list";
     }
+
     @GetMapping("/addAdmin")
     public String showAddAdminForm(Model model) {
         model.addAttribute("admin", new Admin());
@@ -54,13 +61,14 @@ public class AdminController {
         return "redirect:/admin/list" ; 
             }
         }
+    
 
-@GetMapping("login")
+    @GetMapping("login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView("/admin/loginAdmin.html");
         mav.addObject("admin", new Admin());
         return mav;
-    } 
+    }
 
     @PostMapping("login")
     public RedirectView loginProgress(@RequestParam("username") String name,
@@ -77,6 +85,7 @@ public class AdminController {
             return new RedirectView("login");
         }
     }
+
     @GetMapping("/Profile")
     public ModelAndView viewProfile(HttpSession session) {
         Admin admin = new Admin(); // Assuming you have a way to retrieve the logged-in doctor
@@ -85,15 +94,17 @@ public class AdminController {
         // Retrieve attributes from session or doctor object
         String name = (String) session.getAttribute("username");
         String password = (String) session.getAttribute("password"); // Retrieve email from session or doctor object
-        // String phonenumber =(String) session.getAttribute("phonenumber"); // Retrieve phonenumber from doctor object
-    
+        // String phonenumber =(String) session.getAttribute("phonenumber"); // Retrieve
+        // phonenumber from doctor object
+
         // // Add attributes to the ModelAndView
         mav.addObject("username", name);
         mav.addObject("password", password);
         // mav.addObject("phonenumber", phonenumber);
-    
+
         return mav;
     }
+
     @GetMapping("/{id}/editAdmin")
     public String showEditAdminForm(@PathVariable("id") Long id, Model model) {
         Admin admin = adminRepository.findById(id)
@@ -103,15 +114,16 @@ public class AdminController {
     }
 
     @PostMapping("/{id}/editAdmin")
-    public String updateAdmin(@Valid @PathVariable("id") Long id, @ModelAttribute("Admin") Admin updatedAdmin , BindingResult bindingResult) {
+    public String updateAdmin(@Valid @PathVariable("id") Long id, @ModelAttribute("Admin") Admin updatedAdmin,
+            BindingResult bindingResult) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
         admin.setUsername(updatedAdmin.getUsername());
         if (bindingResult.hasErrors()) {
             return "redirect:/admin/edit";
-        }else{
-        adminRepository.save(admin);
-        return "redirect:/admin/list";
+        } else {
+            adminRepository.save(admin);
+            return "redirect:/admin/list";
         }
     }
 
@@ -119,12 +131,11 @@ public class AdminController {
     public String deleteAdmin(@PathVariable("id") Long id) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-    adminRepository.delete(admin);
+        adminRepository.delete(admin);
         return "redirect:/admin/list";
     }
 
-
-    //doctor 
+    // doctor
     @GetMapping("/doctorList")
     public String listDoctors(Model model) {
         model.addAttribute("Doctor", doctorRepository.findAll());
@@ -137,19 +148,19 @@ public class AdminController {
         return "Admin/addDoctor";
     }
 
+
         @PostMapping("/addDoctor")
     public String addDoctor(@ModelAttribute("Doctor") Doctor Doctor) {
        this.doctorRepository.save(Doctor);
         return "redirect:/admin/doctorList";
     }
 
-    @GetMapping("/{id}/editDoctor")
-    public String showEditForm(@PathVariable("id") Long id, Model model) {
-        Doctor Doctor = doctorRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
-        model.addAttribute("Doctor", Doctor);
-        return "admin/doctorEdit";
-    }
+    // @PostMapping("/addDoctor")
+    // public String addDoctor(@ModelAttribute("Doctor") Doctor doctor) {
+    //             .orElseThrow(() -> new IllegalArgumentException("Invalid doctor ID: " + id));
+    //     model.addAttribute("Doctor", Doctor);
+    //     return "admin/doctorEdit";
+    // }
 
     @PostMapping("/{id}/editDoctor")
     public String updateDoctor(@PathVariable("id") Long id, @ModelAttribute("Doctor") Doctor updatedDoctor) {
@@ -174,8 +185,17 @@ public class AdminController {
     //     return "admin/validation-error";
     // }
 
+ 
+
     // @ModelAttribute("admin")
     // public Admin getAdminModelAttribute() {
     //     return new Admin();
     // }
+
+    
+    @GetMapping("/pets")
+    public ModelAndView getProfile() {
+        ModelAndView mav = new ModelAndView("/admin/pets.html");
+        return mav;
+    }
 }

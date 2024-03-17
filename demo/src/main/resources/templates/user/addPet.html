@@ -16,26 +16,26 @@
 
     <!-- SIDEBAR -->
     <section id="sidebar">
-        <a href="profile.html" class="brand">
+        <a th:href="@{/user}" class="brand">
             <i class='bx bxs-smile'></i>
             <span class="text">UserHub</span>
         </a>
         <ul class="side-menu top">
             <li>
-                <a href="profile.html">
+                <a th:href="@{/user/profile}">
                     <i class='bx bxs-dashboard'></i>
                     <span class="text">Profile</span>
                 </a>
             </li>
             <li class="active">
-                <a href="addPet.html">
+                <a th:href="@{/Pet/addPet}">
                     <i class='bx bxs-group' ></i>
                     <span class="text">Add Pet</span>
                 </a>
             </li>
             
             <li>
-                <a href="./pets">
+                <a th:href="@{/Pet/pets}">
                     <i class='bx bx-plus-medical'></i>
                     <span class="text">Pets</span>
                 </a>
@@ -70,7 +70,7 @@
                     <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
                 </div>
             </form>
-            <a href="profile.html" class="profile">
+            <a href="@{/user/profile}" class="profile">
                 <img src="/images/profile.jpg">
             </a>
         </nav>

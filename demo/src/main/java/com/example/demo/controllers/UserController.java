@@ -10,13 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.models.Doctor;
 import com.example.demo.models.User;
 import com.example.demo.repositories.DoctorRepository;
 import com.example.demo.repositories.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
+
+
+
 
 
 @RestController
@@ -32,6 +39,8 @@ public class UserController {
     @GetMapping("")
     public ModelAndView getHomePage() {
         ModelAndView mav = new ModelAndView("/user/index.html");
+        List<User>users = this.userRepository.findAll();
+        mav.addObject("users", users);
         return mav;
     }
 
@@ -45,30 +54,27 @@ public class UserController {
     }
     
     @PostMapping("Registration")
-    public ModelAndView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    public RedirectView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         ModelAndView mav = new ModelAndView();
         
         // Check for validation errors
         if (bindingResult.hasErrors()) {
             // If there are validation errors, return to the registration form
-            mav.setViewName("/user/Signup.html");
-            return mav;
+            return new RedirectView("registration");
         }
         
         // Check if the password meets the minimum length requirement
         String password = user.getPassword();
         if (password == null || password.length() < 8) {
             bindingResult.addError(new FieldError("user", "password", "Password must be at least 8 characters long."));
-            mav.setViewName("/user/Signup.html");
-            return mav;
+            return new RedirectView("Registration");
         }
         
         // Check if the password matches the confirm password
         String confirmPassword = user.getConfirmPassword();
         if (!password.equals(confirmPassword)) {
             bindingResult.addError(new FieldError("user", "confirmPassword", "Passwords do not match."));
-            mav.setViewName("/user/Signup.html");
-            return mav;
+            return new RedirectView("Registration");
         }
     
         // Hash the password and save the user
@@ -77,8 +83,27 @@ public class UserController {
         userRepository.save(user);
     
         // Redirect to the home page after successful registration
-        mav.setViewName("/user/index.html");
+        return new RedirectView("index");
+    }
+ 
+      @GetMapping("Login")
+    public ModelAndView login() {
+        ModelAndView mav = new ModelAndView("Signup.html");
+        User newUser = new User();
+        mav.addObject("user", newUser);
         return mav;
+    }
+    
+    @PostMapping("Login")
+    public RedirectView loginProcess(@RequestParam("email") String email,
+    @RequestParam("password") String password, HttpSession session){
+        User dbUser = this.userRepository.findByEmail(email);
+        Boolean isPasswordMatched= BCrypt.checkpw(password,dbUser.getPassword());
+        if (isPasswordMatched){
+            session.setAttribute("email", dbUser.getEmail());
+            return new RedirectView("index");
+        } else return new RedirectView("Registration");
+
     }
 
     @GetMapping("doctors")
