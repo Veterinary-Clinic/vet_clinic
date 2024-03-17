@@ -86,24 +86,31 @@ public ModelAndView viewProfile(HttpSession session) {
     String email = (String) session.getAttribute("email"); // Retrieve email from session or doctor object
     String phonenumber = (String) session.getAttribute("phonenumber"); // Retrieve phonenumber from doctor object
     Long id = (Long) session.getAttribute("id"); // Retrieve doctor's ID from session
-
+    String password = (String) session.getAttribute("password");
     // Add attributes to the ModelAndView
     mav.addObject("name", name);
     mav.addObject("email", email);
+    mav.addObject("password", password);
     mav.addObject("phonenumber", phonenumber);
     mav.addObject("id", id); // Add doctor's ID to the ModelAndView
 
     return mav;
 }
  
-
-
-
+   
 @GetMapping("/editProfile")
-public ModelAndView editProfilePage(HttpSession session) {
-    ModelAndView mav = new ModelAndView("doctors/EditProfile"); // Assuming "doctors/EditProfile" is the correct template name
-    Doctor doctor = (Doctor) session.getAttribute("doctor"); // Retrieve the doctor object from session
-    mav.addObject("doctor", doctor); // Add the doctor object to the ModelAndView
+public ModelAndView editDoctor(HttpSession session) {
+    ModelAndView mav = new ModelAndView("doctors/editProfile.html");
+    String name = (String) session.getAttribute("name");
+    String email = (String) session.getAttribute("email");
+    String phonenumber = (String) session.getAttribute("phonenumber");
+    String password = (String) session.getAttribute("password");
+    mav.addObject("name", name);
+    mav.addObject("email", email);
+    mav.addObject("phonenumber", phonenumber);
+    mav.addObject("password", password);
+    Doctor dr=doctorRepository.findByName(name);
+    mav.addObject("doctor", dr);
     return mav;
 }
 
@@ -111,30 +118,29 @@ public ModelAndView editProfilePage(HttpSession session) {
 public RedirectView editProfile(@ModelAttribute Doctor updatedDoctor,
                                 @RequestParam(value = "newPassword", required = false) String newPassword,
                                 HttpSession session) {
-    Doctor doctor = (Doctor) session.getAttribute("doctor"); // Retrieve the doctor object from session
-    if (doctor != null) {
-        // Update doctor's information
-        doctor.setName(updatedDoctor.getName());
-        doctor.setEmail(updatedDoctor.getEmail());
+    String name = (String) session.getAttribute("name");
+    Doctor existingUser = doctorRepository.findByName(name);
+
+    if (existingUser != null) {
+        existingUser.setName(updatedDoctor.getName());
+        existingUser.setEmail(updatedDoctor.getEmail());
         
-        // Update password if provided
+        // Check if a new password is provided and update it
         if (newPassword != null && !newPassword.isEmpty()) {
-            String encryptedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt(12));
-            doctor.setPassword(encryptedPassword);
+            // Don't hash the password if you want to store it as plain text
+            existingUser.setPassword(newPassword);
         }
 
-        // Save the updated doctor to the session
-        session.setAttribute("doctor", doctor);
+        doctorRepository.save(existingUser);
 
-        // Redirect to the profile page
-        return new RedirectView("/Profile");
-    } else {
-        // Handle case where doctor is not found in session
-        // You can redirect to an error page or handle it as per your application's requirement
-        return new RedirectView("/error");
+        // Update session attribute if necessary
+        session.setAttribute("name", existingUser.getName());
+        session.setAttribute("email", existingUser.getEmail());
+        session.setAttribute("password", existingUser.getPassword());
     }
-}
 
+    return new RedirectView("/doctor/Profile");
+}
 
 
 
