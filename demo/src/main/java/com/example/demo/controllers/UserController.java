@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,8 @@ import jakarta.validation.Valid;
 
 
 
-@RestController
+
+@Controller
 @RequestMapping("/user")
 
 public class UserController {
@@ -41,7 +43,7 @@ public class UserController {
      private  DoctorRepository doctorRepository;
      @Autowired
     private  PetRepository petRepository;
-    @GetMapping("pets")
+    @GetMapping("/pets")
     public ModelAndView getpets() {
         ModelAndView mav = new ModelAndView("/user/pets.html");
         List<Pet>pets = this.petRepository.findAll();
@@ -68,7 +70,7 @@ public class UserController {
         Pet npet = petRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid pet ID: " + id));
         petRepository.delete(npet);
-        return "redirect:user/pets";
+        return "redirect:/user/pets";
     }
 
 
