@@ -37,7 +37,7 @@ public class UserController {
     @Autowired
      private  DoctorRepository doctorRepository;
 
-    @GetMapping("")
+    @GetMapping("/index")
     public ModelAndView getHomePage() {
         ModelAndView mav = new ModelAndView("/user/index.html");
         List<User>users = this.userRepository.findAll();
@@ -84,7 +84,7 @@ public class UserController {
         userRepository.save(user);
     
         // Redirect to the home page after successful registration
-        return new RedirectView("/user");
+        return new RedirectView("/user/index");
     }
  
       @GetMapping("Login")
@@ -103,7 +103,7 @@ public class UserController {
         if (isPasswordMatched){
             session.setAttribute("email", dbUser.getEmail());
             session.setAttribute("user_id", dbUser.getId());
-            return new RedirectView("/user");
+            return new RedirectView("/user/index");
         } else
             return new RedirectView("Registration");
     }
