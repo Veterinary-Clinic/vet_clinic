@@ -85,53 +85,54 @@
     <script src="../../Js/signup.js" ></script>
 	<script>
 		$(document).ready(function () {
-			$('#sign').on('click', function () {
-				if (validateForm()) {
-					$('#signupForm').submit();
+			$('#email').on('input', function () {
+				var email = $(this).val();
+				
+				// Regular expression for email validation
+				var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				
+				if (!emailRegex.test(email)) {
+					$('#emailError').text('Please enter a valid email').show();
+					$('#sign').prop('disabled', true);
+				} else {
+					$('#emailError').text('').hide();
+					$('#sign').prop('disabled', false);
 				}
 			});
 	
-			function validateForm() {
-				var valid = true;
-				var email = $('#email').val();
-				var password = $('#password').val();
-				var confirmPassword = $('#confirmPassword').val();
-	
-				// Validate email
-				if (email.trim() === '') {
-					$('#emailError').text('Email is required').show();
-					valid = false;
-				} else {
-					$('#emailError').text('').hide();
-				}
-	
-				// Validate password
-				if (password.trim() === '') {
-					$('#passwordError').text('Password is required').show();
-					valid = false;
-				} else if (password.length < 8) {
+			$('#password').on('input', function () {
+				var password = $(this).val();
+				if (password.length < 8) {
 					$('#passwordError').text('Password must be at least 8 characters long').show();
-					valid = false;
+					$('#sign').prop('disabled', true);
 				} else {
 					$('#passwordError').text('').hide();
+					$('#sign').prop('disabled', false);
 				}
-	
-				// Validate confirm password
-				if (confirmPassword.trim() === '') {
-					$('#confirmPasswordError').text('Confirm password is required').show();
-					valid = false;
-				} else if (password !== confirmPassword) {
-					$('#confirmPasswordError').text('Passwords do not match').show();
-					valid = false;
-				} else {
+				// Check if confirmPassword field is empty and remove error message if so
+				if ($('#confirmPassword').val() === '') {
 					$('#confirmPasswordError').text('').hide();
 				}
+			});
 	
-				return valid;
-			}
+			$('#confirmPassword').on('input', function () {
+				var password = $('#password').val();
+				var confirmPassword = $(this).val();
+				if (password !== confirmPassword) {
+					$('#confirmPasswordError').text('Passwords do not match').show();
+					$('#sign').prop('disabled', true);
+				} else {
+					$('#confirmPasswordError').text('').hide();
+					$('#sign').prop('disabled', false);
+				}
+				// Check if password field is empty and remove error message if so
+				if ($('#password').val() === '') {
+					$('#passwordError').text('').hide();
+				}
+			});
 		});
 	</script>
-
+	
 	</head>
 
 </body>
