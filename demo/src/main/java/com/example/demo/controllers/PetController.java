@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
-import com.example.demo.models.Doctor;
 import com.example.demo.models.Pet;
 import com.example.demo.repositories.PetRepository;
 

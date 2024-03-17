@@ -9,15 +9,14 @@
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="../../css/admin/addDoctor.css">
-    <link rel="icon" href="../../images/logo.png" type="image/icon type" />
+    <link rel="stylesheet" href="/css/doctor/profile.css">
+    <link rel="icon" href="/images/logo.png" type="image/icon type" />
 
 
 	<title>AdminHub</title>
 </head>
 
 <body>
-
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
@@ -26,14 +25,14 @@
 			<span class="text">AdminHub</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li>
 				<a th:href="@{/admin/index}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
-				<a th:href="@{/admin/Profile}">
+			<li class="active">
+				<a th:href="@{/admin/profile}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Profile</span>
 				</a>
@@ -56,7 +55,7 @@
 					<span class="text">Add Doctor</span>
 				</a>
 			</li>
-			<li>
+			<li >
 				<a th:href="@{/admin/addAdmin}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Add Admin</span>
@@ -88,6 +87,9 @@
 
 
 
+
+
+
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- NAVBAR -->
@@ -108,16 +110,16 @@
 
 		<!-- MAIN -->
 		<main>
-			<div class="head-title">
+			<div class="head-title"> 
 				<div class="left">
 					<h1>Profile</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="/admin/Profile">AdminProfile</a>
+							<a th:href="@{/admin/Profile}">AdminProfile</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="/admin/Profile">profile</a>
+							<a class="active" th:href="@{/admin/Profile}">profile</a>
 						</li>
 					</ul>
 				</div>

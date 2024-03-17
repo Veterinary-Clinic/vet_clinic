@@ -27,14 +27,14 @@
 			<span class="text">AdminHub</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li>
 				<a th:href="@{/admin/index}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a th:href="@{/admin/profile}">
+				<a th:href="@{/admin/Profile}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Profile</span>
 				</a>
@@ -93,12 +93,13 @@
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
+			<i class='bx bx-menu'></i>
 			<a href="#" class="nav-link">Categories</a>
 			<form action="#">
 				<div class="form-input">
 					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search'title="Toggle Navigation" ></i></button>
+					<button type="submit" class="search-btn"><i class='bx bx-search'
+							title="Toggle Navigation"></i></button>
 				</div>
 			</form>
 			<a th:href="@{/admin/Profile}" class="profile">
@@ -116,7 +117,7 @@
 						<li>
 							<a href="index.html">Dashboard</a>
 						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
+						<li><i class='bx bx-chevron-right'></i></li>
 						<li>
 							<a class="active" href="#">Add Admin</a>
 						</li>
@@ -126,58 +127,30 @@
 
 
 			<div class="table-data">
-				<div class="order">	
-    <form action="#" th:action="@{/admin/addAdmin}" th:object="${admin}" method="post"  class="form">
-        <div class="input-box">
-            <label for="username">Username:</label>
-            <input type="text" id="username" th:field="*{username}">
-            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-        </div>
-		<div class="input-box">
-            <label for="password">Password:</label>
-            <input type="password" id="password" th:field="*{password}" placeholder="password">
-            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-        </div>
-        <div>
-            <button  type="submit">Add</button>
-        </div>
-    </form>
-						<!-- <div class="input-box">
-							<label for="email">Email</label>
-							<input type="email"  th:field="*{email}" id="email" name="email" placeholder="Enter doctor's email" />
-							<span class="error" id="email-error"></span>
-						</div> -->
-	
-						<!-- <div class="input-box">
-							<label for="password">Password</label>
-							<input type="password"  th:field="*{password}"id="password" name="password" placeholder="Enter doctor's password" />
-						</div> -->
-	
-						<!-- <div class="input-box">
-							<label for="gender">Gender</label>
+				<div class="order">
+					<form class="form" action="#" th:action="@{/admin/addAdmin}" th:object="${admin}" method="post">
+						<div class="input-box">
+							<label for="username">Username:</label>
+							<input type="text" id="username" th:field="*{username}" placeholder="Username">
+							<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 						</div>
-						<div class="row">
-							<div class="column">
-								<input type="radio"   th:field="*{gender}"name="gender" id="male" value="Male">
-								<label for="male">Male</label>
-							</div>
-							<div class="column">
-								<input type="radio" th:field="*{gender}name="gender" id="female" value="Female">
-								<label for="female">Female</label>
-							</div>
+						<div class="input-box">
+							<label for="password">Password:</label>
+							<input type="password" id="password" th:field="*{password}" placeholder="password">
+							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 						</div>
-	 
-						<!-- <button input type="submit" name="submit" id="submit-button" value="submit">Add Admin</button>
-					</form> --> 
+						<div>
+							<button type="submit" name="submit" id="submit-button" value="submit">Add Admin</button>
+						</div>
+					</form>
 				</div>
 			</div>
-
-           
 
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
+
 </body>
+
 </html>
