@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	<meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description"
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
@@ -13,8 +13,9 @@
     <link rel="icon" href="/images/logo.png" type="image/icon type" />
 
 
-	<title>DoctorHub</title>
+	<title>AdminHub</title>
 </head>
+
 <body>
 
 	<!-- SIDEBAR -->
@@ -126,13 +127,32 @@
             
             
             </div> 
-            <div class="container">
-              <div class="profile-picture" style="background-image: url('https://via.placeholder.com/150')"></div>
-              <div class="Admin-details">
-                <p><strong>name:</strong> <span th:text="${username}"></span></p>
-                <p><strong>password:</strong> <span th:text="${password}"></span></p>
+		</div> 
+		<div class="container rounded bg-white mt-5 mb-5">
+			<div class="row">
+				<div class="col-md-3 border-right">
+					<div class="d-flex flex-column align-items-center text-center p-3 py-5">
+						<img class="rounded-circle mt-5" width="150px" src="/images/user.png" title="img">
+						
+					</div>
+				</div>
+				<div class="col-md-5 border-right">
+					<div class="p-3 py-5">
+						<div class="d-flex justify-content-between align-items-center mb-3">
+							<h4 class="text-right">Profile Settings</h4>
+						</div>
+						<div class="row mt-2">
+							<div class="col-md-6">
+								
+                <p><strong  class="labels">name:</strong> <span th:text="${username}"></span></p>
+			</div>
+			<div class="col-md-6">
+                <p><strong  class="labels">password:</strong> <span th:text="${password}"></span></p>
+			</div>
                 <!-- <p><strong>Phonenumber:</strong> <span th:text="${phonenumber}"></span></p> -->
-              </div>
+             
+			</div>
+		</div>
             </body>
             </html>
             

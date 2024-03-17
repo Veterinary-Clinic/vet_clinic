@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://wwww.thymleaf.org">
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	<meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description"
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link rel="stylesheet" href="/css/admin/addDoctor.css">
-	<link rel="icon" href="/images/logo.png" type="image/icon type" />
+	<link rel="stylesheet" href="../../css/admin/addDoctor.css">
+	<link rel="stylesheet" href="/css/doctor/tables.css">
+    <link rel="icon" href="../../images/logo.png" type="image/icon type" />
 
 
 	<title>AdminHub</title>
@@ -20,7 +22,7 @@
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a th:href="@{/admin}" class="brand">
+		<a th:href="@{/admin/index}" class="brand">
 			<i class='bx bxs-smile'></i>
 			<span class="text">AdminHub</span>
 		</a>
@@ -32,7 +34,7 @@
 				</a>
 			</li>
 			<li>
-				<a th:href="@{/admin/Profile}">
+				<a th:href="@{/admin/profile}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Profile</span>
 				</a>
@@ -55,7 +57,7 @@
 					<span class="text">Add Doctor</span>
 				</a>
 			</li>
-			<li class="active">
+			<li>
 				<a th:href="@{/admin/addAdmin}">
 					<i class='bx bxs-file-plus'></i>
 					<span class="text">Add Admin</span>

@@ -108,20 +108,23 @@
  
             <div class="table-data">
                 <div class="order">
-                    <form class="form" th:action="@{/appointments/save-appointment}" th:object="${appointments}" method ="POST">
+                    <form class="form" th:action="@{/appointments/save-appointment}" th:object="${appointments}" method ="POST" onsubmit="return validateForm()">
                         <div class="input-box">
                             <label for="date">Preferred Date</label>
-                            <input type="date" id="date" th:field = "*{date}"/>
+                            <input type="date" id="date" th:field = "*{date}" required/>
+                            <span id="date-error" class="error-message"></span> 
                         </div>
 
                         <div class="input-box">
                             <label for="startHr">Start working hour</label>
-                            <input type="time" id="startHr" th:field="*{unFormattedStartHr}"/>
+                            <input type="time" id="startHr" th:field="*{unFormattedStartHr}" required/>
+                            <span id="startHr-error" class="error-message"></span> <!-- Error message placeholder -->
                         </div>
 
                         <div class="input-box">
                             <label for="endHr">End working hour</label>
-                            <input type="time" id="endHr" th:field="*{unFormattedEndHr}"/>
+                            <input type="time" id="endHr" th:field="*{unFormattedEndHr}"required/>
+                            <span id="endHr-error" class="error-message"></span> <!-- Error message placeholder -->
                         </div> 
 
                         <button input type="submit" name="submit" id="submit-button" value="submit">Add Appointment</button>
@@ -135,6 +138,7 @@
         <!-- MAIN -->
     </section>
     <!-- CONTENT -->
+    <script type="text/javascript" src="../../static/Js/addAppointmentValidation.js"></script>
 
 </body>
 
