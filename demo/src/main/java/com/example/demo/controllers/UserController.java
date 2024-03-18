@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.example.demo.models.Admin;
 import com.example.demo.models.Doctor;
 import com.example.demo.models.Pet;
 import com.example.demo.models.User;
@@ -58,10 +56,26 @@ public class UserController {
     }
 
     @GetMapping("profile")
-    public ModelAndView viewProfile() {
-        ModelAndView mav = new ModelAndView("/user/profile.html"); // Retrieve attributes from session or
-                                   
-       
+    public ModelAndView viewProfile(HttpSession session) {
+        ModelAndView mav = new ModelAndView("/user/profile.html");
+        
+        // Retrieve userId from the session
+        Long userId = (Long) session.getAttribute("user_id");
+        
+        if (userId != null) {
+            // Load user data from the database based on userId
+            User user = userRepository.findById(userId).orElse(null);
+            System.out.println(userId);
+            // Add user object to the ModelAndView if found
+            if (user != null) {
+                mav.addObject("user", user);
+            } else {
+                System.out.println("user not found");
+            }
+        } else {
+            System.out.println("user id not found in the session");
+        }
+        
         return mav;
     }
 
@@ -128,11 +142,6 @@ public class UserController {
     }
     @PostMapping("Registration")
     public RedirectView saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        // Check for validation errors
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("error", bindingResult.getAllErrors());
-            return new RedirectView("/user/Registration?error=true");
-        }
         
         // Check if the password meets the minimum length requirement
         String password = user.getPassword();
@@ -161,9 +170,7 @@ public class UserController {
         // Saving user details
         userRepository.save(user);
         
-        // Redirect with success message
-        redirectAttributes.addFlashAttribute("success", "Signed up successfully!");
-        return new RedirectView("/user/Registration?success=true");
+        return new RedirectView("/user/Registration");
     }
     @GetMapping("/check-email")
 @ResponseBody
@@ -176,7 +183,7 @@ public Map<String, Boolean> checkEmailAvailability(@RequestParam("email") String
  
       @GetMapping("Login")
     public ModelAndView login() {
-        ModelAndView mav = new ModelAndView("Signup.html");
+        ModelAndView mav = new ModelAndView("/user/Signup.html");
         User newUser = new User();
         mav.addObject("user", newUser);
         return mav;
@@ -184,16 +191,29 @@ public Map<String, Boolean> checkEmailAvailability(@RequestParam("email") String
     
     @PostMapping("Login")
     public RedirectView loginProcess(@RequestParam("email") String email,
-    @RequestParam("password") String password, HttpSession session){
+                        @RequestParam("password") String password, HttpSession session) {
         User dbUser = this.userRepository.findByemail(email);
-        Boolean isPasswordMatched= BCrypt.checkpw(password,dbUser.getPassword());
-        if (isPasswordMatched){
+        if (dbUser != null && BCrypt.checkpw(password, dbUser.getPassword())) {
             session.setAttribute("email", dbUser.getEmail());
             session.setAttribute("user_id", dbUser.getId());
-            return new RedirectView("/user/index");
-        } else
-            return new RedirectView("Registration");
+            return new RedirectView("/user/profile");
+        } else {
+            return new RedirectView("/user/Registration"); 
+        }
     }
+    
+    
+@PostMapping("/editUser/{id}")
+public RedirectView updateMovie(@PathVariable("id") Long id, @ModelAttribute User updateUser) {
+    User existingUser = userRepository.findById(id).orElse(null);
+    if (existingUser != null) {
+        existingUser.setName(updateUser.getName());
+        existingUser.setEmail(updateUser.getEmail());
+        existingUser.setPhone(updateUser.getPhone());
+        userRepository.save(existingUser);
+    }
+    return new RedirectView("/user/profile");
+}
 
     @GetMapping("doctors")
     public ModelAndView getDoctors() {
