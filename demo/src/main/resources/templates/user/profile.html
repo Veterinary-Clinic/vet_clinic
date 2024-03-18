@@ -37,7 +37,7 @@
 		</li>
 		
 		<li>
-			<a th:href="@{/user/pets}">
+			<a th:href="@{user/pets}">
 				<i class='bx bx-plus-medical'></i>
 				<span class="text">Pets</span>
 			</a>
@@ -105,36 +105,97 @@
 
             </head>
             <body>
-            
-            <div class="container">
-              <div class="profile-picture" style="background-image: url('https://via.placeholder.com/150')"></div>
-              <div class="doctor-details">
-                <h2>Dr. Jane Smith</h2>
-                <p>Email: <span id="email">drjanesmith@example.com</span> <span class="edit-button" onclick="edit('email')">Edit</span></p>
-                <p>Phone: <span id="phone">+1234567890</span> <span class="edit-button" onclick="edit('phone')">Edit</span></p>
-                <p>Location: <span id="location">New York, USA</span> <span class="edit-button" onclick="edit('location')">Edit</span></p>
-                <p>Experience: <span id="experience">15 years</span> <span class="edit-button" onclick="edit('experience')">Edit</span></p>
-                <p>Languages Spoken: <span id="languages">English, Spanish</span> <span class="edit-button" onclick="edit('languages')">Edit</span></p>
-              </div>
-              <div class="specialization">
-                <h3>Specializations</h3>
-                <ul>
-                  <li>Internal Medicine</li>
-                  <li>Family Medicine</li>
-                  <li>Preventive Care</li>
-                </ul>
-              </div>
-            </div>
-            
-            <script>
-              function edit(field) {
-                var value = prompt("Enter new value for " + field + ":");
-                if (value !== null && value !== "") {
-                  document.getElementById(field).textContent = value;
-                }
-              }
-            </script>
-            
+				<div class="container">
+					<h1>User Profile</h1>
+					<table id="pets">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Gmail</th>
+								<th>Phone</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user: ${user}">
+								<td th:text="${user.id}"></td>
+								<td th:text="${user.name}"></td>
+								<td th:text="${user.email}"></td>
+								<td th:text="${user.phone}"></td>
+							</tr>
+									<a class="button edit-button" th:href="@{/user/{id}/editUser(id=${user.id})}">Edit</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+            <style>
+				body {
+					font-family: Arial, sans-serif;
+					background-color: #f4f4f4;
+					margin: 0;
+					padding: 0;
+				}
+				
+				.container {
+					max-width: 800px;
+					margin: 20px auto;
+					padding: 20px;
+					background-color: #ffffff;
+					border-radius: 8px;
+					box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				}
+				
+				h1 {
+					text-align: center;
+					margin-bottom: 20px;
+				}
+				
+				#pets {
+					width: 100%;
+					border-collapse: collapse;
+					margin-top: 20px;
+				}
+				
+				#pets th, #pets td {
+					border: 1px solid #dddddd;
+					padding: 10px;
+				}
+				
+				#pets th {
+					background-color: #f2f2f2;
+				}
+				
+				#pets tbody tr:nth-child(even) {
+					background-color: #f9f9f9;
+				}
+				
+				.button {
+					display: inline-block;
+					padding: 10px 20px;
+					text-align: center;
+					text-decoration: none;
+					border-radius: 4px;
+					cursor: pointer;
+					transition: background-color 0.3s ease;
+				}
+				
+				.button.edit-button {
+					background-color: #007bff;
+					color: #ffffff;
+				}
+				
+				.button.edit-button:hover {
+					background-color: #0056b3;
+				}
+				
+				.button.edit-button:active {
+					background-color: #003d80;
+				}
+				
+  
+			</style>
             </body>
             </html>
             
