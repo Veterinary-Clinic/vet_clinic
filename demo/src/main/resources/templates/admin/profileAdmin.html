@@ -143,16 +143,27 @@
 						</div>
 						<div class="row mt-2">
 							<div class="col-md-6">
-								
-                <p><strong  class="labels">name:</strong> <span th:text="${username}"></span></p>
-			</div>
-			<div class="col-md-6">
-                <p><strong  class="labels">password:</strong> <span th:text="${password}"></span></p>
-			</div>
-                <!-- <p><strong>Phonenumber:</strong> <span th:text="${phonenumber}"></span></p> -->
-             
-			</div>
-		</div>
+								<label class="labels">ID: <span th:text="${id}"></span></label>
+							</div>
+							<div class="col-md-6">
+								<label class="labels">Name: <span th:text="${username}"></span></label>
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col-md-12">
+								<label class="labels">Mobile Number: <span th:text="${phonenumber}"></span></label>
+							</div>
+							<div class="col-md-12">
+								<label class="labels">Email: <span th:text="${email}"></span></label>
+							</div>
+							
+							<br>
+							<a href="/admin/profile" class="profile-form">Edit Profile</a>
+
+						</div>
+					</div>
+				</div>
+			</div> 
             </body>
             </html>
             

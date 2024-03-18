@@ -105,11 +105,12 @@
 		<!-- SIDEBAR -->
 		<h1>Edit Admin</h1>
 <!-- SIDEBAR -->
-    <form th:action="@{/admin/{id}/editDoctor(id=${Doctor.id})}" method="post">
+    <form th:action="@{/admin/{id}/editDoctor(id=${Doctor.id})}" method="post" validateLoginForm()>
         <input type="hidden" id="id" name="id" th:value="${Doctor.id}">
 
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" th:value="${Doctor.name}" required><br>
+        <input type="text" id="password" name="password" th:value="${Doctor.password}" required title="input"><br>
         <input type="text" id="email" name="email" th:value="${Doctor.email}"title="email" required><br>
         <input type="text" id="phonenumber" name="phonenumber" th:value="${Doctor.phonenumber}" title="phonenumber" required><br>
 
@@ -120,5 +121,36 @@
 
     <a th:href="@{/admin/doctors}">Back to List</a>
 </section>
+<script>
+    function validateLoginForm() {
+      var name = document.getElementById("username").value.trim();
+      var password = document.getElementById("password").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var phonenumber = document.getElementById("phonenumber").value.trim();
+      // Simple validation for name
+      if (name === "") {
+        alert("Please enter your name");
+        return false;
+      }
+
+      // Password validation
+      if (password === "") {
+        alert("Please enter your password");
+        return false;
+      }
+      if (email === "") {
+        alert("Please enter your email");
+        return false;
+      }
+
+      // Password validation
+      if (phonenumber === "") {
+        alert("Please enter your phonenumber");
+        return false;
+      }
+
+      return true; 
+    }
+  </script>
 </body>
 </html>
