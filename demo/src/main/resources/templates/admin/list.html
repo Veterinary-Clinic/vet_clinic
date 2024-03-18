@@ -139,7 +139,7 @@
 								<td th:text="${Admin.username}"></td>
 								<td th:text="${Admin.email}"></td>
 								<td th:text="${Admin.phonenumber}"></td>
-								<!-- <td th:text="${doctor.specialization}"></td> -->
+								
 								<td>
 									<a class = "buttons" id ="edit" th:href="@{/admin/{id}/editAdmin(id=${Admin.id})}">Edit</a>
 									<form th:action="@{/admin/{id}/deleteAdmin(id=${Admin.id})}" method="post">

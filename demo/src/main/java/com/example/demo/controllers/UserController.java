@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.models.Admin;
 import com.example.demo.models.Doctor;
 import com.example.demo.models.Pet;
 import com.example.demo.models.User;
@@ -203,17 +204,38 @@ public Map<String, Boolean> checkEmailAvailability(@RequestParam("email") String
     }
     
     
-@PostMapping("/editUser/{id}")
-public RedirectView updateMovie(@PathVariable("id") Long id, @ModelAttribute User updateUser) {
-    User existingUser = userRepository.findById(id).orElse(null);
-    if (existingUser != null) {
-        existingUser.setName(updateUser.getName());
-        existingUser.setEmail(updateUser.getEmail());
-        existingUser.setPhone(updateUser.getPhone());
-        userRepository.save(existingUser);
+// @PostMapping("/editUser/{id}")
+// public RedirectView updateMovie(@PathVariable("id") Long id, @ModelAttribute User updateUser) {
+//     User existingUser = userRepository.findById(id).orElse(null);
+//     if (existingUser != null) {
+//         existingUser.setName(updateUser.getName());
+//         existingUser.setEmail(updateUser.getEmail());
+//         existingUser.setPhone(updateUser.getPhone());
+//         userRepository.save(existingUser);
+//     }
+//     return new RedirectView("/user/profile");
+// }
+ @GetMapping("/{id}/editUser")
+    public String showEditAdminForm(@PathVariable("id") Long id, Model model) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
+        model.addAttribute("user", user);
+        return "user/edit";
     }
-    return new RedirectView("/user/profile");
-}
+
+    @PostMapping("/{id}/editUser")
+    public String updateAdmin(@Valid @PathVariable("id") Long id, @ModelAttribute("User") User updatedUser,
+            BindingResult bindingResult) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid admin ID: " + id));
+        user.setName(updatedUser.getName());
+        if (bindingResult.hasErrors()) {
+            return "redirect:/user/edit";
+        } else {
+            userRepository.save(user);
+            return "redirect:/user/profile";
+        }
+    }
 
     @GetMapping("doctors")
     public ModelAndView getDoctors() {
