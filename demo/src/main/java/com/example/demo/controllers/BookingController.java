@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Appointment;
 import com.example.demo.models.Booking;
-import com.example.demo.models.Doctor;
 import com.example.demo.models.User;
 import com.example.demo.repositories.AppointmentRepository;
 import com.example.demo.repositories.BookingRepository;
