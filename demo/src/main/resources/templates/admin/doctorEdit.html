@@ -105,7 +105,7 @@
 		<!-- SIDEBAR -->
 		<h1>Edit Admin</h1>
 <!-- SIDEBAR -->
-    <form th:action="@{/admin/{id}/editDoctor(id=${Doctor.id})}" method="post" validateLoginForm()>
+    <form th:action="@{/admin/{id}/editDoctor(id=${Doctor.id})}" method="post" onsubmit="return validateLoginForm()">
         <input type="hidden" id="id" name="id" th:value="${Doctor.id}">
 
         <label for="name">Name:</label>

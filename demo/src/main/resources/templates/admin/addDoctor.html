@@ -127,7 +127,7 @@
 
 			<div class="table-data">
 				<div class="order">
-					<form th:action="@{/admin/addDoctor}" th:object="${Doctor}" method="post" class="form" validateLoginForm()>
+					<form th:action="@{/admin/addDoctor}" th:object="${Doctor}" method="post" class="form" onsubmit="return validateLoginForm()">
 						<div class="input-box">
 							<label for="name">Name</label>
 							<input type="text" th:field="*{name}" id="name" name="name"
@@ -179,7 +179,7 @@
 	<!-- CONTENT -->
 	<script>
 		function validateLoginForm() {
-		  var name = document.getElementById("username").value.trim();
+		  var name = document.getElementById("name").value.trim();
 		  var password = document.getElementById("password").value.trim();
 		  var email = document.getElementById("email").value.trim();
 		  var phonenumber = document.getElementById("phonenumber").value.trim();
