@@ -122,7 +122,7 @@ public class UserController {
         petRepository.delete(npet);
         return "redirect:/user/pets";
     }
-
+ 
 
     @GetMapping("/index")
     public ModelAndView getHomePage() {
