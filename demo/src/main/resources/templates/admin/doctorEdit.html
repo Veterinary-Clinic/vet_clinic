@@ -123,34 +123,47 @@
 </section>
 <script>
     function validateLoginForm() {
-      var name = document.getElementById("username").value.trim();
-      var password = document.getElementById("password").value.trim();
-      var email = document.getElementById("email").value.trim();
-      var phonenumber = document.getElementById("phonenumber").value.trim();
-      // Simple validation for name
-      if (name === "") {
-        alert("Please enter your name");
-        return false;
-      }
+  var name = document.getElementById("username").value.trim();
+  var password = document.getElementById("password").value.trim();
+  var email = document.getElementById("email").value.trim();
+  var phonenumber = document.getElementById("phonenumber").value.trim();
+  
+  // Simple validation for name
+  if (name === "") {
+    alert("Please enter your name");
+    return false;
+  }
 
-      // Password validation
-      if (password === "") {
-        alert("Please enter your password");
-        return false;
-      }
-      if (email === "") {
-        alert("Please enter your email");
-        return false;
-      }
+  // Password validation
+  if (password === "") {
+    alert("Please enter your password");
+    return false;
+  }
+  if (password.length < 8) {
+    alert("Password should be at least 8 characters long");
+    return false;
+  }
+  
+  // Email validation
+  if (email === "") {
+    alert("Please enter your email");
+    return false;
+  }
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.match(emailRegex)) {
+    alert("Please enter a valid email address");
+    return false;
+  }
 
-      // Password validation
-      if (phonenumber === "") {
-        alert("Please enter your phonenumber");
-        return false;
-      }
+  // Phone number validation
+  if (phonenumber === "") {
+    alert("Please enter your phone number");
+    return false;
+  }
 
-      return true; 
-    }
+  return true; 
+}
+
   </script>
 </body>
 </html>
