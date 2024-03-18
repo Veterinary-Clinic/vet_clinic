@@ -87,14 +87,16 @@ public class AdminController {
         // Retrieve attributes from session or doctor object
         String name = (String) session.getAttribute("username");
         String password = (String) session.getAttribute("password"); 
+        String email = (String) session.getAttribute("email");
+        String phonenumber = (String) session.getAttribute("phonenumber"); 
         //String email = (String) session.getAttribute("email"); 
         // String phonenumber =(String) session.getAttribute("phonenumber"); // Retrieve
 
         // // Add attributes to the ModelAndView
         mav.addObject("username", name);
         mav.addObject("password", password);
-        // mav.addObject("phonenumber", phonenumber);
-        // mav.addObject("email", email);
+        mav.addObject("phonenumber", phonenumber);
+        mav.addObject("email", email);
 
         return mav;
     }

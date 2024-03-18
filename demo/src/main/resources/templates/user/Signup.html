@@ -40,7 +40,8 @@
 					<input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password" name="confirm" id="confirmPassword" required />
 					<span class="error" id="confirmPasswordError"></span>
 					<span id="passwordValidationMessage"></span>
-					<button type="button" id="sign" name="submit">Sign Up</button>
+					<!-- <button type="button" id="sign" name="submit" >Sign Up</button> -->
+					<input type="submit"  onclick="validateForm()" value="Add">
 				</form>
 
 			</div>

@@ -128,11 +128,21 @@
 
 			<div class="table-data">
 				<div class="order">
-					<form class="form" action="#" th:action="@{/admin/addAdmin}" th:object="${admin}" method="post">
+					<form class="form" action="#" th:action="@{/admin/addAdmin}" th:object="${admin}" method="post" validateLoginForm()>
 						<div class="input-box">
 							<label for="username">Username:</label>
 							<input type="text" id="username" th:field="*{username}" placeholder="Username">
 							<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+						</div>
+						<div class="input-box">
+							<label for="email">email:</label>
+							<input type="text" id="email" th:field="*{email}" placeholder="email" >
+							<span th:if="${#fields.hasErrors('email')}" th:errors="*{emil}"></span>
+						</div>
+						<div class="input-box">
+							<label for="phonenumber">phonenumber:</label>
+							<input type="text" id="phonenumber" th:field="*{phonenumber}" placeholder="phonenumber">
+							<span th:if="${#fields.hasErrors('phonenumber')}" th:errors="*{phonenumber}"></span>
 						</div>
 						<div class="input-box">
 							<label for="password">Password:</label>
@@ -150,7 +160,37 @@
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-
+	<script>
+		function validateLoginForm() {
+		  var name = document.getElementById("username").value.trim();
+		  var password = document.getElementById("password").value.trim();
+		  var email = document.getElementById("email").value.trim();
+		  var phonenumber = document.getElementById("phonenumber").value.trim();
+		  // Simple validation for name
+		  if (name === "") {
+			alert("Please enter your name");
+			return false;
+		  }
+	
+		  // Password validation
+		  if (password === "") {
+			alert("Please enter your password");
+			return false;
+		  }
+		  if (email === "") {
+			alert("Please enter your email");
+			return false;
+		  }
+	
+		  // Password validation
+		  if (phonenumber === "") {
+			alert("Please enter your phonenumber");
+			return false;
+		  }
+	
+		  return true; 
+		}
+	  </script>
 </body>
 
 </html>

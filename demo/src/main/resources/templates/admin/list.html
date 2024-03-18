@@ -127,6 +127,8 @@
 							<tr>
 								<th>ID</th>
 								<th>Name</th>
+								<th>Email</th>
+								<th>phonenumber</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
@@ -135,6 +137,8 @@
 							<tr th:each="Admin : ${admins}">
 								<td th:text="${Admin.id}"></td>
 								<td th:text="${Admin.username}"></td>
+								<td th:text="${Admin.email}"></td>
+								<td th:text="${Admin.phonenumber}"></td>
 								<!-- <td th:text="${doctor.specialization}"></td> -->
 								<td>
 									<a class = "buttons" id ="edit" th:href="@{/admin/{id}/editAdmin(id=${Admin.id})}">Edit</a>
